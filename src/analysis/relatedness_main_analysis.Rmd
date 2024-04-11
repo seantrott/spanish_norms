@@ -1,0 +1,387 @@
+---
+title: "SAW-C: Main Relatedness Analysis"
+author: "Sean Trott"
+date: "April 11, 2024"
+output:
+  # pdf_document: 
+  #    fig_caption: yes
+  #    keep_md: yes
+  #    keep_tex: yes
+  html_document:
+     keep_md: yes
+     toc: yes
+     toc_float: yes
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(dpi = 300, fig.format = "pdf", warning = FALSE, message = FALSE)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(lmtest)
+library(forcats)
+library(broom)
+library(lme4)
+library(ggridges)
+library(lmerTest)
+library(ggrepel)
+library(tools)
+library(viridis)
+
+all_colors <- viridis::viridis(10, option = "mako")
+my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palette
+```
+
+# Load data
+
+```{r}
+### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/saw-c/src/analysis/")
+### Read in all data
+df_final = read_csv("../../data/processed/human/sawc_relatedness_full_critical_data.csv")
+nrow(df_final)
+length(unique(df_final$Participant))
+```
+
+
+# RQ1: Same vs. Different Sense
+
+```{r rq1_same_different}
+df_ratio = df_final %>% 
+  group_by(Same_sense) %>%
+  mutate(count_condition = n()) %>%
+  ungroup() %>%
+  group_by(Same_sense, Response, count_condition) %>%
+  summarise(count_response = n()) %>%
+  mutate(prop_response = count_response / count_condition)
+              
+df_ratio %>%         
+  ggplot(aes(x = Response,
+             y = prop_response)) +
+  geom_bar(alpha = .6, stat = "identity") +
+  theme_minimal() +
+  labs(x = "Relatedness",
+       y = "P(Response | Condition)") +
+  facet_wrap(~Same_sense) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+df_final %>%         
+  ggplot(aes(x = Response)) +
+  geom_bar(alpha = .6, stat = "count") +
+  theme_minimal() +
+  labs(x = "Relatedness",
+       y = "Count") +
+  facet_wrap(~Same_sense) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+
+mod_full = lmer(data = df_final,
+                Response ~ Same_sense +
+                  (1 + Same_sense | Participant) + 
+                  (1 + Same_sense | List) + (1 | Word),
+                REML = FALSE)
+
+mod_reduced = lmer(data = df_final,
+                Response ~ # Same_sense +
+                  (1 + Same_sense | Participant) + 
+                  (1 + Same_sense | List) + (1 | Word),
+                REML = FALSE)
+
+summary(mod_full)
+anova(mod_full, mod_reduced)
+```
+
+
+# RQ2 + RQ5: Correlation with BETO
+
+## Load and process BETO data
+
+```{r}
+### BETO distances
+df_beto_distances = read_csv("../../data/processed/models/sawc_distances.csv")
+nrow(df_beto_distances)
+
+### basic items to get Tag
+df_sawc_items = read_csv("../../data/raw/items/sawc_sentence_pairs.csv")
+
+### merge together
+df_merged = df_beto_distances %>%
+  left_join(df_sawc_items)
+```
+
+## Merge with SAW-C Norms
+
+```{r}
+df_list_mean = df_final %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n())
+nrow(df_list_mean)
+
+df_merged_beto = df_merged %>%
+  inner_join(df_list_mean)
+nrow(df_merged_beto)
+```
+
+## RQ2: Correlation by layer
+
+```{r rq2_corr_by_layer}
+df_by_layer = df_merged_beto %>%
+  group_by(Layer) %>%
+  summarise(r = cor(mean_relatedness, Distance, method = "pearson"),
+            r2 = r ** 2,
+            rho = cor(mean_relatedness, Distance, method = "spearman"),
+            count = n())
+
+summary(df_by_layer$rho)
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (BETO)",
+       y = "Pearson's r") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = rho)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (BETO)",
+       y = "Spearman's rho") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (BETO)",
+       y = "R2") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+min(df_by_layer$rho)
+```
+
+
+## RQ5: Expected layer
+
+```{r rq5_layer}
+df_by_layer <- df_by_layer %>%
+  mutate(r2_delta = c(NA, diff(r2))) %>%
+  mutate(weighted_layer = Layer * r2_delta)
+
+expected_layer = sum(df_by_layer$weighted_layer, na.rm = TRUE) / sum(df_by_layer$r2_delta, na.rm = TRUE)
+expected_layer
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue",
+            alpha = .8) +
+  theme_minimal() +
+  geom_vline(xintercept = expected_layer, size = 1.5, 
+             linetype = "dashed", alpha = .7) +
+  geom_vline(xintercept = 7, size = 1.5, 
+             linetype = "dotted", alpha = .7) +
+  scale_x_continuous(breaks = c(0:13)) +
+  labs(x = "Layer (BETO)",
+       y = "R2") +
+  theme(text = element_text(size = 15),
+        legend.position="none") 
+```
+
+
+
+
+# RQ3: Cosine distance vs. Same/Different
+
+Now, we select the *best-performing layer* from BETO.
+
+```{r}
+df_beto_l5 = df_merged %>%
+  filter(Layer == 5) %>%
+  select(-Same_sense)
+nrow(df_beto_l5)
+
+df_experimental_with_beto = df_final %>%
+  left_join(df_beto_l5)
+nrow(df_experimental_with_beto)
+  
+
+mod_full = lmer(data = df_experimental_with_beto,
+                Response ~ Same_sense + Distance +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_reduced = lmer(data = df_experimental_with_beto,
+                Response ~ Distance + # Same_sense +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_just_same = lmer(data = df_experimental_with_beto,
+                Response ~ Same_sense + # Distance
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+summary(mod_full)
+anova(mod_full, mod_reduced)
+anova(mod_full, mod_just_same)
+
+
+
+### Visualize
+df_experimental_with_beto %>%
+  mutate(distance_binned = ntile(Distance, 20)) %>%
+  group_by(Same_sense, distance_binned) %>%
+  summarize(
+    mean_relatedness = mean(Response),
+    sd_relatedness = sd(Response),
+    count = n(),
+    se_relatedness = sd_relatedness / sqrt(count),
+  ) %>%
+  ggplot(aes(x = distance_binned, 
+             y = mean_relatedness, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_relatedness - se_relatedness, 
+                  ymax = mean_relatedness + se_relatedness), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "Cosine Distance (Binned)",
+       y = "Relatedness",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+  
+```
+
+
+
+# RQ4: BETO vs. inter-annotator agreement
+
+```{r rq4_comparison}
+### First, get group means
+df_list_mean = df_experimental_with_beto %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n(),
+            distance = mean(Distance))
+nrow(df_list_mean)
+
+### Get BETO cor
+BETO_COR = abs(cor(df_list_mean$mean_relatedness,
+               df_list_mean$distance, method = "spearman"))
+
+### Now, iterate through ppts
+ppts = unique(df_final$Participant)
+df_r = data.frame()
+
+for (ppt in ppts) {
+  # Subset df_critical for the current participant
+  individual_data <- df_final %>%
+    filter(Participant == ppt) %>%
+    select(List, Word, Tag, Response)  # Ensure you're selecting the needed columns
+
+  # Merge individual data with mean data
+  merged_data <- inner_join(individual_data, df_list_mean, by = c("List", "Word", "Tag"))
+  
+  test = cor.test(merged_data$Response,
+                  merged_data$mean_relatedness,
+                 method = "spearman")
+  
+  df_test = broom::tidy(test)
+  df_test$ppt = ppt
+  df_test$List = unique(individual_data$List)
+  df_r = rbind(df_r, df_test)
+
+}
+
+### Visualization
+df_r %>%
+  ggplot(aes(x = estimate)) +
+  geom_histogram(alpha = .7) +
+  scale_x_continuous(limits = c(0, 1)) +
+  theme_minimal() +
+  geom_vline(xintercept = BETO_COR, size = 1.5, 
+             linetype = "dashed", alpha = .7) +
+  labs(x = "Leave-one-out Correlation") +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+summary(df_r$estimate)
+
+
+### What proportion of inter-annotator agreement scores are larger?
+prop_larger = df_r %>%
+  mutate(larger = estimate >= BETO_COR) %>%
+  summarise(mean(larger))
+prop_larger
+
+
+```
+
+
+# RQ6: Layer vs. same/different
+
+The actual code implementation is executed in Python, but a visualization is produced here.
+
+```{r rq6_same_different}
+# Calculate mean and SE of Distance
+df_summary <- df_beto_distances %>%
+  group_by(Layer, Same_sense) %>%
+  summarise(
+    mean_Distance = mean(Distance),
+    sd_Distance = sd(Distance),
+    count = n(),
+    se_Distance = sd_Distance / sqrt(count),
+    .groups = 'drop'  # Drop the automatic grouping by dplyr
+  )
+
+df_summary %>%
+  ggplot(aes(x = Layer, 
+             y = mean_Distance, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_Distance - 2 * se_Distance, 
+                  ymax = mean_Distance + 2 * se_Distance), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "Layer",
+       y = "Mean Distance",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+  
+```
+

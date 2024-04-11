@@ -1,0 +1,314 @@
+---
+title: "SAW-C Pre-processing and demographic analysis"
+author: "Sean Trott"
+date: "April 11, 2024"
+output:
+  # pdf_document: 
+  #    fig_caption: yes
+  #    keep_md: yes
+  #    keep_tex: yes
+  html_document:
+  #   keep_md: yes
+    toc: yes
+    toc_float: yes
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(dpi = 300, fig.format = "pdf", warning = FALSE, message = FALSE)
+
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(lmtest)
+library(forcats)
+library(broom)
+library(lme4)
+library(ggridges)
+library(lmerTest)
+library(ggrepel)
+library(tools)
+library(viridis)
+library(gplots)
+
+all_colors <- viridis::viridis(10, option = "mako")
+my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palette
+```
+
+# Load data
+
+```{r}
+### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/saw-c/src/analysis/")
+
+### Read in all data
+df_all_results = read_csv("../../data/processed/human/sawc_relatedness_full_all_data.csv")
+nrow(df_all_results)
+
+### How many per list?
+table(df_all_results$List)
+
+### How many per ppt?
+df_ppt = df_all_results %>%
+  group_by(Participant) %>%
+  summarise(count = n())
+
+### Clean up
+df_all_results = df_all_results %>%
+  mutate(Same_sense = case_when(
+    Same_sense == TRUE ~ "Same Sense",
+    Same_sense == FALSE ~ "Different Sense"
+  )) 
+
+
+### Load demographic data
+df_demo = read_csv("../../data/processed/human/demographic_results_relatedness.csv")
+nrow(df_demo)
+
+```
+
+# Exclusion
+
+## Catch trials
+
+```{r}
+df_catch = df_all_results %>%
+  filter(Sense_id_s1 == "catch") %>%
+  select(Participant, Response) %>%
+  mutate(correct = Response == 5)
+
+table(df_catch$correct)
+
+df_keep = df_catch %>%
+  filter(correct == TRUE)
+nrow(df_keep)
+
+df_critical = df_all_results %>%
+  filter(Sense_id_s1 != "catch") %>%
+  filter(Participant %in% c(df_keep$Participant))
+nrow(df_critical)
+```
+
+## Leave-one-out
+
+```{r}
+### First, get group means
+df_list_mean = df_critical %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n())
+nrow(df_list_mean)
+
+### Now, iterate through ppts
+ppts = unique(df_critical$Participant)
+df_r = data.frame()
+
+for (ppt in ppts) {
+  # Subset df_critical for the current participant
+  individual_data <- df_critical %>%
+    filter(Participant == ppt) %>%
+    select(List, Word, Tag, Response)  # Ensure you're selecting the needed columns
+
+  # Merge individual data with mean data
+  merged_data <- inner_join(individual_data, df_list_mean, by = c("List", "Word", "Tag"))
+  
+  
+  test = cor.test(merged_data$Response,
+                  merged_data$mean_relatedness,
+                 method = "spearman")
+  
+  df_test = broom::tidy(test)
+  df_test$ppt = ppt
+  df_test$List = unique(individual_data$List)
+  df_r = rbind(df_r, df_test)
+
+}
+
+df_r %>%
+  ggplot(aes(x = estimate)) +
+  geom_histogram(alpha = .7) +
+  geom_vline(xintercept = mean(df_r$estimate, na.rm= TRUE),
+             linetype = "dashed") +
+  scale_x_continuous(limits = c(0, 1)) +
+  theme_minimal() +
+  labs(x = "Leave-one-out Correlation") +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+mean(df_r$estimate, na.rm = TRUE)
+median(df_r$estimate, na.rm = TRUE)
+sd(df_r$estimate, na.rm = TRUE)
+range(df_r$estimate)
+
+
+df_keep = df_r %>%
+  filter(estimate >= .1)
+nrow(df_keep)
+
+df_critical = df_critical %>%
+  filter(Participant %in% df_keep$ppt)
+
+length(unique(df_critical$Participant))
+
+```
+
+## Completion time
+
+```{r}
+df_times = df_critical %>%
+  group_by(Participant) %>%
+  summarise(total_time = sum(`Reaction Time`) / 1000/60) %>%
+  mutate(total_time_z = scale(total_time))
+
+df_keep = df_times %>%
+  filter(total_time_z <= 3)
+
+df_critical = df_critical %>%
+  filter(Participant %in% df_keep$Participant)
+
+length(unique(df_critical$Participant))
+
+```
+
+
+## Remove non-native speakers
+
+```{r}
+df_native = df_demo %>%
+  filter(Native_language == "Sí")
+
+df_critical = df_critical %>%
+  filter(Participant %in% df_native$Participant)
+
+length(unique(df_critical$Participant))
+```
+
+
+## Check for list sizes
+
+```{r}
+df_list_mean = df_critical %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n())
+nrow(df_list_mean)
+
+summary(df_list_mean$count)
+
+```
+
+# Demographic analysis
+
+## Basic descriptive stats
+
+```{r}
+df_demo = df_demo %>%
+  filter(Participant %in% c(df_critical$Participant))
+nrow(df_demo)
+
+table(df_demo$Gender)
+table(df_demo$Native_language)
+table(df_demo$National_identity)
+table(df_demo$Current_residence)
+table(df_demo$Other_languages)
+summary(df_demo$Age)
+```
+
+## Create correlation matrix
+
+```{r}
+### Merge with critical
+df_joined_with_demo = df_critical %>%
+  left_join(df_demo, by = "Participant")
+nrow(df_joined_with_demo)
+
+### Get means by nationality
+df_means_by_nationality = df_joined_with_demo %>%
+  group_by(Word, Tag, National_identity) %>%
+  summarise(mean_relatedness = mean(Response),
+            sd_relatedness = sd(Response),
+            count = n()) %>%
+  filter(count > 1)
+
+colnames(df_means_by_nationality)
+
+### Pivot wide
+df_wide <- df_means_by_nationality %>%
+  pivot_wider(names_from = National_identity, 
+              values_from = c(mean_relatedness, sd_relatedness, count),
+              names_sep = "_") %>%
+  left_join(df_list_mean)
+
+### Create correlation matrix
+relevant_columns = df_wide %>%
+  ungroup() %>%
+  mutate(# Total = mean_relatedness,
+         Chile = mean_relatedness_Chile,
+         México = mean_relatedness_México,
+         España = mean_relatedness_España) %>%
+  select(Chile, México, España)
+
+### abslute  value
+relevant_cors = cor(relevant_columns,  use = "complete.obs")
+relevant_cors
+
+# Define breaks such that colors range between -1 and 1
+breaks <- seq(-1, 1, length.out=101) 
+# Create a color palette
+my_palette <- colorRampPalette(c("lightblue", "white", "lightcoral"))(100)
+heatmap.2(relevant_cors,
+          breaks=breaks,
+          col=my_palette,
+          main="Correlations",
+          trace="none",
+          dendrogram="none",
+          Rowv=FALSE, 
+          Colv=FALSE,
+          scale="none",
+          key=TRUE,
+          keysize=1.2,
+          symm=TRUE, # symmetric heatmap
+          density.info="none",
+          margins=c(6,6),
+          cexRow=0.9, # Adjust font size of row labels if needed
+          cexCol=0.9, # Adjust font size of column labels if needed
+          cellnote=round(relevant_cors, 2), # Add correlation values to cells
+          notecol="black", # Color for cell values
+          notecex=0.8) # Font size for cell values
+```
+
+
+# Save data
+
+```{r}
+### Save trial-level data
+df_items = read_csv("../../data/raw/items/sawc_sentence_pairs.csv") %>%
+  select(-Same_sense, -counts)
+nrow(df_items)
+
+df_merged_with_all_data = df_critical %>%
+  select(Participant, Response, Word, Tag, Same_sense, List) %>%
+  left_join(df_items)
+
+write.csv(df_merged_with_all_data, "../../data/processed/human/sawc_relatedness_full_critical_data.csv")
+
+### Save averages
+df_merged_with_demo = df_merged_with_all_data %>%
+  left_join(df_demo)
+nrow(df_merged_with_demo)
+
+df_item_means = df_merged_with_demo %>%
+  group_by(List, Word, Same_sense, Sentence_1, Sentence_2,
+           Sense_id_s1, Sense_id_s2, Gender_s1, Gender_s2) %>%
+  summarise(mean_relatedness = mean(Response),
+            sd_relatedness = sd(Response),
+            median_relatedness = median(Response),
+            count = n())
+
+write.csv(df_merged_with_all_data,
+          "../../data/processed/human/sawc_avg_relatedness.csv")
+
+```
+
+
+

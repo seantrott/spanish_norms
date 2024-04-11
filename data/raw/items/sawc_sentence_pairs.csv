@@ -1,0 +1,813 @@
+﻿Word,Sentence_1,Sense_id_s1,Gender_s1,Sentence_2,Sense_id_s2,Gender_s2,context_cue1,context_cue2,Same_sense,Same_gender,counts,Tag
+aceite,Compró el aceite de oliva,1,male,Compró el aceite de cocina,1,male,adjective,adjective,True,True,6,Compró el aceite de cocina__Compró el aceite de oliva
+aceite,Compró el aceite de oliva,1,male,Compró el aceite de motor,2,male,adjective,adjective,False,True,6,Compró el aceite de motor__Compró el aceite de oliva
+aceite,Compró el aceite de oliva,1,male,Compró el aceite de carro,2,male,adjective,adjective,False,True,6,Compró el aceite de carro__Compró el aceite de oliva
+aceite,Compró el aceite de cocina,1,male,Compró el aceite de motor,2,male,adjective,adjective,False,True,6,Compró el aceite de cocina__Compró el aceite de motor
+aceite,Compró el aceite de cocina,1,male,Compró el aceite de carro,2,male,adjective,adjective,False,True,6,Compró el aceite de carro__Compró el aceite de cocina
+aceite,Compró el aceite de motor,2,male,Compró el aceite de carro,2,male,adjective,adjective,True,True,6,Compró el aceite de carro__Compró el aceite de motor
+ala,Le gustó el ala sureste,1,female,Le gustó el ala remodelada,1,female,adjective,adjective,True,True,6,Le gustó el ala remodelada__Le gustó el ala sureste
+ala,Le gustó el ala sureste,1,female,Le gustó el ala plumosa,2,female,adjective,adjective,False,True,6,Le gustó el ala plumosa__Le gustó el ala sureste
+ala,Le gustó el ala sureste,1,female,Le gustó el ala de águila,2,female,adjective,adjective,False,True,6,Le gustó el ala de águila__Le gustó el ala sureste
+ala,Le gustó el ala remodelada,1,female,Le gustó el ala plumosa,2,female,adjective,adjective,False,True,6,Le gustó el ala plumosa__Le gustó el ala remodelada
+ala,Le gustó el ala remodelada,1,female,Le gustó el ala de águila,2,female,adjective,adjective,False,True,6,Le gustó el ala de águila__Le gustó el ala remodelada
+ala,Le gustó el ala plumosa,2,female,Le gustó el ala de águila,2,female,adjective,adjective,True,True,6,Le gustó el ala de águila__Le gustó el ala plumosa
+algodón,Evaluó el algodón cultivado,1,male,Evaluó el algodón sembrado,1,male,adjective,adjective,True,True,6,Evaluó el algodón cultivado__Evaluó el algodón sembrado
+algodón,Evaluó el algodón cultivado,1,male,Evaluó el algodón endulzado,2,male,adjective,adjective,False,True,6,Evaluó el algodón cultivado__Evaluó el algodón endulzado
+algodón,Evaluó el algodón cultivado,1,male,Evaluó el algodón caramelizado,2,male,adjective,adjective,False,True,6,Evaluó el algodón caramelizado__Evaluó el algodón cultivado
+algodón,Evaluó el algodón sembrado,1,male,Evaluó el algodón endulzado,2,male,adjective,adjective,False,True,6,Evaluó el algodón endulzado__Evaluó el algodón sembrado
+algodón,Evaluó el algodón sembrado,1,male,Evaluó el algodón caramelizado,2,male,adjective,adjective,False,True,6,Evaluó el algodón caramelizado__Evaluó el algodón sembrado
+algodón,Evaluó el algodón endulzado,2,male,Evaluó el algodón caramelizado,2,male,adjective,adjective,True,True,6,Evaluó el algodón caramelizado__Evaluó el algodón endulzado
+arte,Se trataba del arte de mentir,1,male,Se trataba del arte de guerra,1,male,adjective,adjective,True,True,6,Se trataba del arte de guerra__Se trataba del arte de mentir
+arte,Se trataba del arte de mentir,1,male,Se trataba del arte renacentista,2,male,adjective,adjective,False,True,6,Se trataba del arte de mentir__Se trataba del arte renacentista
+arte,Se trataba del arte de mentir,1,male,Se trataba del arte abstracto,2,male,adjective,adjective,False,True,6,Se trataba del arte abstracto__Se trataba del arte de mentir
+arte,Se trataba del arte de guerra,1,male,Se trataba del arte renacentista,2,male,adjective,adjective,False,True,6,Se trataba del arte de guerra__Se trataba del arte renacentista
+arte,Se trataba del arte de guerra,1,male,Se trataba del arte abstracto,2,male,adjective,adjective,False,True,6,Se trataba del arte abstracto__Se trataba del arte de guerra
+arte,Se trataba del arte renacentista,2,male,Se trataba del arte abstracto,2,male,adjective,adjective,True,True,6,Se trataba del arte abstracto__Se trataba del arte renacentista
+banco,Era un banco financiero,1,male,Era un banco exitoso,1,male,adjective,adjective,True,True,6,Era un banco exitoso__Era un banco financiero
+banco,Era un banco financiero,1,male,Era un banco plástico,2,male,adjective,adjective,False,True,6,Era un banco financiero__Era un banco plástico
+banco,Era un banco financiero,1,male,Era un banco cómodo,2,male,adjective,adjective,False,True,6,Era un banco cómodo__Era un banco financiero
+banco,Era un banco exitoso,1,male,Era un banco plástico,2,male,adjective,adjective,False,True,6,Era un banco exitoso__Era un banco plástico
+banco,Era un banco exitoso,1,male,Era un banco cómodo,2,male,adjective,adjective,False,True,6,Era un banco cómodo__Era un banco exitoso
+banco,Era un banco plástico,2,male,Era un banco cómodo,2,male,adjective,adjective,True,True,6,Era un banco cómodo__Era un banco plástico
+baño,Disfrutó el baño caliente,1,male,Disfrutó el baño frío,1,male,adjective,adjective,True,True,6,Disfrutó el baño caliente__Disfrutó el baño frío
+baño,Disfrutó el baño caliente,1,male,Disfrutó el baño remodelado,2,male,adjective,adjective,False,True,6,Disfrutó el baño caliente__Disfrutó el baño remodelado
+baño,Disfrutó el baño caliente,1,male,Disfrutó el baño privado,2,male,adjective,adjective,False,True,6,Disfrutó el baño caliente__Disfrutó el baño privado
+baño,Disfrutó el baño frío,1,male,Disfrutó el baño remodelado,2,male,adjective,adjective,False,True,6,Disfrutó el baño frío__Disfrutó el baño remodelado
+baño,Disfrutó el baño frío,1,male,Disfrutó el baño privado,2,male,adjective,adjective,False,True,6,Disfrutó el baño frío__Disfrutó el baño privado
+baño,Disfrutó el baño remodelado,2,male,Disfrutó el baño privado,2,male,adjective,adjective,True,True,6,Disfrutó el baño privado__Disfrutó el baño remodelado
+cadena,Era una cadena de oro,1,female,Era una cadena elegante,1,female,adjective,adjective,True,True,15,Era una cadena de oro__Era una cadena elegante
+cadena,Era una cadena de oro,1,female,Era una cadena de hierro,2,female,adjective,adjective,False,True,15,Era una cadena de hierro__Era una cadena de oro
+cadena,Era una cadena de oro,1,female,Era una cadena de reo,2,female,adjective,adjective,False,True,15,Era una cadena de oro__Era una cadena de reo
+cadena,Era una cadena de oro,1,female,Era una cadena de radio,3,female,adjective,adjective,False,True,15,Era una cadena de oro__Era una cadena de radio
+cadena,Era una cadena de oro,1,female,Era una cadena televisiva,3,female,adjective,adjective,False,True,15,Era una cadena de oro__Era una cadena televisiva
+cadena,Era una cadena elegante,1,female,Era una cadena de hierro,2,female,adjective,adjective,False,True,15,Era una cadena de hierro__Era una cadena elegante
+cadena,Era una cadena elegante,1,female,Era una cadena de reo,2,female,adjective,adjective,False,True,15,Era una cadena de reo__Era una cadena elegante
+cadena,Era una cadena elegante,1,female,Era una cadena de radio,3,female,adjective,adjective,False,True,15,Era una cadena de radio__Era una cadena elegante
+cadena,Era una cadena elegante,1,female,Era una cadena televisiva,3,female,adjective,adjective,False,True,15,Era una cadena elegante__Era una cadena televisiva
+cadena,Era una cadena de hierro,2,female,Era una cadena de reo,2,female,adjective,adjective,True,True,15,Era una cadena de hierro__Era una cadena de reo
+cadena,Era una cadena de hierro,2,female,Era una cadena de radio,3,female,adjective,adjective,False,True,15,Era una cadena de hierro__Era una cadena de radio
+cadena,Era una cadena de hierro,2,female,Era una cadena televisiva,3,female,adjective,adjective,False,True,15,Era una cadena de hierro__Era una cadena televisiva
+cadena,Era una cadena de reo,2,female,Era una cadena de radio,3,female,adjective,adjective,False,True,15,Era una cadena de radio__Era una cadena de reo
+cadena,Era una cadena de reo,2,female,Era una cadena televisiva,3,female,adjective,adjective,False,True,15,Era una cadena de reo__Era una cadena televisiva
+cadena,Era una cadena de radio,3,female,Era una cadena televisiva,3,female,adjective,adjective,True,True,15,Era una cadena de radio__Era una cadena televisiva
+caja,Ella vio la caja registradora,1,female,Ella vio la caja bancaria,1,female,adjective,adjective,True,True,15,Ella vio la caja bancaria__Ella vio la caja registradora
+caja,Ella vio la caja registradora,1,female,Ella vio la caja fuerte,2,female,adjective,adjective,False,True,15,Ella vio la caja fuerte__Ella vio la caja registradora
+caja,Ella vio la caja registradora,1,female,Ella vio la caja sellada,2,female,adjective,adjective,False,True,15,Ella vio la caja registradora__Ella vio la caja sellada
+caja,Ella vio la caja registradora,1,female,Ella vio la caja acústica,3,female,adjective,adjective,False,True,15,Ella vio la caja acústica__Ella vio la caja registradora
+caja,Ella vio la caja registradora,1,female,Ella vio la caja percusiva,3,female,adjective,adjective,False,True,15,Ella vio la caja percusiva__Ella vio la caja registradora
+caja,Ella vio la caja bancaria,1,female,Ella vio la caja fuerte,2,female,adjective,adjective,False,True,15,Ella vio la caja bancaria__Ella vio la caja fuerte
+caja,Ella vio la caja bancaria,1,female,Ella vio la caja sellada,2,female,adjective,adjective,False,True,15,Ella vio la caja bancaria__Ella vio la caja sellada
+caja,Ella vio la caja bancaria,1,female,Ella vio la caja acústica,3,female,adjective,adjective,False,True,15,Ella vio la caja acústica__Ella vio la caja bancaria
+caja,Ella vio la caja bancaria,1,female,Ella vio la caja percusiva,3,female,adjective,adjective,False,True,15,Ella vio la caja bancaria__Ella vio la caja percusiva
+caja,Ella vio la caja fuerte,2,female,Ella vio la caja sellada,2,female,adjective,adjective,True,True,15,Ella vio la caja fuerte__Ella vio la caja sellada
+caja,Ella vio la caja fuerte,2,female,Ella vio la caja acústica,3,female,adjective,adjective,False,True,15,Ella vio la caja acústica__Ella vio la caja fuerte
+caja,Ella vio la caja fuerte,2,female,Ella vio la caja percusiva,3,female,adjective,adjective,False,True,15,Ella vio la caja fuerte__Ella vio la caja percusiva
+caja,Ella vio la caja sellada,2,female,Ella vio la caja acústica,3,female,adjective,adjective,False,True,15,Ella vio la caja acústica__Ella vio la caja sellada
+caja,Ella vio la caja sellada,2,female,Ella vio la caja percusiva,3,female,adjective,adjective,False,True,15,Ella vio la caja percusiva__Ella vio la caja sellada
+caja,Ella vio la caja acústica,3,female,Ella vio la caja percusiva,3,female,adjective,adjective,True,True,15,Ella vio la caja acústica__Ella vio la caja percusiva
+calle,Condujo en la calle principal,1,female,Condujo en la calle marginal,1,female,adjective,adjective,True,True,6,Condujo en la calle marginal__Condujo en la calle principal
+calle,Condujo en la calle principal,1,female,Condujo en la calle asfaltada,2,female,adjective,adjective,False,True,6,Condujo en la calle asfaltada__Condujo en la calle principal
+calle,Condujo en la calle principal,1,female,Condujo en la calle resbalosa,2,female,adjective,adjective,False,True,6,Condujo en la calle principal__Condujo en la calle resbalosa
+calle,Condujo en la calle marginal,1,female,Condujo en la calle asfaltada,2,female,adjective,adjective,False,True,6,Condujo en la calle asfaltada__Condujo en la calle marginal
+calle,Condujo en la calle marginal,1,female,Condujo en la calle resbalosa,2,female,adjective,adjective,False,True,6,Condujo en la calle marginal__Condujo en la calle resbalosa
+calle,Condujo en la calle asfaltada,2,female,Condujo en la calle resbalosa,2,female,adjective,adjective,True,True,6,Condujo en la calle asfaltada__Condujo en la calle resbalosa
+campo,Era un campo competitivo,1,male,Era un campo biológico,1,male,adjective,adjective,True,True,6,Era un campo biológico__Era un campo competitivo
+campo,Era un campo competitivo,1,male,Era un campo cultivado,2,male,adjective,adjective,False,True,6,Era un campo competitivo__Era un campo cultivado
+campo,Era un campo competitivo,1,male,Era un campo abandonado,2,male,adjective,adjective,False,True,6,Era un campo abandonado__Era un campo competitivo
+campo,Era un campo biológico,1,male,Era un campo cultivado,2,male,adjective,adjective,False,True,6,Era un campo biológico__Era un campo cultivado
+campo,Era un campo biológico,1,male,Era un campo abandonado,2,male,adjective,adjective,False,True,6,Era un campo abandonado__Era un campo biológico
+campo,Era un campo cultivado,2,male,Era un campo abandonado,2,male,adjective,adjective,True,True,6,Era un campo abandonado__Era un campo cultivado
+canal,Estaba en el canal televisivo,1,male,Estaba en el canal de comedia,1,male,adjective,adjective,True,True,15,Estaba en el canal de comedia__Estaba en el canal televisivo
+canal,Estaba en el canal televisivo,1,male,Estaba en el canal navegable,2,male,adjective,adjective,False,True,15,Estaba en el canal navegable__Estaba en el canal televisivo
+canal,Estaba en el canal televisivo,1,male,Estaba en el canal marítimo,2,male,adjective,adjective,False,True,15,Estaba en el canal marítimo__Estaba en el canal televisivo
+canal,Estaba en el canal televisivo,1,male,Estaba en el canal cervical,3,male,adjective,adjective,False,True,15,Estaba en el canal cervical__Estaba en el canal televisivo
+canal,Estaba en el canal televisivo,1,male,Estaba en el canal uterino,3,male,adjective,adjective,False,True,15,Estaba en el canal televisivo__Estaba en el canal uterino
+canal,Estaba en el canal de comedia,1,male,Estaba en el canal navegable,2,male,adjective,adjective,False,True,15,Estaba en el canal de comedia__Estaba en el canal navegable
+canal,Estaba en el canal de comedia,1,male,Estaba en el canal marítimo,2,male,adjective,adjective,False,True,15,Estaba en el canal de comedia__Estaba en el canal marítimo
+canal,Estaba en el canal de comedia,1,male,Estaba en el canal cervical,3,male,adjective,adjective,False,True,15,Estaba en el canal cervical__Estaba en el canal de comedia
+canal,Estaba en el canal de comedia,1,male,Estaba en el canal uterino,3,male,adjective,adjective,False,True,15,Estaba en el canal de comedia__Estaba en el canal uterino
+canal,Estaba en el canal navegable,2,male,Estaba en el canal marítimo,2,male,adjective,adjective,True,True,15,Estaba en el canal marítimo__Estaba en el canal navegable
+canal,Estaba en el canal navegable,2,male,Estaba en el canal cervical,3,male,adjective,adjective,False,True,15,Estaba en el canal cervical__Estaba en el canal navegable
+canal,Estaba en el canal navegable,2,male,Estaba en el canal uterino,3,male,adjective,adjective,False,True,15,Estaba en el canal navegable__Estaba en el canal uterino
+canal,Estaba en el canal marítimo,2,male,Estaba en el canal cervical,3,male,adjective,adjective,False,True,15,Estaba en el canal cervical__Estaba en el canal marítimo
+canal,Estaba en el canal marítimo,2,male,Estaba en el canal uterino,3,male,adjective,adjective,False,True,15,Estaba en el canal marítimo__Estaba en el canal uterino
+canal,Estaba en el canal cervical,3,male,Estaba en el canal uterino,3,male,adjective,adjective,True,True,15,Estaba en el canal cervical__Estaba en el canal uterino
+capa,Se trataba de la capa de superhéroe,1,female,Se trataba de la capa de tela,1,female,adjective,adjective,True,True,6,Se trataba de la capa de superhéroe__Se trataba de la capa de tela
+capa,Se trataba de la capa de superhéroe,1,female,Se trataba de la capa atmosférica,2,female,adjective,adjective,False,True,6,Se trataba de la capa atmosférica__Se trataba de la capa de superhéroe
+capa,Se trataba de la capa de superhéroe,1,female,Se trataba de la capa de ozono,2,female,adjective,adjective,False,True,6,Se trataba de la capa de ozono__Se trataba de la capa de superhéroe
+capa,Se trataba de la capa de tela,1,female,Se trataba de la capa atmosférica,2,female,adjective,adjective,False,True,6,Se trataba de la capa atmosférica__Se trataba de la capa de tela
+capa,Se trataba de la capa de tela,1,female,Se trataba de la capa de ozono,2,female,adjective,adjective,False,True,6,Se trataba de la capa de ozono__Se trataba de la capa de tela
+capa,Se trataba de la capa atmosférica,2,female,Se trataba de la capa de ozono,2,female,adjective,adjective,True,True,6,Se trataba de la capa atmosférica__Se trataba de la capa de ozono
+capital,Le gustó la capital holandesa,1,female,Le gustó la capital antigua,1,female,adjective,adjective,True,True,6,Le gustó la capital antigua__Le gustó la capital holandesa
+capital,Le gustó la capital holandesa,1,female,Le gustó el capital financiero,2,male,adjective,adjective,False,False,6,Le gustó el capital financiero__Le gustó la capital holandesa
+capital,Le gustó la capital holandesa,1,female,Le gustó el capital económico,2,male,adjective,adjective,False,False,6,Le gustó el capital económico__Le gustó la capital holandesa
+capital,Le gustó la capital antigua,1,female,Le gustó el capital financiero,2,male,adjective,adjective,False,False,6,Le gustó el capital financiero__Le gustó la capital antigua
+capital,Le gustó la capital antigua,1,female,Le gustó el capital económico,2,male,adjective,adjective,False,False,6,Le gustó el capital económico__Le gustó la capital antigua
+capital,Le gustó el capital financiero,2,male,Le gustó el capital económico,2,male,adjective,adjective,True,True,6,Le gustó el capital económico__Le gustó el capital financiero
+carrera,Fue una carrera profesional,1,female,Fue una carrera universitaria,1,female,adjective,adjective,True,True,15,Fue una carrera profesional__Fue una carrera universitaria
+carrera,Fue una carrera profesional,1,female,Fue una carrera académica,1,female,adjective,adjective,True,True,15,Fue una carrera académica__Fue una carrera profesional
+carrera,Fue una carrera profesional,1,female,Fue una carrera benéfica,2,female,adjective,adjective,False,True,15,Fue una carrera benéfica__Fue una carrera profesional
+carrera,Fue una carrera profesional,1,female,Fue una carrera reñida,2,female,adjective,adjective,False,True,15,Fue una carrera profesional__Fue una carrera reñida
+carrera,Fue una carrera profesional,1,female,Fue una carrera olímpica,2,female,adjective,adjective,False,True,15,Fue una carrera olímpica__Fue una carrera profesional
+carrera,Fue una carrera universitaria,1,female,Fue una carrera académica,1,female,adjective,adjective,True,True,15,Fue una carrera académica__Fue una carrera universitaria
+carrera,Fue una carrera universitaria,1,female,Fue una carrera benéfica,2,female,adjective,adjective,False,True,15,Fue una carrera benéfica__Fue una carrera universitaria
+carrera,Fue una carrera universitaria,1,female,Fue una carrera reñida,2,female,adjective,adjective,False,True,15,Fue una carrera reñida__Fue una carrera universitaria
+carrera,Fue una carrera universitaria,1,female,Fue una carrera olímpica,2,female,adjective,adjective,False,True,15,Fue una carrera olímpica__Fue una carrera universitaria
+carrera,Fue una carrera académica,1,female,Fue una carrera benéfica,2,female,adjective,adjective,False,True,15,Fue una carrera académica__Fue una carrera benéfica
+carrera,Fue una carrera académica,1,female,Fue una carrera reñida,2,female,adjective,adjective,False,True,15,Fue una carrera académica__Fue una carrera reñida
+carrera,Fue una carrera académica,1,female,Fue una carrera olímpica,2,female,adjective,adjective,False,True,15,Fue una carrera académica__Fue una carrera olímpica
+carrera,Fue una carrera benéfica,2,female,Fue una carrera reñida,2,female,adjective,adjective,True,True,15,Fue una carrera benéfica__Fue una carrera reñida
+carrera,Fue una carrera benéfica,2,female,Fue una carrera olímpica,2,female,adjective,adjective,True,True,15,Fue una carrera benéfica__Fue una carrera olímpica
+carrera,Fue una carrera reñida,2,female,Fue una carrera olímpica,2,female,adjective,adjective,True,True,15,Fue una carrera olímpica__Fue una carrera reñida
+cartel,Era un cartel publicitario,1,male,Era un cartel informativo,1,male,adjective,adjective,True,True,6,Era un cartel informativo__Era un cartel publicitario
+cartel,Era un cartel publicitario,1,male,Era un cartel peligroso,2,male,adjective,adjective,False,True,6,Era un cartel peligroso__Era un cartel publicitario
+cartel,Era un cartel publicitario,1,male,Era un cartel dominante,2,male,adjective,adjective,False,True,6,Era un cartel dominante__Era un cartel publicitario
+cartel,Era un cartel informativo,1,male,Era un cartel peligroso,2,male,adjective,adjective,False,True,6,Era un cartel informativo__Era un cartel peligroso
+cartel,Era un cartel informativo,1,male,Era un cartel dominante,2,male,adjective,adjective,False,True,6,Era un cartel dominante__Era un cartel informativo
+cartel,Era un cartel peligroso,2,male,Era un cartel dominante,2,male,adjective,adjective,True,True,6,Era un cartel dominante__Era un cartel peligroso
+casco,Le gustó el casco protector,1,male,Le gustó el casco de la ciclista,1,male,adjective,adjective,True,True,6,Le gustó el casco de la ciclista__Le gustó el casco protector
+casco,Le gustó el casco protector,1,male,Le gustó el casco urbano,2,male,adjective,adjective,False,True,6,Le gustó el casco protector__Le gustó el casco urbano
+casco,Le gustó el casco protector,1,male,Le gustó el casco de la ciudad,2,male,adjective,adjective,False,True,6,Le gustó el casco de la ciudad__Le gustó el casco protector
+casco,Le gustó el casco de la ciclista,1,male,Le gustó el casco urbano,2,male,adjective,adjective,False,True,6,Le gustó el casco de la ciclista__Le gustó el casco urbano
+casco,Le gustó el casco de la ciclista,1,male,Le gustó el casco de la ciudad,2,male,adjective,adjective,False,True,6,Le gustó el casco de la ciclista__Le gustó el casco de la ciudad
+casco,Le gustó el casco urbano,2,male,Le gustó el casco de la ciudad,2,male,adjective,adjective,True,True,6,Le gustó el casco de la ciudad__Le gustó el casco urbano
+caudal,Era un caudal financiero,1,male,Era un caudal heredado,1,male,adjective,adjective,True,True,6,Era un caudal financiero__Era un caudal heredado
+caudal,Era un caudal financiero,1,male,Era un caudal ambiental,2,male,adjective,adjective,False,True,6,Era un caudal ambiental__Era un caudal financiero
+caudal,Era un caudal financiero,1,male,Era un caudal ecológico,2,male,adjective,adjective,False,True,6,Era un caudal ecológico__Era un caudal financiero
+caudal,Era un caudal heredado,1,male,Era un caudal ambiental,2,male,adjective,adjective,False,True,6,Era un caudal ambiental__Era un caudal heredado
+caudal,Era un caudal heredado,1,male,Era un caudal ecológico,2,male,adjective,adjective,False,True,6,Era un caudal ecológico__Era un caudal heredado
+caudal,Era un caudal ambiental,2,male,Era un caudal ecológico,2,male,adjective,adjective,True,True,6,Era un caudal ambiental__Era un caudal ecológico
+cima,Estaba en la cima de la montaña,1,female,Estaba en la cima de la loma,1,female,adjective,adjective,True,True,6,Estaba en la cima de la loma__Estaba en la cima de la montaña
+cima,Estaba en la cima de la montaña,1,female,Estaba en la cima de su carrera,2,female,adjective,adjective,False,True,6,Estaba en la cima de la montaña__Estaba en la cima de su carrera
+cima,Estaba en la cima de la montaña,1,female,Estaba en la cima de la fama,2,female,adjective,adjective,False,True,6,Estaba en la cima de la fama__Estaba en la cima de la montaña
+cima,Estaba en la cima de la loma,1,female,Estaba en la cima de su carrera,2,female,adjective,adjective,False,True,6,Estaba en la cima de la loma__Estaba en la cima de su carrera
+cima,Estaba en la cima de la loma,1,female,Estaba en la cima de la fama,2,female,adjective,adjective,False,True,6,Estaba en la cima de la fama__Estaba en la cima de la loma
+cima,Estaba en la cima de su carrera,2,female,Estaba en la cima de la fama,2,female,adjective,adjective,True,True,6,Estaba en la cima de la fama__Estaba en la cima de su carrera
+cinta,Usó la cinta adhesiva,1,female,Usó la cinta pegante,1,female,adjective,adjective,True,True,15,Usó la cinta adhesiva__Usó la cinta pegante
+cinta,Usó la cinta adhesiva,1,female,Usó la cinta rosada,2,female,adjective,adjective,False,True,15,Usó la cinta adhesiva__Usó la cinta rosada
+cinta,Usó la cinta adhesiva,1,female,Usó la cinta decorativa,2,female,adjective,adjective,False,True,15,Usó la cinta adhesiva__Usó la cinta decorativa
+cinta,Usó la cinta adhesiva,1,female,Usó la cinta métrica,3,female,adjective,adjective,False,True,15,Usó la cinta adhesiva__Usó la cinta métrica
+cinta,Usó la cinta adhesiva,1,female,Usó la cinta quirúrgica,4,female,adjective,adjective,False,True,15,Usó la cinta adhesiva__Usó la cinta quirúrgica
+cinta,Usó la cinta pegante,1,female,Usó la cinta rosada,2,female,adjective,adjective,False,True,15,Usó la cinta pegante__Usó la cinta rosada
+cinta,Usó la cinta pegante,1,female,Usó la cinta decorativa,2,female,adjective,adjective,False,True,15,Usó la cinta decorativa__Usó la cinta pegante
+cinta,Usó la cinta pegante,1,female,Usó la cinta métrica,3,female,adjective,adjective,False,True,15,Usó la cinta métrica__Usó la cinta pegante
+cinta,Usó la cinta pegante,1,female,Usó la cinta quirúrgica,4,female,adjective,adjective,False,True,15,Usó la cinta pegante__Usó la cinta quirúrgica
+cinta,Usó la cinta rosada,2,female,Usó la cinta decorativa,2,female,adjective,adjective,True,True,15,Usó la cinta decorativa__Usó la cinta rosada
+cinta,Usó la cinta rosada,2,female,Usó la cinta métrica,3,female,adjective,adjective,False,True,15,Usó la cinta métrica__Usó la cinta rosada
+cinta,Usó la cinta rosada,2,female,Usó la cinta quirúrgica,4,female,adjective,adjective,False,True,15,Usó la cinta quirúrgica__Usó la cinta rosada
+cinta,Usó la cinta decorativa,2,female,Usó la cinta métrica,3,female,adjective,adjective,False,True,15,Usó la cinta decorativa__Usó la cinta métrica
+cinta,Usó la cinta decorativa,2,female,Usó la cinta quirúrgica,4,female,adjective,adjective,False,True,15,Usó la cinta decorativa__Usó la cinta quirúrgica
+cinta,Usó la cinta métrica,3,female,Usó la cinta quirúrgica,4,female,adjective,adjective,False,True,15,Usó la cinta métrica__Usó la cinta quirúrgica
+clase,Se trataba de una clase media,1,female,Se trataba de una clase social,1,female,adjective,adjective,True,True,6,Se trataba de una clase media__Se trataba de una clase social
+clase,Se trataba de una clase media,1,female,Se trataba de una clase de geología,2,female,adjective,adjective,False,True,6,Se trataba de una clase de geología__Se trataba de una clase media
+clase,Se trataba de una clase media,1,female,Se trataba de una clase aburrida,2,female,adjective,adjective,False,True,6,Se trataba de una clase aburrida__Se trataba de una clase media
+clase,Se trataba de una clase social,1,female,Se trataba de una clase de geología,2,female,adjective,adjective,False,True,6,Se trataba de una clase de geología__Se trataba de una clase social
+clase,Se trataba de una clase social,1,female,Se trataba de una clase aburrida,2,female,adjective,adjective,False,True,6,Se trataba de una clase aburrida__Se trataba de una clase social
+clase,Se trataba de una clase de geología,2,female,Se trataba de una clase aburrida,2,female,adjective,adjective,True,True,6,Se trataba de una clase aburrida__Se trataba de una clase de geología
+clave,Era la clave musical,1,female,Era la clave de sol,1,female,adjective,adjective,True,True,6,Era la clave de sol__Era la clave musical
+clave,Era la clave musical,1,female,Era la clave esencial,2,female,adjective,adjective,False,True,6,Era la clave esencial__Era la clave musical
+clave,Era la clave musical,1,female,Era la clave al caso,2,female,adjective,adjective,False,True,6,Era la clave al caso__Era la clave musical
+clave,Era la clave de sol,1,female,Era la clave esencial,2,female,adjective,adjective,False,True,6,Era la clave de sol__Era la clave esencial
+clave,Era la clave de sol,1,female,Era la clave al caso,2,female,adjective,adjective,False,True,6,Era la clave al caso__Era la clave de sol
+clave,Era la clave esencial,2,female,Era la clave al caso,2,female,adjective,adjective,True,True,6,Era la clave al caso__Era la clave esencial
+clima,El clima estaba tenso,1,male,El clima estaba amigable,1,male,adjective,adjective,True,True,6,El clima estaba amigable__El clima estaba tenso
+clima,El clima estaba tenso,1,male,El clima estaba frío,2,male,adjective,adjective,False,True,6,El clima estaba frío__El clima estaba tenso
+clima,El clima estaba tenso,1,male,El clima estaba lluvioso,2,male,adjective,adjective,False,True,6,El clima estaba lluvioso__El clima estaba tenso
+clima,El clima estaba amigable,1,male,El clima estaba frío,2,male,adjective,adjective,False,True,6,El clima estaba amigable__El clima estaba frío
+clima,El clima estaba amigable,1,male,El clima estaba lluvioso,2,male,adjective,adjective,False,True,6,El clima estaba amigable__El clima estaba lluvioso
+clima,El clima estaba frío,2,male,El clima estaba lluvioso,2,male,adjective,adjective,True,True,6,El clima estaba frío__El clima estaba lluvioso
+colonia,Era una colonia fragante,1,female,Era una colonia sutil,1,female,adjective,adjective,True,True,28,Era una colonia fragante__Era una colonia sutil
+colonia,Era una colonia fragante,1,female,Era una colonia de hombre,1,female,adjective,adjective,True,True,28,Era una colonia de hombre__Era una colonia fragante
+colonia,Era una colonia fragante,1,female,Era una colonia oprimida,2,female,adjective,adjective,False,True,28,Era una colonia fragante__Era una colonia oprimida
+colonia,Era una colonia fragante,1,female,Era una colonia abandonada,2,female,adjective,adjective,False,True,28,Era una colonia abandonada__Era una colonia fragante
+colonia,Era una colonia fragante,1,female,Era una colonia rebelde,2,female,adjective,adjective,False,True,28,Era una colonia fragante__Era una colonia rebelde
+colonia,Era una colonia fragante,1,female,Era una colonia bacteriana,3,female,adjective,adjective,False,True,28,Era una colonia bacteriana__Era una colonia fragante
+colonia,Era una colonia fragante,1,female,Era una colonia de hormigas,3,female,adjective,adjective,False,True,28,Era una colonia de hormigas__Era una colonia fragante
+colonia,Era una colonia sutil,1,female,Era una colonia de hombre,1,female,adjective,adjective,True,True,28,Era una colonia de hombre__Era una colonia sutil
+colonia,Era una colonia sutil,1,female,Era una colonia oprimida,2,female,adjective,adjective,False,True,28,Era una colonia oprimida__Era una colonia sutil
+colonia,Era una colonia sutil,1,female,Era una colonia abandonada,2,female,adjective,adjective,False,True,28,Era una colonia abandonada__Era una colonia sutil
+colonia,Era una colonia sutil,1,female,Era una colonia rebelde,2,female,adjective,adjective,False,True,28,Era una colonia rebelde__Era una colonia sutil
+colonia,Era una colonia sutil,1,female,Era una colonia bacteriana,3,female,adjective,adjective,False,True,28,Era una colonia bacteriana__Era una colonia sutil
+colonia,Era una colonia sutil,1,female,Era una colonia de hormigas,3,female,adjective,adjective,False,True,28,Era una colonia de hormigas__Era una colonia sutil
+colonia,Era una colonia de hombre,1,female,Era una colonia oprimida,2,female,adjective,adjective,False,True,28,Era una colonia de hombre__Era una colonia oprimida
+colonia,Era una colonia de hombre,1,female,Era una colonia abandonada,2,female,adjective,adjective,False,True,28,Era una colonia abandonada__Era una colonia de hombre
+colonia,Era una colonia de hombre,1,female,Era una colonia rebelde,2,female,adjective,adjective,False,True,28,Era una colonia de hombre__Era una colonia rebelde
+colonia,Era una colonia de hombre,1,female,Era una colonia bacteriana,3,female,adjective,adjective,False,True,28,Era una colonia bacteriana__Era una colonia de hombre
+colonia,Era una colonia de hombre,1,female,Era una colonia de hormigas,3,female,adjective,adjective,False,True,28,Era una colonia de hombre__Era una colonia de hormigas
+colonia,Era una colonia oprimida,2,female,Era una colonia abandonada,2,female,adjective,adjective,True,True,28,Era una colonia abandonada__Era una colonia oprimida
+colonia,Era una colonia oprimida,2,female,Era una colonia rebelde,2,female,adjective,adjective,True,True,28,Era una colonia oprimida__Era una colonia rebelde
+colonia,Era una colonia oprimida,2,female,Era una colonia bacteriana,3,female,adjective,adjective,False,True,28,Era una colonia bacteriana__Era una colonia oprimida
+colonia,Era una colonia oprimida,2,female,Era una colonia de hormigas,3,female,adjective,adjective,False,True,28,Era una colonia de hormigas__Era una colonia oprimida
+colonia,Era una colonia abandonada,2,female,Era una colonia rebelde,2,female,adjective,adjective,True,True,28,Era una colonia abandonada__Era una colonia rebelde
+colonia,Era una colonia abandonada,2,female,Era una colonia bacteriana,3,female,adjective,adjective,False,True,28,Era una colonia abandonada__Era una colonia bacteriana
+colonia,Era una colonia abandonada,2,female,Era una colonia de hormigas,3,female,adjective,adjective,False,True,28,Era una colonia abandonada__Era una colonia de hormigas
+colonia,Era una colonia rebelde,2,female,Era una colonia bacteriana,3,female,adjective,adjective,False,True,28,Era una colonia bacteriana__Era una colonia rebelde
+colonia,Era una colonia rebelde,2,female,Era una colonia de hormigas,3,female,adjective,adjective,False,True,28,Era una colonia de hormigas__Era una colonia rebelde
+colonia,Era una colonia bacteriana,3,female,Era una colonia de hormigas,3,female,adjective,adjective,True,True,28,Era una colonia bacteriana__Era una colonia de hormigas
+columna,Era una columna de mármol,1,female,Era una columna decorativa,1,female,adjective,adjective,True,True,6,Era una columna de mármol__Era una columna decorativa
+columna,Era una columna de mármol,1,female,Era una columna vertebral,2,female,adjective,adjective,False,True,6,Era una columna de mármol__Era una columna vertebral
+columna,Era una columna de mármol,1,female,Era una columna encorvada,2,female,adjective,adjective,False,True,6,Era una columna de mármol__Era una columna encorvada
+columna,Era una columna decorativa,1,female,Era una columna vertebral,2,female,adjective,adjective,False,True,6,Era una columna decorativa__Era una columna vertebral
+columna,Era una columna decorativa,1,female,Era una columna encorvada,2,female,adjective,adjective,False,True,6,Era una columna decorativa__Era una columna encorvada
+columna,Era una columna vertebral,2,female,Era una columna encorvada,2,female,adjective,adjective,True,True,6,Era una columna encorvada__Era una columna vertebral
+compañía,Le gustó la compañía de inversiones,1,female,Le gustó la compañía financiera,1,female,adjective,adjective,True,True,6,Le gustó la compañía de inversiones__Le gustó la compañía financiera
+compañía,Le gustó la compañía de inversiones,1,female,Le gustó la compañía teatral,2,female,adjective,adjective,False,True,6,Le gustó la compañía de inversiones__Le gustó la compañía teatral
+compañía,Le gustó la compañía de inversiones,1,female,Le gustó la compañía de actores,2,female,adjective,adjective,False,True,6,Le gustó la compañía de actores__Le gustó la compañía de inversiones
+compañía,Le gustó la compañía financiera,1,female,Le gustó la compañía teatral,2,female,adjective,adjective,False,True,6,Le gustó la compañía financiera__Le gustó la compañía teatral
+compañía,Le gustó la compañía financiera,1,female,Le gustó la compañía de actores,2,female,adjective,adjective,False,True,6,Le gustó la compañía de actores__Le gustó la compañía financiera
+compañía,Le gustó la compañía teatral,2,female,Le gustó la compañía de actores,2,female,adjective,adjective,True,True,6,Le gustó la compañía de actores__Le gustó la compañía teatral
+compás,Él navegaba con el compás,1,male,Él observaba el compás,1,male,verb,verb,True,True,6,Él navegaba con el compás__Él observaba el compás
+compás,Él navegaba con el compás,1,male,Él bailaba al compás,2,male,verb,verb,False,True,6,Él bailaba al compás__Él navegaba con el compás
+compás,Él navegaba con el compás,1,male,Él cantaba al compás,2,male,verb,verb,False,True,6,Él cantaba al compás__Él navegaba con el compás
+compás,Él observaba el compás,1,male,Él bailaba al compás,2,male,verb,verb,False,True,6,Él bailaba al compás__Él observaba el compás
+compás,Él observaba el compás,1,male,Él cantaba al compás,2,male,verb,verb,False,True,6,Él cantaba al compás__Él observaba el compás
+compás,Él bailaba al compás,2,male,Él cantaba al compás,2,male,verb,verb,True,True,6,Él bailaba al compás__Él cantaba al compás
+copa,Él vio la copa mundial,1,female,Él vio la copa deportiva,1,female,adjective,adjective,True,True,10,Él vio la copa deportiva__Él vio la copa mundial
+copa,Él vio la copa mundial,1,female,Él vio la copa llena,2,female,adjective,adjective,False,True,10,Él vio la copa llena__Él vio la copa mundial
+copa,Él vio la copa mundial,1,female,Él vio la copa vacía,2,female,adjective,adjective,False,True,10,Él vio la copa mundial__Él vio la copa vacía
+copa,Él vio la copa mundial,1,female,Él vio la copa de cristal,2,female,adjective,adjective,False,True,10,Él vio la copa de cristal__Él vio la copa mundial
+copa,Él vio la copa deportiva,1,female,Él vio la copa llena,2,female,adjective,adjective,False,True,10,Él vio la copa deportiva__Él vio la copa llena
+copa,Él vio la copa deportiva,1,female,Él vio la copa vacía,2,female,adjective,adjective,False,True,10,Él vio la copa deportiva__Él vio la copa vacía
+copa,Él vio la copa deportiva,1,female,Él vio la copa de cristal,2,female,adjective,adjective,False,True,10,Él vio la copa de cristal__Él vio la copa deportiva
+copa,Él vio la copa llena,2,female,Él vio la copa vacía,2,female,adjective,adjective,True,True,10,Él vio la copa llena__Él vio la copa vacía
+copa,Él vio la copa llena,2,female,Él vio la copa de cristal,2,female,adjective,adjective,True,True,10,Él vio la copa de cristal__Él vio la copa llena
+copa,Él vio la copa vacía,2,female,Él vio la copa de cristal,2,female,adjective,adjective,True,True,10,Él vio la copa de cristal__Él vio la copa vacía
+corazón,Tenía el corazón partido,1,male,Tenía el corazón angustiado,1,male,adjective,adjective,True,True,6,Tenía el corazón angustiado__Tenía el corazón partido
+corazón,Tenía el corazón partido,1,male,Tenía el corazón operado,2,male,adjective,adjective,False,True,6,Tenía el corazón operado__Tenía el corazón partido
+corazón,Tenía el corazón partido,1,male,Tenía el corazón inflamado,2,male,adjective,adjective,False,True,6,Tenía el corazón inflamado__Tenía el corazón partido
+corazón,Tenía el corazón angustiado,1,male,Tenía el corazón operado,2,male,adjective,adjective,False,True,6,Tenía el corazón angustiado__Tenía el corazón operado
+corazón,Tenía el corazón angustiado,1,male,Tenía el corazón inflamado,2,male,adjective,adjective,False,True,6,Tenía el corazón angustiado__Tenía el corazón inflamado
+corazón,Tenía el corazón operado,2,male,Tenía el corazón inflamado,2,male,adjective,adjective,True,True,6,Tenía el corazón inflamado__Tenía el corazón operado
+cordón,Se trataba de un cordón sedoso,1,male,Se trataba de un cordón de lona,1,male,adjective,adjective,True,True,15,Se trataba de un cordón de lona__Se trataba de un cordón sedoso
+cordón,Se trataba de un cordón sedoso,1,male,Se trataba de un cordón umbilical,2,male,adjective,adjective,False,True,15,Se trataba de un cordón sedoso__Se trataba de un cordón umbilical
+cordón,Se trataba de un cordón sedoso,1,male,Se trataba de un cordón biológico,2,male,adjective,adjective,False,True,15,Se trataba de un cordón biológico__Se trataba de un cordón sedoso
+cordón,Se trataba de un cordón sedoso,1,male,Se trataba de un cordón eléctrico,3,male,adjective,adjective,False,True,15,Se trataba de un cordón eléctrico__Se trataba de un cordón sedoso
+cordón,Se trataba de un cordón sedoso,1,male,Se trataba de un cordón inalámbrico,3,male,adjective,adjective,False,True,15,Se trataba de un cordón inalámbrico__Se trataba de un cordón sedoso
+cordón,Se trataba de un cordón de lona,1,male,Se trataba de un cordón umbilical,2,male,adjective,adjective,False,True,15,Se trataba de un cordón de lona__Se trataba de un cordón umbilical
+cordón,Se trataba de un cordón de lona,1,male,Se trataba de un cordón biológico,2,male,adjective,adjective,False,True,15,Se trataba de un cordón biológico__Se trataba de un cordón de lona
+cordón,Se trataba de un cordón de lona,1,male,Se trataba de un cordón eléctrico,3,male,adjective,adjective,False,True,15,Se trataba de un cordón de lona__Se trataba de un cordón eléctrico
+cordón,Se trataba de un cordón de lona,1,male,Se trataba de un cordón inalámbrico,3,male,adjective,adjective,False,True,15,Se trataba de un cordón de lona__Se trataba de un cordón inalámbrico
+cordón,Se trataba de un cordón umbilical,2,male,Se trataba de un cordón biológico,2,male,adjective,adjective,True,True,15,Se trataba de un cordón biológico__Se trataba de un cordón umbilical
+cordón,Se trataba de un cordón umbilical,2,male,Se trataba de un cordón eléctrico,3,male,adjective,adjective,False,True,15,Se trataba de un cordón eléctrico__Se trataba de un cordón umbilical
+cordón,Se trataba de un cordón umbilical,2,male,Se trataba de un cordón inalámbrico,3,male,adjective,adjective,False,True,15,Se trataba de un cordón inalámbrico__Se trataba de un cordón umbilical
+cordón,Se trataba de un cordón biológico,2,male,Se trataba de un cordón eléctrico,3,male,adjective,adjective,False,True,15,Se trataba de un cordón biológico__Se trataba de un cordón eléctrico
+cordón,Se trataba de un cordón biológico,2,male,Se trataba de un cordón inalámbrico,3,male,adjective,adjective,False,True,15,Se trataba de un cordón biológico__Se trataba de un cordón inalámbrico
+cordón,Se trataba de un cordón eléctrico,3,male,Se trataba de un cordón inalámbrico,3,male,adjective,adjective,True,True,15,Se trataba de un cordón eléctrico__Se trataba de un cordón inalámbrico
+corte,Le gustó la corte noble,1,female,Le gustó la corte real,1,female,adjective,adjective,True,True,15,Le gustó la corte noble__Le gustó la corte real
+corte,Le gustó la corte noble,1,female,Le gustó la corte suprema,2,female,adjective,adjective,False,True,15,Le gustó la corte noble__Le gustó la corte suprema
+corte,Le gustó la corte noble,1,female,Le gustó la corte judicial,2,female,adjective,adjective,False,True,15,Le gustó la corte judicial__Le gustó la corte noble
+corte,Le gustó la corte noble,1,female,Le gustó el corte de pelo,3,male,adjective,adjective,False,False,15,Le gustó el corte de pelo__Le gustó la corte noble
+corte,Le gustó la corte noble,1,female,Le gustó el corte asimétrico,3,male,adjective,adjective,False,False,15,Le gustó el corte asimétrico__Le gustó la corte noble
+corte,Le gustó la corte real,1,female,Le gustó la corte suprema,2,female,adjective,adjective,False,True,15,Le gustó la corte real__Le gustó la corte suprema
+corte,Le gustó la corte real,1,female,Le gustó la corte judicial,2,female,adjective,adjective,False,True,15,Le gustó la corte judicial__Le gustó la corte real
+corte,Le gustó la corte real,1,female,Le gustó el corte de pelo,3,male,adjective,adjective,False,False,15,Le gustó el corte de pelo__Le gustó la corte real
+corte,Le gustó la corte real,1,female,Le gustó el corte asimétrico,3,male,adjective,adjective,False,False,15,Le gustó el corte asimétrico__Le gustó la corte real
+corte,Le gustó la corte suprema,2,female,Le gustó la corte judicial,2,female,adjective,adjective,True,True,15,Le gustó la corte judicial__Le gustó la corte suprema
+corte,Le gustó la corte suprema,2,female,Le gustó el corte de pelo,3,male,adjective,adjective,False,False,15,Le gustó el corte de pelo__Le gustó la corte suprema
+corte,Le gustó la corte suprema,2,female,Le gustó el corte asimétrico,3,male,adjective,adjective,False,False,15,Le gustó el corte asimétrico__Le gustó la corte suprema
+corte,Le gustó la corte judicial,2,female,Le gustó el corte de pelo,3,male,adjective,adjective,False,False,15,Le gustó el corte de pelo__Le gustó la corte judicial
+corte,Le gustó la corte judicial,2,female,Le gustó el corte asimétrico,3,male,adjective,adjective,False,False,15,Le gustó el corte asimétrico__Le gustó la corte judicial
+corte,Le gustó el corte de pelo,3,male,Le gustó el corte asimétrico,3,male,adjective,adjective,True,True,15,Le gustó el corte asimétrico__Le gustó el corte de pelo
+corteza,Estaba en la corteza terrestre,1,female,Estaba en la corteza geológica,1,female,adjective,adjective,True,True,28,Estaba en la corteza geológica__Estaba en la corteza terrestre
+corteza,Estaba en la corteza terrestre,1,female,Estaba en la corteza del árbol,2,female,adjective,adjective,False,True,28,Estaba en la corteza del árbol__Estaba en la corteza terrestre
+corteza,Estaba en la corteza terrestre,1,female,Estaba en la corteza del roble,2,female,adjective,adjective,False,True,28,Estaba en la corteza del roble__Estaba en la corteza terrestre
+corteza,Estaba en la corteza terrestre,1,female,Estaba en la corteza cerebral,3,female,adjective,adjective,False,True,28,Estaba en la corteza cerebral__Estaba en la corteza terrestre
+corteza,Estaba en la corteza terrestre,1,female,Estaba en la corteza prefrontal,3,female,adjective,adjective,False,True,28,Estaba en la corteza prefrontal__Estaba en la corteza terrestre
+corteza,Estaba en la corteza terrestre,1,female,Estaba en la corteza comestible,4,female,adjective,adjective,False,True,28,Estaba en la corteza comestible__Estaba en la corteza terrestre
+corteza,Estaba en la corteza terrestre,1,female,Estaba en la corteza crocante,4,female,adjective,adjective,False,True,28,Estaba en la corteza crocante__Estaba en la corteza terrestre
+corteza,Estaba en la corteza geológica,1,female,Estaba en la corteza del árbol,2,female,adjective,adjective,False,True,28,Estaba en la corteza del árbol__Estaba en la corteza geológica
+corteza,Estaba en la corteza geológica,1,female,Estaba en la corteza del roble,2,female,adjective,adjective,False,True,28,Estaba en la corteza del roble__Estaba en la corteza geológica
+corteza,Estaba en la corteza geológica,1,female,Estaba en la corteza cerebral,3,female,adjective,adjective,False,True,28,Estaba en la corteza cerebral__Estaba en la corteza geológica
+corteza,Estaba en la corteza geológica,1,female,Estaba en la corteza prefrontal,3,female,adjective,adjective,False,True,28,Estaba en la corteza geológica__Estaba en la corteza prefrontal
+corteza,Estaba en la corteza geológica,1,female,Estaba en la corteza comestible,4,female,adjective,adjective,False,True,28,Estaba en la corteza comestible__Estaba en la corteza geológica
+corteza,Estaba en la corteza geológica,1,female,Estaba en la corteza crocante,4,female,adjective,adjective,False,True,28,Estaba en la corteza crocante__Estaba en la corteza geológica
+corteza,Estaba en la corteza del árbol,2,female,Estaba en la corteza del roble,2,female,adjective,adjective,True,True,28,Estaba en la corteza del roble__Estaba en la corteza del árbol
+corteza,Estaba en la corteza del árbol,2,female,Estaba en la corteza cerebral,3,female,adjective,adjective,False,True,28,Estaba en la corteza cerebral__Estaba en la corteza del árbol
+corteza,Estaba en la corteza del árbol,2,female,Estaba en la corteza prefrontal,3,female,adjective,adjective,False,True,28,Estaba en la corteza del árbol__Estaba en la corteza prefrontal
+corteza,Estaba en la corteza del árbol,2,female,Estaba en la corteza comestible,4,female,adjective,adjective,False,True,28,Estaba en la corteza comestible__Estaba en la corteza del árbol
+corteza,Estaba en la corteza del árbol,2,female,Estaba en la corteza crocante,4,female,adjective,adjective,False,True,28,Estaba en la corteza crocante__Estaba en la corteza del árbol
+corteza,Estaba en la corteza del roble,2,female,Estaba en la corteza cerebral,3,female,adjective,adjective,False,True,28,Estaba en la corteza cerebral__Estaba en la corteza del roble
+corteza,Estaba en la corteza del roble,2,female,Estaba en la corteza prefrontal,3,female,adjective,adjective,False,True,28,Estaba en la corteza del roble__Estaba en la corteza prefrontal
+corteza,Estaba en la corteza del roble,2,female,Estaba en la corteza comestible,4,female,adjective,adjective,False,True,28,Estaba en la corteza comestible__Estaba en la corteza del roble
+corteza,Estaba en la corteza del roble,2,female,Estaba en la corteza crocante,4,female,adjective,adjective,False,True,28,Estaba en la corteza crocante__Estaba en la corteza del roble
+corteza,Estaba en la corteza cerebral,3,female,Estaba en la corteza prefrontal,3,female,adjective,adjective,True,True,28,Estaba en la corteza cerebral__Estaba en la corteza prefrontal
+corteza,Estaba en la corteza cerebral,3,female,Estaba en la corteza comestible,4,female,adjective,adjective,False,True,28,Estaba en la corteza cerebral__Estaba en la corteza comestible
+corteza,Estaba en la corteza cerebral,3,female,Estaba en la corteza crocante,4,female,adjective,adjective,False,True,28,Estaba en la corteza cerebral__Estaba en la corteza crocante
+corteza,Estaba en la corteza prefrontal,3,female,Estaba en la corteza comestible,4,female,adjective,adjective,False,True,28,Estaba en la corteza comestible__Estaba en la corteza prefrontal
+corteza,Estaba en la corteza prefrontal,3,female,Estaba en la corteza crocante,4,female,adjective,adjective,False,True,28,Estaba en la corteza crocante__Estaba en la corteza prefrontal
+corteza,Estaba en la corteza comestible,4,female,Estaba en la corteza crocante,4,female,adjective,adjective,True,True,28,Estaba en la corteza comestible__Estaba en la corteza crocante
+cuadro,No le gustó el cuadro clíninco,1,male,No le gustó el cuadro de síntomas,1,male,adjective,adjective,True,True,15,No le gustó el cuadro clíninco__No le gustó el cuadro de síntomas
+cuadro,No le gustó el cuadro clíninco,1,male,No le gustó el cuadro diagnóstico,1,male,adjective,adjective,True,True,15,No le gustó el cuadro clíninco__No le gustó el cuadro diagnóstico
+cuadro,No le gustó el cuadro clíninco,1,male,No le gustó el cuadro pintoresco,2,male,adjective,adjective,False,True,15,No le gustó el cuadro clíninco__No le gustó el cuadro pintoresco
+cuadro,No le gustó el cuadro clíninco,1,male,No le gustó el cuadro antiguo,2,male,adjective,adjective,False,True,15,No le gustó el cuadro antiguo__No le gustó el cuadro clíninco
+cuadro,No le gustó el cuadro clíninco,1,male,No le gustó el cuadro barroco,2,male,adjective,adjective,False,True,15,No le gustó el cuadro barroco__No le gustó el cuadro clíninco
+cuadro,No le gustó el cuadro de síntomas,1,male,No le gustó el cuadro diagnóstico,1,male,adjective,adjective,True,True,15,No le gustó el cuadro de síntomas__No le gustó el cuadro diagnóstico
+cuadro,No le gustó el cuadro de síntomas,1,male,No le gustó el cuadro pintoresco,2,male,adjective,adjective,False,True,15,No le gustó el cuadro de síntomas__No le gustó el cuadro pintoresco
+cuadro,No le gustó el cuadro de síntomas,1,male,No le gustó el cuadro antiguo,2,male,adjective,adjective,False,True,15,No le gustó el cuadro antiguo__No le gustó el cuadro de síntomas
+cuadro,No le gustó el cuadro de síntomas,1,male,No le gustó el cuadro barroco,2,male,adjective,adjective,False,True,15,No le gustó el cuadro barroco__No le gustó el cuadro de síntomas
+cuadro,No le gustó el cuadro diagnóstico,1,male,No le gustó el cuadro pintoresco,2,male,adjective,adjective,False,True,15,No le gustó el cuadro diagnóstico__No le gustó el cuadro pintoresco
+cuadro,No le gustó el cuadro diagnóstico,1,male,No le gustó el cuadro antiguo,2,male,adjective,adjective,False,True,15,No le gustó el cuadro antiguo__No le gustó el cuadro diagnóstico
+cuadro,No le gustó el cuadro diagnóstico,1,male,No le gustó el cuadro barroco,2,male,adjective,adjective,False,True,15,No le gustó el cuadro barroco__No le gustó el cuadro diagnóstico
+cuadro,No le gustó el cuadro pintoresco,2,male,No le gustó el cuadro antiguo,2,male,adjective,adjective,True,True,15,No le gustó el cuadro antiguo__No le gustó el cuadro pintoresco
+cuadro,No le gustó el cuadro pintoresco,2,male,No le gustó el cuadro barroco,2,male,adjective,adjective,True,True,15,No le gustó el cuadro barroco__No le gustó el cuadro pintoresco
+cuadro,No le gustó el cuadro antiguo,2,male,No le gustó el cuadro barroco,2,male,adjective,adjective,True,True,15,No le gustó el cuadro antiguo__No le gustó el cuadro barroco
+cubo,Le gustó el cubo geométrico,1,male,Le gustó el cubo tridimensional,1,male,adjective,adjective,True,True,6,Le gustó el cubo geométrico__Le gustó el cubo tridimensional
+cubo,Le gustó el cubo geométrico,1,male,Le gustó el cubo plástico,2,male,adjective,adjective,False,True,6,Le gustó el cubo geométrico__Le gustó el cubo plástico
+cubo,Le gustó el cubo geométrico,1,male,Le gustó el cubo de madera,2,male,adjective,adjective,False,True,6,Le gustó el cubo de madera__Le gustó el cubo geométrico
+cubo,Le gustó el cubo tridimensional,1,male,Le gustó el cubo plástico,2,male,adjective,adjective,False,True,6,Le gustó el cubo plástico__Le gustó el cubo tridimensional
+cubo,Le gustó el cubo tridimensional,1,male,Le gustó el cubo de madera,2,male,adjective,adjective,False,True,6,Le gustó el cubo de madera__Le gustó el cubo tridimensional
+cubo,Le gustó el cubo plástico,2,male,Le gustó el cubo de madera,2,male,adjective,adjective,True,True,6,Le gustó el cubo de madera__Le gustó el cubo plástico
+cuerdas,Tenía cuerdas fibrosas,1,female,Tenía cuerdas sintéticas,1,female,adjective,adjective,True,True,15,Tenía cuerdas fibrosas__Tenía cuerdas sintéticas
+cuerdas,Tenía cuerdas fibrosas,1,female,Tenía cuerdas de terreno,2,female,adjective,adjective,False,True,15,Tenía cuerdas de terreno__Tenía cuerdas fibrosas
+cuerdas,Tenía cuerdas fibrosas,1,female,Tenía cuerdas forestadas,2,female,adjective,adjective,False,True,15,Tenía cuerdas fibrosas__Tenía cuerdas forestadas
+cuerdas,Tenía cuerdas fibrosas,1,female,Tenía cuerdas vocales,3,female,adjective,adjective,False,True,15,Tenía cuerdas fibrosas__Tenía cuerdas vocales
+cuerdas,Tenía cuerdas fibrosas,1,female,Tenía cuerdas inflamadas,3,female,adjective,adjective,False,True,15,Tenía cuerdas fibrosas__Tenía cuerdas inflamadas
+cuerdas,Tenía cuerdas sintéticas,1,female,Tenía cuerdas de terreno,2,female,adjective,adjective,False,True,15,Tenía cuerdas de terreno__Tenía cuerdas sintéticas
+cuerdas,Tenía cuerdas sintéticas,1,female,Tenía cuerdas forestadas,2,female,adjective,adjective,False,True,15,Tenía cuerdas forestadas__Tenía cuerdas sintéticas
+cuerdas,Tenía cuerdas sintéticas,1,female,Tenía cuerdas vocales,3,female,adjective,adjective,False,True,15,Tenía cuerdas sintéticas__Tenía cuerdas vocales
+cuerdas,Tenía cuerdas sintéticas,1,female,Tenía cuerdas inflamadas,3,female,adjective,adjective,False,True,15,Tenía cuerdas inflamadas__Tenía cuerdas sintéticas
+cuerdas,Tenía cuerdas de terreno,2,female,Tenía cuerdas forestadas,2,female,adjective,adjective,True,True,15,Tenía cuerdas de terreno__Tenía cuerdas forestadas
+cuerdas,Tenía cuerdas de terreno,2,female,Tenía cuerdas vocales,3,female,adjective,adjective,False,True,15,Tenía cuerdas de terreno__Tenía cuerdas vocales
+cuerdas,Tenía cuerdas de terreno,2,female,Tenía cuerdas inflamadas,3,female,adjective,adjective,False,True,15,Tenía cuerdas de terreno__Tenía cuerdas inflamadas
+cuerdas,Tenía cuerdas forestadas,2,female,Tenía cuerdas vocales,3,female,adjective,adjective,False,True,15,Tenía cuerdas forestadas__Tenía cuerdas vocales
+cuerdas,Tenía cuerdas forestadas,2,female,Tenía cuerdas inflamadas,3,female,adjective,adjective,False,True,15,Tenía cuerdas forestadas__Tenía cuerdas inflamadas
+cuerdas,Tenía cuerdas vocales,3,female,Tenía cuerdas inflamadas,3,female,adjective,adjective,True,True,15,Tenía cuerdas inflamadas__Tenía cuerdas vocales
+cura,Era un cura compasivo,1,male,Era un cura sabio,1,male,adjective,adjective,True,True,6,Era un cura compasivo__Era un cura sabio
+cura,Era un cura compasivo,1,male,Era una cura efectiva,2,female,adjective,adjective,False,False,6,Era un cura compasivo__Era una cura efectiva
+cura,Era un cura compasivo,1,male,Era una cura potente,2,female,adjective,adjective,False,False,6,Era un cura compasivo__Era una cura potente
+cura,Era un cura sabio,1,male,Era una cura efectiva,2,female,adjective,adjective,False,False,6,Era un cura sabio__Era una cura efectiva
+cura,Era un cura sabio,1,male,Era una cura potente,2,female,adjective,adjective,False,False,6,Era un cura sabio__Era una cura potente
+cura,Era una cura efectiva,2,female,Era una cura potente,2,female,adjective,adjective,True,True,6,Era una cura efectiva__Era una cura potente
+cámara,Se trataba de la cámara senatorial,1,female,Se trataba de la cámara gubernamental,1,female,adjective,adjective,True,True,15,Se trataba de la cámara gubernamental__Se trataba de la cámara senatorial
+cámara,Se trataba de la cámara senatorial,1,female,Se trataba de la cámara profesional,2,female,adjective,adjective,False,True,15,Se trataba de la cámara profesional__Se trataba de la cámara senatorial
+cámara,Se trataba de la cámara senatorial,1,female,Se trataba de la cámara digital,2,female,adjective,adjective,False,True,15,Se trataba de la cámara digital__Se trataba de la cámara senatorial
+cámara,Se trataba de la cámara senatorial,1,female,Se trataba de la cámara remodelada,3,female,adjective,adjective,False,True,15,Se trataba de la cámara remodelada__Se trataba de la cámara senatorial
+cámara,Se trataba de la cámara senatorial,1,female,Se trataba de la cámara principal,3,female,adjective,adjective,False,True,15,Se trataba de la cámara principal__Se trataba de la cámara senatorial
+cámara,Se trataba de la cámara gubernamental,1,female,Se trataba de la cámara profesional,2,female,adjective,adjective,False,True,15,Se trataba de la cámara gubernamental__Se trataba de la cámara profesional
+cámara,Se trataba de la cámara gubernamental,1,female,Se trataba de la cámara digital,2,female,adjective,adjective,False,True,15,Se trataba de la cámara digital__Se trataba de la cámara gubernamental
+cámara,Se trataba de la cámara gubernamental,1,female,Se trataba de la cámara remodelada,3,female,adjective,adjective,False,True,15,Se trataba de la cámara gubernamental__Se trataba de la cámara remodelada
+cámara,Se trataba de la cámara gubernamental,1,female,Se trataba de la cámara principal,3,female,adjective,adjective,False,True,15,Se trataba de la cámara gubernamental__Se trataba de la cámara principal
+cámara,Se trataba de la cámara profesional,2,female,Se trataba de la cámara digital,2,female,adjective,adjective,True,True,15,Se trataba de la cámara digital__Se trataba de la cámara profesional
+cámara,Se trataba de la cámara profesional,2,female,Se trataba de la cámara remodelada,3,female,adjective,adjective,False,True,15,Se trataba de la cámara profesional__Se trataba de la cámara remodelada
+cámara,Se trataba de la cámara profesional,2,female,Se trataba de la cámara principal,3,female,adjective,adjective,False,True,15,Se trataba de la cámara principal__Se trataba de la cámara profesional
+cámara,Se trataba de la cámara digital,2,female,Se trataba de la cámara remodelada,3,female,adjective,adjective,False,True,15,Se trataba de la cámara digital__Se trataba de la cámara remodelada
+cámara,Se trataba de la cámara digital,2,female,Se trataba de la cámara principal,3,female,adjective,adjective,False,True,15,Se trataba de la cámara digital__Se trataba de la cámara principal
+cámara,Se trataba de la cámara remodelada,3,female,Se trataba de la cámara principal,3,female,adjective,adjective,True,True,15,Se trataba de la cámara principal__Se trataba de la cámara remodelada
+código,Era un código de ética,1,male,Era un código de conducta,1,male,adjective,adjective,True,True,6,Era un código de conducta__Era un código de ética
+código,Era un código de ética,1,male,Era un código númerico,2,male,adjective,adjective,False,True,6,Era un código de ética__Era un código númerico
+código,Era un código de ética,1,male,Era un código programático,2,male,adjective,adjective,False,True,6,Era un código de ética__Era un código programático
+código,Era un código de conducta,1,male,Era un código númerico,2,male,adjective,adjective,False,True,6,Era un código de conducta__Era un código númerico
+código,Era un código de conducta,1,male,Era un código programático,2,male,adjective,adjective,False,True,6,Era un código de conducta__Era un código programático
+código,Era un código númerico,2,male,Era un código programático,2,male,adjective,adjective,True,True,6,Era un código númerico__Era un código programático
+depresión,Se trataba de una depresión geológica,1,female,Se trataba de una depresión terrestre,1,female,adjective,adjective,True,True,6,Se trataba de una depresión geológica__Se trataba de una depresión terrestre
+depresión,Se trataba de una depresión geológica,1,female,Se trataba de una depresión mental,2,female,adjective,adjective,False,True,6,Se trataba de una depresión geológica__Se trataba de una depresión mental
+depresión,Se trataba de una depresión geológica,1,female,Se trataba de una depresión psicológica,2,female,adjective,adjective,False,True,6,Se trataba de una depresión geológica__Se trataba de una depresión psicológica
+depresión,Se trataba de una depresión terrestre,1,female,Se trataba de una depresión mental,2,female,adjective,adjective,False,True,6,Se trataba de una depresión mental__Se trataba de una depresión terrestre
+depresión,Se trataba de una depresión terrestre,1,female,Se trataba de una depresión psicológica,2,female,adjective,adjective,False,True,6,Se trataba de una depresión psicológica__Se trataba de una depresión terrestre
+depresión,Se trataba de una depresión mental,2,female,Se trataba de una depresión psicológica,2,female,adjective,adjective,True,True,6,Se trataba de una depresión mental__Se trataba de una depresión psicológica
+estado,Le preocupaba su estado mental,1,male,Le preocupaba su estado psicológico,1,male,adjective,adjective,True,True,6,Le preocupaba su estado mental__Le preocupaba su estado psicológico
+estado,Le preocupaba su estado mental,1,male,Le preocupaba su estado sureño,2,male,adjective,adjective,False,True,6,Le preocupaba su estado mental__Le preocupaba su estado sureño
+estado,Le preocupaba su estado mental,1,male,Le preocupaba su estado natal,2,male,adjective,adjective,False,True,6,Le preocupaba su estado mental__Le preocupaba su estado natal
+estado,Le preocupaba su estado psicológico,1,male,Le preocupaba su estado sureño,2,male,adjective,adjective,False,True,6,Le preocupaba su estado psicológico__Le preocupaba su estado sureño
+estado,Le preocupaba su estado psicológico,1,male,Le preocupaba su estado natal,2,male,adjective,adjective,False,True,6,Le preocupaba su estado natal__Le preocupaba su estado psicológico
+estado,Le preocupaba su estado sureño,2,male,Le preocupaba su estado natal,2,male,adjective,adjective,True,True,6,Le preocupaba su estado natal__Le preocupaba su estado sureño
+fibra,Carecía fibra moral,1,female,Carecía fibra nutritiva,2,female,adjective,adjective,False,True,10,Carecía fibra moral__Carecía fibra nutritiva
+fibra,Carecía fibra moral,1,female,Carecía fibra dietética,2,female,adjective,adjective,False,True,10,Carecía fibra dietética__Carecía fibra moral
+fibra,Carecía fibra moral,1,female,Carecía fibra muscular,3,female,adjective,adjective,False,True,10,Carecía fibra moral__Carecía fibra muscular
+fibra,Carecía fibra moral,1,female,Carecía fibra óptica,4,female,adjective,adjective,False,True,10,Carecía fibra moral__Carecía fibra óptica
+fibra,Carecía fibra nutritiva,2,female,Carecía fibra dietética,2,female,adjective,adjective,True,True,10,Carecía fibra dietética__Carecía fibra nutritiva
+fibra,Carecía fibra nutritiva,2,female,Carecía fibra muscular,3,female,adjective,adjective,False,True,10,Carecía fibra muscular__Carecía fibra nutritiva
+fibra,Carecía fibra nutritiva,2,female,Carecía fibra óptica,4,female,adjective,adjective,False,True,10,Carecía fibra nutritiva__Carecía fibra óptica
+fibra,Carecía fibra dietética,2,female,Carecía fibra muscular,3,female,adjective,adjective,False,True,10,Carecía fibra dietética__Carecía fibra muscular
+fibra,Carecía fibra dietética,2,female,Carecía fibra óptica,4,female,adjective,adjective,False,True,10,Carecía fibra dietética__Carecía fibra óptica
+fibra,Carecía fibra muscular,3,female,Carecía fibra óptica,4,female,adjective,adjective,False,True,10,Carecía fibra muscular__Carecía fibra óptica
+firma,Era una firma caligráfica,1,female,Era una firma indescifrable,1,female,adjective,adjective,True,True,6,Era una firma caligráfica__Era una firma indescifrable
+firma,Era una firma caligráfica,1,female,Era una firma emprendedora,2,female,adjective,adjective,False,True,6,Era una firma caligráfica__Era una firma emprendedora
+firma,Era una firma caligráfica,1,female,Era una firma acreditada,2,female,adjective,adjective,False,True,6,Era una firma acreditada__Era una firma caligráfica
+firma,Era una firma indescifrable,1,female,Era una firma emprendedora,2,female,adjective,adjective,False,True,6,Era una firma emprendedora__Era una firma indescifrable
+firma,Era una firma indescifrable,1,female,Era una firma acreditada,2,female,adjective,adjective,False,True,6,Era una firma acreditada__Era una firma indescifrable
+firma,Era una firma emprendedora,2,female,Era una firma acreditada,2,female,adjective,adjective,True,True,6,Era una firma acreditada__Era una firma emprendedora
+fondo,Estaba en el fondo gubernamental,1,male,Estaba en el fondo presupuestario,1,male,adjective,adjective,True,True,6,Estaba en el fondo gubernamental__Estaba en el fondo presupuestario
+fondo,Estaba en el fondo gubernamental,1,male,Estaba en el fondo marino,2,male,adjective,adjective,False,True,6,Estaba en el fondo gubernamental__Estaba en el fondo marino
+fondo,Estaba en el fondo gubernamental,1,male,Estaba en el fondo del cuarto,2,male,adjective,adjective,False,True,6,Estaba en el fondo del cuarto__Estaba en el fondo gubernamental
+fondo,Estaba en el fondo presupuestario,1,male,Estaba en el fondo marino,2,male,adjective,adjective,False,True,6,Estaba en el fondo marino__Estaba en el fondo presupuestario
+fondo,Estaba en el fondo presupuestario,1,male,Estaba en el fondo del cuarto,2,male,adjective,adjective,False,True,6,Estaba en el fondo del cuarto__Estaba en el fondo presupuestario
+fondo,Estaba en el fondo marino,2,male,Estaba en el fondo del cuarto,2,male,adjective,adjective,True,True,6,Estaba en el fondo del cuarto__Estaba en el fondo marino
+fortuna,Fue una fortuna heredada,1,female,Fue una fortuna financiera,1,female,adjective,adjective,True,True,6,Fue una fortuna financiera__Fue una fortuna heredada
+fortuna,Fue una fortuna heredada,1,female,Fue una fortuna imprevista,2,female,adjective,adjective,False,True,6,Fue una fortuna heredada__Fue una fortuna imprevista
+fortuna,Fue una fortuna heredada,1,female,Fue una fortuna inesperada,2,female,adjective,adjective,False,True,6,Fue una fortuna heredada__Fue una fortuna inesperada
+fortuna,Fue una fortuna financiera,1,female,Fue una fortuna imprevista,2,female,adjective,adjective,False,True,6,Fue una fortuna financiera__Fue una fortuna imprevista
+fortuna,Fue una fortuna financiera,1,female,Fue una fortuna inesperada,2,female,adjective,adjective,False,True,6,Fue una fortuna financiera__Fue una fortuna inesperada
+fortuna,Fue una fortuna imprevista,2,female,Fue una fortuna inesperada,2,female,adjective,adjective,True,True,6,Fue una fortuna imprevista__Fue una fortuna inesperada
+frase,Le gustó la frase musical,1,female,Le gustó la frase melódica,1,female,adjective,adjective,True,True,6,Le gustó la frase melódica__Le gustó la frase musical
+frase,Le gustó la frase musical,1,female,Le gustó la frase poética,2,female,adjective,adjective,False,True,6,Le gustó la frase musical__Le gustó la frase poética
+frase,Le gustó la frase musical,1,female,Le gustó la frase lírica,2,female,adjective,adjective,False,True,6,Le gustó la frase lírica__Le gustó la frase musical
+frase,Le gustó la frase melódica,1,female,Le gustó la frase poética,2,female,adjective,adjective,False,True,6,Le gustó la frase melódica__Le gustó la frase poética
+frase,Le gustó la frase melódica,1,female,Le gustó la frase lírica,2,female,adjective,adjective,False,True,6,Le gustó la frase lírica__Le gustó la frase melódica
+frase,Le gustó la frase poética,2,female,Le gustó la frase lírica,2,female,adjective,adjective,True,True,6,Le gustó la frase lírica__Le gustó la frase poética
+frente,Era un frente frío,1,male,Era un frente lluvioso,1,male,adjective,adjective,True,True,6,Era un frente frío__Era un frente lluvioso
+frente,Era un frente frío,1,male,Era una frente amplia,2,female,adjective,adjective,False,False,6,Era un frente frío__Era una frente amplia
+frente,Era un frente frío,1,male,Era una frente arrugada,2,female,adjective,adjective,False,False,6,Era un frente frío__Era una frente arrugada
+frente,Era un frente lluvioso,1,male,Era una frente amplia,2,female,adjective,adjective,False,False,6,Era un frente lluvioso__Era una frente amplia
+frente,Era un frente lluvioso,1,male,Era una frente arrugada,2,female,adjective,adjective,False,False,6,Era un frente lluvioso__Era una frente arrugada
+frente,Era una frente amplia,2,female,Era una frente arrugada,2,female,adjective,adjective,True,True,6,Era una frente amplia__Era una frente arrugada
+función,Era una función biológica,1,female,Era una función social,1,female,adjective,adjective,True,True,6,Era una función biológica__Era una función social
+función,Era una función biológica,1,female,Era una función lineal,2,female,adjective,adjective,False,True,6,Era una función biológica__Era una función lineal
+función,Era una función biológica,1,female,Era una función matemática,2,female,adjective,adjective,False,True,6,Era una función biológica__Era una función matemática
+función,Era una función social,1,female,Era una función lineal,2,female,adjective,adjective,False,True,6,Era una función lineal__Era una función social
+función,Era una función social,1,female,Era una función matemática,2,female,adjective,adjective,False,True,6,Era una función matemática__Era una función social
+función,Era una función lineal,2,female,Era una función matemática,2,female,adjective,adjective,True,True,6,Era una función lineal__Era una función matemática
+gato,Compró el gato para el niño,1,male,Compró el gato peludo,1,male,adjective,adjective,True,True,6,Compró el gato para el niño__Compró el gato peludo
+gato,Compró el gato para el niño,1,male,Compró el gato para el auto,2,male,adjective,adjective,False,True,6,Compró el gato para el auto__Compró el gato para el niño
+gato,Compró el gato para el niño,1,male,Compró el gato hidraúlico,2,male,adjective,adjective,False,True,6,Compró el gato hidraúlico__Compró el gato para el niño
+gato,Compró el gato peludo,1,male,Compró el gato para el auto,2,male,adjective,adjective,False,True,6,Compró el gato para el auto__Compró el gato peludo
+gato,Compró el gato peludo,1,male,Compró el gato hidraúlico,2,male,adjective,adjective,False,True,6,Compró el gato hidraúlico__Compró el gato peludo
+gato,Compró el gato para el auto,2,male,Compró el gato hidraúlico,2,male,adjective,adjective,True,True,6,Compró el gato hidraúlico__Compró el gato para el auto
+guardia,Llamó al guardia de seguridad,1,male,Llamó al guardia de noche,1,male,adjective,adjective,True,True,6,Llamó al guardia de noche__Llamó al guardia de seguridad
+guardia,Llamó al guardia de seguridad,1,male,Llamó a la guardia nacional,2,female,adjective,adjective,False,False,6,Llamó a la guardia nacional__Llamó al guardia de seguridad
+guardia,Llamó al guardia de seguridad,1,male,Llamó a la guardia costanera,2,female,adjective,adjective,False,False,6,Llamó a la guardia costanera__Llamó al guardia de seguridad
+guardia,Llamó al guardia de noche,1,male,Llamó a la guardia nacional,2,female,adjective,adjective,False,False,6,Llamó a la guardia nacional__Llamó al guardia de noche
+guardia,Llamó al guardia de noche,1,male,Llamó a la guardia costanera,2,female,adjective,adjective,False,False,6,Llamó a la guardia costanera__Llamó al guardia de noche
+guardia,Llamó a la guardia nacional,2,female,Llamó a la guardia costanera,2,female,adjective,adjective,True,True,6,Llamó a la guardia costanera__Llamó a la guardia nacional
+guía,Era una guía turística,1,female,Era una guía viajera,1,female,adjective,adjective,True,True,6,Era una guía turística__Era una guía viajera
+guía,Era una guía turística,1,female,Era una guía digital,2,female,adjective,adjective,False,True,6,Era una guía digital__Era una guía turística
+guía,Era una guía turística,1,female,Era una guía televisiva,2,female,adjective,adjective,False,True,6,Era una guía televisiva__Era una guía turística
+guía,Era una guía viajera,1,female,Era una guía digital,2,female,adjective,adjective,False,True,6,Era una guía digital__Era una guía viajera
+guía,Era una guía viajera,1,female,Era una guía televisiva,2,female,adjective,adjective,False,True,6,Era una guía televisiva__Era una guía viajera
+guía,Era una guía digital,2,female,Era una guía televisiva,2,female,adjective,adjective,True,True,6,Era una guía digital__Era una guía televisiva
+hoja,Era una hoja de cálculo,1,female,Era una hoja de papel,1,female,adjective,adjective,True,True,6,Era una hoja de cálculo__Era una hoja de papel
+hoja,Era una hoja de cálculo,1,female,Era una hoja de árbol,2,female,adjective,adjective,False,True,6,Era una hoja de cálculo__Era una hoja de árbol
+hoja,Era una hoja de cálculo,1,female,Era una hoja verdosa,2,female,adjective,adjective,False,True,6,Era una hoja de cálculo__Era una hoja verdosa
+hoja,Era una hoja de papel,1,female,Era una hoja de árbol,2,female,adjective,adjective,False,True,6,Era una hoja de papel__Era una hoja de árbol
+hoja,Era una hoja de papel,1,female,Era una hoja verdosa,2,female,adjective,adjective,False,True,6,Era una hoja de papel__Era una hoja verdosa
+hoja,Era una hoja de árbol,2,female,Era una hoja verdosa,2,female,adjective,adjective,True,True,6,Era una hoja de árbol__Era una hoja verdosa
+hábito,Era un hábito irritante,1,male,Era un hábito rutinario,1,male,adjective,adjective,True,True,6,Era un hábito irritante__Era un hábito rutinario
+hábito,Era un hábito irritante,1,male,Era un hábito de monje,2,male,adjective,adjective,False,True,6,Era un hábito de monje__Era un hábito irritante
+hábito,Era un hábito irritante,1,male,Era un hábito de lona,2,male,adjective,adjective,False,True,6,Era un hábito de lona__Era un hábito irritante
+hábito,Era un hábito rutinario,1,male,Era un hábito de monje,2,male,adjective,adjective,False,True,6,Era un hábito de monje__Era un hábito rutinario
+hábito,Era un hábito rutinario,1,male,Era un hábito de lona,2,male,adjective,adjective,False,True,6,Era un hábito de lona__Era un hábito rutinario
+hábito,Era un hábito de monje,2,male,Era un hábito de lona,2,male,adjective,adjective,True,True,6,Era un hábito de lona__Era un hábito de monje
+lengua,Le gusta la lengua castellana,1,female,Le gusta la lengua española,1,female,adjective,adjective,True,True,6,Le gusta la lengua castellana__Le gusta la lengua española
+lengua,Le gusta la lengua castellana,1,female,Le gusta la lengua cocida,2,female,adjective,adjective,False,True,6,Le gusta la lengua castellana__Le gusta la lengua cocida
+lengua,Le gusta la lengua castellana,1,female,Le gusta la lengua marinada,2,female,adjective,adjective,False,True,6,Le gusta la lengua castellana__Le gusta la lengua marinada
+lengua,Le gusta la lengua española,1,female,Le gusta la lengua cocida,2,female,adjective,adjective,False,True,6,Le gusta la lengua cocida__Le gusta la lengua española
+lengua,Le gusta la lengua española,1,female,Le gusta la lengua marinada,2,female,adjective,adjective,False,True,6,Le gusta la lengua española__Le gusta la lengua marinada
+lengua,Le gusta la lengua cocida,2,female,Le gusta la lengua marinada,2,female,adjective,adjective,True,True,6,Le gusta la lengua cocida__Le gusta la lengua marinada
+llama,Era una llama ardiente,1,female,Era una llama brillante,1,female,adjective,adjective,True,True,6,Era una llama ardiente__Era una llama brillante
+llama,Era una llama ardiente,1,female,Era una llama peruana,2,female,adjective,adjective,False,True,6,Era una llama ardiente__Era una llama peruana
+llama,Era una llama ardiente,1,female,Era una llama lanuda,2,female,adjective,adjective,False,True,6,Era una llama ardiente__Era una llama lanuda
+llama,Era una llama brillante,1,female,Era una llama peruana,2,female,adjective,adjective,False,True,6,Era una llama brillante__Era una llama peruana
+llama,Era una llama brillante,1,female,Era una llama lanuda,2,female,adjective,adjective,False,True,6,Era una llama brillante__Era una llama lanuda
+llama,Era una llama peruana,2,female,Era una llama lanuda,2,female,adjective,adjective,True,True,6,Era una llama lanuda__Era una llama peruana
+mano,Tenía una mano de hierro,1,female,Tenía una mano dura,1,female,adjective,adjective,True,True,10,Tenía una mano de hierro__Tenía una mano dura
+mano,Tenía una mano de hierro,1,female,Tenía una mano lastimada,2,female,adjective,adjective,False,True,10,Tenía una mano de hierro__Tenía una mano lastimada
+mano,Tenía una mano de hierro,1,female,Tenía una mano arrugada,2,female,adjective,adjective,False,True,10,Tenía una mano arrugada__Tenía una mano de hierro
+mano,Tenía una mano de hierro,1,female,Tenía una mano sudada,2,female,adjective,adjective,False,True,10,Tenía una mano de hierro__Tenía una mano sudada
+mano,Tenía una mano dura,1,female,Tenía una mano lastimada,2,female,adjective,adjective,False,True,10,Tenía una mano dura__Tenía una mano lastimada
+mano,Tenía una mano dura,1,female,Tenía una mano arrugada,2,female,adjective,adjective,False,True,10,Tenía una mano arrugada__Tenía una mano dura
+mano,Tenía una mano dura,1,female,Tenía una mano sudada,2,female,adjective,adjective,False,True,10,Tenía una mano dura__Tenía una mano sudada
+mano,Tenía una mano lastimada,2,female,Tenía una mano arrugada,2,female,adjective,adjective,True,True,10,Tenía una mano arrugada__Tenía una mano lastimada
+mano,Tenía una mano lastimada,2,female,Tenía una mano sudada,2,female,adjective,adjective,True,True,10,Tenía una mano lastimada__Tenía una mano sudada
+mano,Tenía una mano arrugada,2,female,Tenía una mano sudada,2,female,adjective,adjective,True,True,10,Tenía una mano arrugada__Tenía una mano sudada
+muñeca,Tenía una muñeca fracturada,1,female,Tenía una muñeca lesionada,1,female,adjective,adjective,True,True,6,Tenía una muñeca fracturada__Tenía una muñeca lesionada
+muñeca,Tenía una muñeca fracturada,1,female,Tenía una muñeca preciosa,2,female,adjective,adjective,False,True,6,Tenía una muñeca fracturada__Tenía una muñeca preciosa
+muñeca,Tenía una muñeca fracturada,1,female,Tenía una muñeca plástica,2,female,adjective,adjective,False,True,6,Tenía una muñeca fracturada__Tenía una muñeca plástica
+muñeca,Tenía una muñeca lesionada,1,female,Tenía una muñeca preciosa,2,female,adjective,adjective,False,True,6,Tenía una muñeca lesionada__Tenía una muñeca preciosa
+muñeca,Tenía una muñeca lesionada,1,female,Tenía una muñeca plástica,2,female,adjective,adjective,False,True,6,Tenía una muñeca lesionada__Tenía una muñeca plástica
+muñeca,Tenía una muñeca preciosa,2,female,Tenía una muñeca plástica,2,female,adjective,adjective,True,True,6,Tenía una muñeca plástica__Tenía una muñeca preciosa
+naranja,Era una naranja jugosa,1,female,Era una naranja madura,1,female,adjective,adjective,True,True,6,Era una naranja jugosa__Era una naranja madura
+naranja,Era una naranja jugosa,1,female,Era un naranja oscuro,2,male,adjective,adjective,False,False,6,Era un naranja oscuro__Era una naranja jugosa
+naranja,Era una naranja jugosa,1,female,Era un naranja brillante,2,male,adjective,adjective,False,False,6,Era un naranja brillante__Era una naranja jugosa
+naranja,Era una naranja madura,1,female,Era un naranja oscuro,2,male,adjective,adjective,False,False,6,Era un naranja oscuro__Era una naranja madura
+naranja,Era una naranja madura,1,female,Era un naranja brillante,2,male,adjective,adjective,False,False,6,Era un naranja brillante__Era una naranja madura
+naranja,Era un naranja oscuro,2,male,Era un naranja brillante,2,male,adjective,adjective,True,True,6,Era un naranja brillante__Era un naranja oscuro
+nave,Era una nave de madera,1,female,Era una nave marítima,1,female,adjective,adjective,True,True,6,Era una nave de madera__Era una nave marítima
+nave,Era una nave de madera,1,female,Era una nave católica,2,female,adjective,adjective,False,True,6,Era una nave católica__Era una nave de madera
+nave,Era una nave de madera,1,female,Era una nave sagrada,2,female,adjective,adjective,False,True,6,Era una nave de madera__Era una nave sagrada
+nave,Era una nave marítima,1,female,Era una nave católica,2,female,adjective,adjective,False,True,6,Era una nave católica__Era una nave marítima
+nave,Era una nave marítima,1,female,Era una nave sagrada,2,female,adjective,adjective,False,True,6,Era una nave marítima__Era una nave sagrada
+nave,Era una nave católica,2,female,Era una nave sagrada,2,female,adjective,adjective,True,True,6,Era una nave católica__Era una nave sagrada
+nota,Era una nota desafinada,1,female,Era una nota aguda,1,female,adjective,adjective,True,True,15,Era una nota aguda__Era una nota desafinada
+nota,Era una nota desafinada,1,female,Era una nota musical,1,female,adjective,adjective,True,True,15,Era una nota desafinada__Era una nota musical
+nota,Era una nota desafinada,1,female,Era una nota académica,2,female,adjective,adjective,False,True,15,Era una nota académica__Era una nota desafinada
+nota,Era una nota desafinada,1,female,Era una nota decepcionante,2,female,adjective,adjective,False,True,15,Era una nota decepcionante__Era una nota desafinada
+nota,Era una nota desafinada,1,female,Era una nota satisfactoria,2,female,adjective,adjective,False,True,15,Era una nota desafinada__Era una nota satisfactoria
+nota,Era una nota aguda,1,female,Era una nota musical,1,female,adjective,adjective,True,True,15,Era una nota aguda__Era una nota musical
+nota,Era una nota aguda,1,female,Era una nota académica,2,female,adjective,adjective,False,True,15,Era una nota académica__Era una nota aguda
+nota,Era una nota aguda,1,female,Era una nota decepcionante,2,female,adjective,adjective,False,True,15,Era una nota aguda__Era una nota decepcionante
+nota,Era una nota aguda,1,female,Era una nota satisfactoria,2,female,adjective,adjective,False,True,15,Era una nota aguda__Era una nota satisfactoria
+nota,Era una nota musical,1,female,Era una nota académica,2,female,adjective,adjective,False,True,15,Era una nota académica__Era una nota musical
+nota,Era una nota musical,1,female,Era una nota decepcionante,2,female,adjective,adjective,False,True,15,Era una nota decepcionante__Era una nota musical
+nota,Era una nota musical,1,female,Era una nota satisfactoria,2,female,adjective,adjective,False,True,15,Era una nota musical__Era una nota satisfactoria
+nota,Era una nota académica,2,female,Era una nota decepcionante,2,female,adjective,adjective,True,True,15,Era una nota académica__Era una nota decepcionante
+nota,Era una nota académica,2,female,Era una nota satisfactoria,2,female,adjective,adjective,True,True,15,Era una nota académica__Era una nota satisfactoria
+nota,Era una nota decepcionante,2,female,Era una nota satisfactoria,2,female,adjective,adjective,True,True,15,Era una nota decepcionante__Era una nota satisfactoria
+ola,Se trataba de una ola marítima,1,female,Se trataba de una ola navegable,1,female,adjective,adjective,True,True,6,Se trataba de una ola marítima__Se trataba de una ola navegable
+ola,Se trataba de una ola marítima,1,female,Se trataba de una ola migratoria,2,female,adjective,adjective,False,True,6,Se trataba de una ola marítima__Se trataba de una ola migratoria
+ola,Se trataba de una ola marítima,1,female,Se trataba de una ola criminal,2,female,adjective,adjective,False,True,6,Se trataba de una ola criminal__Se trataba de una ola marítima
+ola,Se trataba de una ola navegable,1,female,Se trataba de una ola migratoria,2,female,adjective,adjective,False,True,6,Se trataba de una ola migratoria__Se trataba de una ola navegable
+ola,Se trataba de una ola navegable,1,female,Se trataba de una ola criminal,2,female,adjective,adjective,False,True,6,Se trataba de una ola criminal__Se trataba de una ola navegable
+ola,Se trataba de una ola migratoria,2,female,Se trataba de una ola criminal,2,female,adjective,adjective,True,True,6,Se trataba de una ola criminal__Se trataba de una ola migratoria
+orden,Es una orden jurídica,1,female,Es una orden ejecutiva,1,female,adjective,adjective,True,True,6,Es una orden ejecutiva__Es una orden jurídica
+orden,Es una orden jurídica,1,female,Es una orden religiosa,2,female,adjective,adjective,False,True,6,Es una orden jurídica__Es una orden religiosa
+orden,Es una orden jurídica,1,female,Es una orden católica,2,female,adjective,adjective,False,True,6,Es una orden católica__Es una orden jurídica
+orden,Es una orden ejecutiva,1,female,Es una orden religiosa,2,female,adjective,adjective,False,True,6,Es una orden ejecutiva__Es una orden religiosa
+orden,Es una orden ejecutiva,1,female,Es una orden católica,2,female,adjective,adjective,False,True,6,Es una orden católica__Es una orden ejecutiva
+orden,Es una orden religiosa,2,female,Es una orden católica,2,female,adjective,adjective,True,True,6,Es una orden católica__Es una orden religiosa
+palma,Estaba en la palma frondosa,1,female,Estaba en la palma de coco,1,female,adjective,adjective,True,True,6,Estaba en la palma de coco__Estaba en la palma frondosa
+palma,Estaba en la palma frondosa,1,female,Estaba en la palma derecha,2,female,adjective,adjective,False,True,6,Estaba en la palma derecha__Estaba en la palma frondosa
+palma,Estaba en la palma frondosa,1,female,Estaba en la palma izquierda,2,female,adjective,adjective,False,True,6,Estaba en la palma frondosa__Estaba en la palma izquierda
+palma,Estaba en la palma de coco,1,female,Estaba en la palma derecha,2,female,adjective,adjective,False,True,6,Estaba en la palma de coco__Estaba en la palma derecha
+palma,Estaba en la palma de coco,1,female,Estaba en la palma izquierda,2,female,adjective,adjective,False,True,6,Estaba en la palma de coco__Estaba en la palma izquierda
+palma,Estaba en la palma derecha,2,female,Estaba en la palma izquierda,2,female,adjective,adjective,True,True,6,Estaba en la palma derecha__Estaba en la palma izquierda
+papa,Era una papa majada,1,female,Era una papa caliente,1,female,adjective,adjective,True,True,15,Era una papa caliente__Era una papa majada
+papa,Era una papa majada,1,female,Era una papa podrida,1,female,adjective,adjective,True,True,15,Era una papa majada__Era una papa podrida
+papa,Era una papa majada,1,female,Era un papa jesuita,2,male,adjective,adjective,False,False,15,Era un papa jesuita__Era una papa majada
+papa,Era una papa majada,1,female,Era un papa comprensivo,2,male,adjective,adjective,False,False,15,Era un papa comprensivo__Era una papa majada
+papa,Era una papa majada,1,female,Era un papa conservador,2,male,adjective,adjective,False,False,15,Era un papa conservador__Era una papa majada
+papa,Era una papa caliente,1,female,Era una papa podrida,1,female,adjective,adjective,True,True,15,Era una papa caliente__Era una papa podrida
+papa,Era una papa caliente,1,female,Era un papa jesuita,2,male,adjective,adjective,False,False,15,Era un papa jesuita__Era una papa caliente
+papa,Era una papa caliente,1,female,Era un papa comprensivo,2,male,adjective,adjective,False,False,15,Era un papa comprensivo__Era una papa caliente
+papa,Era una papa caliente,1,female,Era un papa conservador,2,male,adjective,adjective,False,False,15,Era un papa conservador__Era una papa caliente
+papa,Era una papa podrida,1,female,Era un papa jesuita,2,male,adjective,adjective,False,False,15,Era un papa jesuita__Era una papa podrida
+papa,Era una papa podrida,1,female,Era un papa comprensivo,2,male,adjective,adjective,False,False,15,Era un papa comprensivo__Era una papa podrida
+papa,Era una papa podrida,1,female,Era un papa conservador,2,male,adjective,adjective,False,False,15,Era un papa conservador__Era una papa podrida
+papa,Era un papa jesuita,2,male,Era un papa comprensivo,2,male,adjective,adjective,True,True,15,Era un papa comprensivo__Era un papa jesuita
+papa,Era un papa jesuita,2,male,Era un papa conservador,2,male,adjective,adjective,True,True,15,Era un papa conservador__Era un papa jesuita
+papa,Era un papa comprensivo,2,male,Era un papa conservador,2,male,adjective,adjective,True,True,15,Era un papa comprensivo__Era un papa conservador
+papel,Era un papel amplio,1,male,Era un papel cuadriculado,1,male,adjective,adjective,True,True,6,Era un papel amplio__Era un papel cuadriculado
+papel,Era un papel amplio,1,male,Era un papel principal,2,male,adjective,adjective,False,True,6,Era un papel amplio__Era un papel principal
+papel,Era un papel amplio,1,male,Era un papel secundario,2,male,adjective,adjective,False,True,6,Era un papel amplio__Era un papel secundario
+papel,Era un papel cuadriculado,1,male,Era un papel principal,2,male,adjective,adjective,False,True,6,Era un papel cuadriculado__Era un papel principal
+papel,Era un papel cuadriculado,1,male,Era un papel secundario,2,male,adjective,adjective,False,True,6,Era un papel cuadriculado__Era un papel secundario
+papel,Era un papel principal,2,male,Era un papel secundario,2,male,adjective,adjective,True,True,6,Era un papel principal__Era un papel secundario
+parque,Visitó el parque de diversiones,1,male,Visitó el parque de atracciones,1,male,adjective,adjective,True,True,6,Visitó el parque de atracciones__Visitó el parque de diversiones
+parque,Visitó el parque de diversiones,1,male,Visitó el parque estatal,2,male,adjective,adjective,False,True,6,Visitó el parque de diversiones__Visitó el parque estatal
+parque,Visitó el parque de diversiones,1,male,Visitó el parque forestal,2,male,adjective,adjective,False,True,6,Visitó el parque de diversiones__Visitó el parque forestal
+parque,Visitó el parque de atracciones,1,male,Visitó el parque estatal,2,male,adjective,adjective,False,True,6,Visitó el parque de atracciones__Visitó el parque estatal
+parque,Visitó el parque de atracciones,1,male,Visitó el parque forestal,2,male,adjective,adjective,False,True,6,Visitó el parque de atracciones__Visitó el parque forestal
+parque,Visitó el parque estatal,2,male,Visitó el parque forestal,2,male,adjective,adjective,True,True,6,Visitó el parque estatal__Visitó el parque forestal
+pasta,Le gustó la pasta italiana,1,female,Le gustó la pasta caliente,1,female,adjective,adjective,True,True,6,Le gustó la pasta caliente__Le gustó la pasta italiana
+pasta,Le gustó la pasta italiana,1,female,Le gustó la pasta dental,2,female,adjective,adjective,False,True,6,Le gustó la pasta dental__Le gustó la pasta italiana
+pasta,Le gustó la pasta italiana,1,female,Le gustó la pasta blanqueadora,2,female,adjective,adjective,False,True,6,Le gustó la pasta blanqueadora__Le gustó la pasta italiana
+pasta,Le gustó la pasta caliente,1,female,Le gustó la pasta dental,2,female,adjective,adjective,False,True,6,Le gustó la pasta caliente__Le gustó la pasta dental
+pasta,Le gustó la pasta caliente,1,female,Le gustó la pasta blanqueadora,2,female,adjective,adjective,False,True,6,Le gustó la pasta blanqueadora__Le gustó la pasta caliente
+pasta,Le gustó la pasta dental,2,female,Le gustó la pasta blanqueadora,2,female,adjective,adjective,True,True,6,Le gustó la pasta blanqueadora__Le gustó la pasta dental
+pastor,Era un pastor evangélico,1,male,Era un pastor eclesiástico,1,male,adjective,adjective,True,True,6,Era un pastor eclesiástico__Era un pastor evangélico
+pastor,Era un pastor evangélico,1,male,Era un pastor montuno,2,male,adjective,adjective,False,True,6,Era un pastor evangélico__Era un pastor montuno
+pastor,Era un pastor evangélico,1,male,Era un pastor de ovejas,2,male,adjective,adjective,False,True,6,Era un pastor de ovejas__Era un pastor evangélico
+pastor,Era un pastor eclesiástico,1,male,Era un pastor montuno,2,male,adjective,adjective,False,True,6,Era un pastor eclesiástico__Era un pastor montuno
+pastor,Era un pastor eclesiástico,1,male,Era un pastor de ovejas,2,male,adjective,adjective,False,True,6,Era un pastor de ovejas__Era un pastor eclesiástico
+pastor,Era un pastor montuno,2,male,Era un pastor de ovejas,2,male,adjective,adjective,True,True,6,Era un pastor de ovejas__Era un pastor montuno
+pata,Ella vio la pata de la mesa,1,female,Ella vio la pata de hierro,1,female,adjective,adjective,True,True,6,Ella vio la pata de hierro__Ella vio la pata de la mesa
+pata,Ella vio la pata de la mesa,1,female,Ella vio la pata de la gata,2,female,adjective,adjective,False,True,6,Ella vio la pata de la gata__Ella vio la pata de la mesa
+pata,Ella vio la pata de la mesa,1,female,Ella vio la pata peluda,2,female,adjective,adjective,False,True,6,Ella vio la pata de la mesa__Ella vio la pata peluda
+pata,Ella vio la pata de hierro,1,female,Ella vio la pata de la gata,2,female,adjective,adjective,False,True,6,Ella vio la pata de hierro__Ella vio la pata de la gata
+pata,Ella vio la pata de hierro,1,female,Ella vio la pata peluda,2,female,adjective,adjective,False,True,6,Ella vio la pata de hierro__Ella vio la pata peluda
+pata,Ella vio la pata de la gata,2,female,Ella vio la pata peluda,2,female,adjective,adjective,True,True,6,Ella vio la pata de la gata__Ella vio la pata peluda
+patrón,Era un patrón orgulloso,1,male,Era un patrón exigente,1,male,adjective,adjective,True,True,6,Era un patrón exigente__Era un patrón orgulloso
+patrón,Era un patrón orgulloso,1,male,Era un patrón geométrico,2,male,adjective,adjective,False,True,6,Era un patrón geométrico__Era un patrón orgulloso
+patrón,Era un patrón orgulloso,1,male,Era un patrón complicado,2,male,adjective,adjective,False,True,6,Era un patrón complicado__Era un patrón orgulloso
+patrón,Era un patrón exigente,1,male,Era un patrón geométrico,2,male,adjective,adjective,False,True,6,Era un patrón exigente__Era un patrón geométrico
+patrón,Era un patrón exigente,1,male,Era un patrón complicado,2,male,adjective,adjective,False,True,6,Era un patrón complicado__Era un patrón exigente
+patrón,Era un patrón geométrico,2,male,Era un patrón complicado,2,male,adjective,adjective,True,True,6,Era un patrón complicado__Era un patrón geométrico
+perfil,Se trataba de un perfil psicológico,1,male,Se trataba de un perfil perturbador,1,male,adjective,adjective,True,True,6,Se trataba de un perfil perturbador__Se trataba de un perfil psicológico
+perfil,Se trataba de un perfil psicológico,1,male,Se trataba de un perfil fotogénico,2,male,adjective,adjective,False,True,6,Se trataba de un perfil fotogénico__Se trataba de un perfil psicológico
+perfil,Se trataba de un perfil psicológico,1,male,Se trataba de un perfil elegante,2,male,adjective,adjective,False,True,6,Se trataba de un perfil elegante__Se trataba de un perfil psicológico
+perfil,Se trataba de un perfil perturbador,1,male,Se trataba de un perfil fotogénico,2,male,adjective,adjective,False,True,6,Se trataba de un perfil fotogénico__Se trataba de un perfil perturbador
+perfil,Se trataba de un perfil perturbador,1,male,Se trataba de un perfil elegante,2,male,adjective,adjective,False,True,6,Se trataba de un perfil elegante__Se trataba de un perfil perturbador
+perfil,Se trataba de un perfil fotogénico,2,male,Se trataba de un perfil elegante,2,male,adjective,adjective,True,True,6,Se trataba de un perfil elegante__Se trataba de un perfil fotogénico
+periódico,Se trataba de un periódico local,1,male,Se trataba de un periódico global,1,male,adjective,adjective,True,True,6,Se trataba de un periódico global__Se trataba de un periódico local
+periódico,Se trataba de un periódico local,1,male,Se trataba de un periódico estrujado,2,male,adjective,adjective,False,True,6,Se trataba de un periódico estrujado__Se trataba de un periódico local
+periódico,Se trataba de un periódico local,1,male,Se trataba de un periódico plegado,2,male,adjective,adjective,False,True,6,Se trataba de un periódico local__Se trataba de un periódico plegado
+periódico,Se trataba de un periódico global,1,male,Se trataba de un periódico estrujado,2,male,adjective,adjective,False,True,6,Se trataba de un periódico estrujado__Se trataba de un periódico global
+periódico,Se trataba de un periódico global,1,male,Se trataba de un periódico plegado,2,male,adjective,adjective,False,True,6,Se trataba de un periódico global__Se trataba de un periódico plegado
+periódico,Se trataba de un periódico estrujado,2,male,Se trataba de un periódico plegado,2,male,adjective,adjective,True,True,6,Se trataba de un periódico estrujado__Se trataba de un periódico plegado
+pico,Dibujó el pico montuno,1,male,Dibujó el pico alpino,1,male,adjective,adjective,True,True,6,Dibujó el pico alpino__Dibujó el pico montuno
+pico,Dibujó el pico montuno,1,male,Dibujó el pico del ave,2,male,adjective,adjective,False,True,6,Dibujó el pico del ave__Dibujó el pico montuno
+pico,Dibujó el pico montuno,1,male,Dibujó el pico amarillo,2,male,adjective,adjective,False,True,6,Dibujó el pico amarillo__Dibujó el pico montuno
+pico,Dibujó el pico alpino,1,male,Dibujó el pico del ave,2,male,adjective,adjective,False,True,6,Dibujó el pico alpino__Dibujó el pico del ave
+pico,Dibujó el pico alpino,1,male,Dibujó el pico amarillo,2,male,adjective,adjective,False,True,6,Dibujó el pico alpino__Dibujó el pico amarillo
+pico,Dibujó el pico del ave,2,male,Dibujó el pico amarillo,2,male,adjective,adjective,True,True,6,Dibujó el pico amarillo__Dibujó el pico del ave
+pieza,Le gustó la pieza musical,1,female,Le gustó la pieza flamenca,1,femael,adjective,adjective,True,False,15,Le gustó la pieza flamenca__Le gustó la pieza musical
+pieza,Le gustó la pieza musical,1,female,Le gustó la pieza alterada,2,female,adjective,adjective,False,True,15,Le gustó la pieza alterada__Le gustó la pieza musical
+pieza,Le gustó la pieza musical,1,female,Le gustó la pieza añadida,2,female,adjective,adjective,False,True,15,Le gustó la pieza añadida__Le gustó la pieza musical
+pieza,Le gustó la pieza musical,1,female,Le gustó la pieza abstracta,3,female,adjective,adjective,False,True,15,Le gustó la pieza abstracta__Le gustó la pieza musical
+pieza,Le gustó la pieza musical,1,female,Le gustó la pieza contemporánea,3,female,adjective,adjective,False,True,15,Le gustó la pieza contemporánea__Le gustó la pieza musical
+pieza,Le gustó la pieza flamenca,1,femael,Le gustó la pieza alterada,2,female,adjective,adjective,False,False,15,Le gustó la pieza alterada__Le gustó la pieza flamenca
+pieza,Le gustó la pieza flamenca,1,femael,Le gustó la pieza añadida,2,female,adjective,adjective,False,False,15,Le gustó la pieza añadida__Le gustó la pieza flamenca
+pieza,Le gustó la pieza flamenca,1,femael,Le gustó la pieza abstracta,3,female,adjective,adjective,False,False,15,Le gustó la pieza abstracta__Le gustó la pieza flamenca
+pieza,Le gustó la pieza flamenca,1,femael,Le gustó la pieza contemporánea,3,female,adjective,adjective,False,False,15,Le gustó la pieza contemporánea__Le gustó la pieza flamenca
+pieza,Le gustó la pieza alterada,2,female,Le gustó la pieza añadida,2,female,adjective,adjective,True,True,15,Le gustó la pieza alterada__Le gustó la pieza añadida
+pieza,Le gustó la pieza alterada,2,female,Le gustó la pieza abstracta,3,female,adjective,adjective,False,True,15,Le gustó la pieza abstracta__Le gustó la pieza alterada
+pieza,Le gustó la pieza alterada,2,female,Le gustó la pieza contemporánea,3,female,adjective,adjective,False,True,15,Le gustó la pieza alterada__Le gustó la pieza contemporánea
+pieza,Le gustó la pieza añadida,2,female,Le gustó la pieza abstracta,3,female,adjective,adjective,False,True,15,Le gustó la pieza abstracta__Le gustó la pieza añadida
+pieza,Le gustó la pieza añadida,2,female,Le gustó la pieza contemporánea,3,female,adjective,adjective,False,True,15,Le gustó la pieza añadida__Le gustó la pieza contemporánea
+pieza,Le gustó la pieza abstracta,3,female,Le gustó la pieza contemporánea,3,female,adjective,adjective,True,True,15,Le gustó la pieza abstracta__Le gustó la pieza contemporánea
+pista,Era una pista de baile,1,female,Era una pista resbalosa,1,female,adjective,adjective,True,True,6,Era una pista de baile__Era una pista resbalosa
+pista,Era una pista de baile,1,female,Era una pista clave,2,female,adjective,adjective,False,True,6,Era una pista clave__Era una pista de baile
+pista,Era una pista de baile,1,female,Era una pista falsa,2,female,adjective,adjective,False,True,6,Era una pista de baile__Era una pista falsa
+pista,Era una pista resbalosa,1,female,Era una pista clave,2,female,adjective,adjective,False,True,6,Era una pista clave__Era una pista resbalosa
+pista,Era una pista resbalosa,1,female,Era una pista falsa,2,female,adjective,adjective,False,True,6,Era una pista falsa__Era una pista resbalosa
+pista,Era una pista clave,2,female,Era una pista falsa,2,female,adjective,adjective,True,True,6,Era una pista clave__Era una pista falsa
+planta,Estaba en la planta tropical,1,female,Estaba en la planta venenosa,1,female,adjective,adjective,True,True,15,Estaba en la planta tropical__Estaba en la planta venenosa
+planta,Estaba en la planta tropical,1,female,Estaba en la planta baja,2,female,adjective,adjective,False,True,15,Estaba en la planta baja__Estaba en la planta tropical
+planta,Estaba en la planta tropical,1,female,Estaba en la planta superior,2,female,adjective,adjective,False,True,15,Estaba en la planta superior__Estaba en la planta tropical
+planta,Estaba en la planta tropical,1,female,Estaba en la planta del pie,3,female,adjective,adjective,False,True,15,Estaba en la planta del pie__Estaba en la planta tropical
+planta,Estaba en la planta tropical,1,female,Estaba en la planta izquierda,3,female,adjective,adjective,False,True,15,Estaba en la planta izquierda__Estaba en la planta tropical
+planta,Estaba en la planta venenosa,1,female,Estaba en la planta baja,2,female,adjective,adjective,False,True,15,Estaba en la planta baja__Estaba en la planta venenosa
+planta,Estaba en la planta venenosa,1,female,Estaba en la planta superior,2,female,adjective,adjective,False,True,15,Estaba en la planta superior__Estaba en la planta venenosa
+planta,Estaba en la planta venenosa,1,female,Estaba en la planta del pie,3,female,adjective,adjective,False,True,15,Estaba en la planta del pie__Estaba en la planta venenosa
+planta,Estaba en la planta venenosa,1,female,Estaba en la planta izquierda,3,female,adjective,adjective,False,True,15,Estaba en la planta izquierda__Estaba en la planta venenosa
+planta,Estaba en la planta baja,2,female,Estaba en la planta superior,2,female,adjective,adjective,True,True,15,Estaba en la planta baja__Estaba en la planta superior
+planta,Estaba en la planta baja,2,female,Estaba en la planta del pie,3,female,adjective,adjective,False,True,15,Estaba en la planta baja__Estaba en la planta del pie
+planta,Estaba en la planta baja,2,female,Estaba en la planta izquierda,3,female,adjective,adjective,False,True,15,Estaba en la planta baja__Estaba en la planta izquierda
+planta,Estaba en la planta superior,2,female,Estaba en la planta del pie,3,female,adjective,adjective,False,True,15,Estaba en la planta del pie__Estaba en la planta superior
+planta,Estaba en la planta superior,2,female,Estaba en la planta izquierda,3,female,adjective,adjective,False,True,15,Estaba en la planta izquierda__Estaba en la planta superior
+planta,Estaba en la planta del pie,3,female,Estaba en la planta izquierda,3,female,adjective,adjective,True,True,15,Estaba en la planta del pie__Estaba en la planta izquierda
+pluma,Tenía una pluma silvestre,1,female,Tenía una pluma albina,1,female,adjective,adjective,True,True,6,Tenía una pluma albina__Tenía una pluma silvestre
+pluma,Tenía una pluma silvestre,1,female,Tenía una pluma fuente,2,female,adjective,adjective,False,True,6,Tenía una pluma fuente__Tenía una pluma silvestre
+pluma,Tenía una pluma silvestre,1,female,Tenía una pluma estilográfica,2,female,adjective,adjective,False,True,6,Tenía una pluma estilográfica__Tenía una pluma silvestre
+pluma,Tenía una pluma albina,1,female,Tenía una pluma fuente,2,female,adjective,adjective,False,True,6,Tenía una pluma albina__Tenía una pluma fuente
+pluma,Tenía una pluma albina,1,female,Tenía una pluma estilográfica,2,female,adjective,adjective,False,True,6,Tenía una pluma albina__Tenía una pluma estilográfica
+pluma,Tenía una pluma fuente,2,female,Tenía una pluma estilográfica,2,female,adjective,adjective,True,True,6,Tenía una pluma estilográfica__Tenía una pluma fuente
+posición,Estaba en una posición fetal,1,female,Estaba en una posición sentada,1,female,adjective,adjective,True,True,6,Estaba en una posición fetal__Estaba en una posición sentada
+posición,Estaba en una posición fetal,1,female,Estaba en una posición oportuna,2,female,adjective,adjective,False,True,6,Estaba en una posición fetal__Estaba en una posición oportuna
+posición,Estaba en una posición fetal,1,female,Estaba en una posición ventajosa,2,female,adjective,adjective,False,True,6,Estaba en una posición fetal__Estaba en una posición ventajosa
+posición,Estaba en una posición sentada,1,female,Estaba en una posición oportuna,2,female,adjective,adjective,False,True,6,Estaba en una posición oportuna__Estaba en una posición sentada
+posición,Estaba en una posición sentada,1,female,Estaba en una posición ventajosa,2,female,adjective,adjective,False,True,6,Estaba en una posición sentada__Estaba en una posición ventajosa
+posición,Estaba en una posición oportuna,2,female,Estaba en una posición ventajosa,2,female,adjective,adjective,True,True,6,Estaba en una posición oportuna__Estaba en una posición ventajosa
+prima,Era una prima anual,1,female,Era una prima costosa,1,female,adjective,adjective,True,True,6,Era una prima anual__Era una prima costosa
+prima,Era una prima anual,1,female,Era una prima hermana,2,female,adjective,adjective,False,True,6,Era una prima anual__Era una prima hermana
+prima,Era una prima anual,1,female,Era una prima atenta,2,female,adjective,adjective,False,True,6,Era una prima anual__Era una prima atenta
+prima,Era una prima costosa,1,female,Era una prima hermana,2,female,adjective,adjective,False,True,6,Era una prima costosa__Era una prima hermana
+prima,Era una prima costosa,1,female,Era una prima atenta,2,female,adjective,adjective,False,True,6,Era una prima atenta__Era una prima costosa
+prima,Era una prima hermana,2,female,Era una prima atenta,2,female,adjective,adjective,True,True,6,Era una prima atenta__Era una prima hermana
+pupila,Tenía una pupila dilatada,1,female,Tenía una pupila contraída,1,female,adjective,adjective,True,True,6,Tenía una pupila contraída__Tenía una pupila dilatada
+pupila,Tenía una pupila dilatada,1,female,Tenía una pupila estudiosa,2,female,adjective,adjective,False,True,6,Tenía una pupila dilatada__Tenía una pupila estudiosa
+pupila,Tenía una pupila dilatada,1,female,Tenía una pupila aplicada,2,female,adjective,adjective,False,True,6,Tenía una pupila aplicada__Tenía una pupila dilatada
+pupila,Tenía una pupila contraída,1,female,Tenía una pupila estudiosa,2,female,adjective,adjective,False,True,6,Tenía una pupila contraída__Tenía una pupila estudiosa
+pupila,Tenía una pupila contraída,1,female,Tenía una pupila aplicada,2,female,adjective,adjective,False,True,6,Tenía una pupila aplicada__Tenía una pupila contraída
+pupila,Tenía una pupila estudiosa,2,female,Tenía una pupila aplicada,2,female,adjective,adjective,True,True,6,Tenía una pupila aplicada__Tenía una pupila estudiosa
+químico,Era un químico negligente,1,male,Era un químico exitoso,1,male,adjective,adjective,True,True,6,Era un químico exitoso__Era un químico negligente
+químico,Era un químico negligente,1,male,Era un químico orgánico,2,male,adjective,adjective,False,True,6,Era un químico negligente__Era un químico orgánico
+químico,Era un químico negligente,1,male,Era un químico tóxico,2,male,adjective,adjective,False,True,6,Era un químico negligente__Era un químico tóxico
+químico,Era un químico exitoso,1,male,Era un químico orgánico,2,male,adjective,adjective,False,True,6,Era un químico exitoso__Era un químico orgánico
+químico,Era un químico exitoso,1,male,Era un químico tóxico,2,male,adjective,adjective,False,True,6,Era un químico exitoso__Era un químico tóxico
+químico,Era un químico orgánico,2,male,Era un químico tóxico,2,male,adjective,adjective,True,True,6,Era un químico orgánico__Era un químico tóxico
+rama,Era una rama médica,1,female,Era una rama competitiva,1,female,adjective,adjective,True,True,6,Era una rama competitiva__Era una rama médica
+rama,Era una rama médica,1,female,Era una rama disecada,2,female,adjective,adjective,False,True,6,Era una rama disecada__Era una rama médica
+rama,Era una rama médica,1,female,Era una rama retorcida,2,female,adjective,adjective,False,True,6,Era una rama médica__Era una rama retorcida
+rama,Era una rama competitiva,1,female,Era una rama disecada,2,female,adjective,adjective,False,True,6,Era una rama competitiva__Era una rama disecada
+rama,Era una rama competitiva,1,female,Era una rama retorcida,2,female,adjective,adjective,False,True,6,Era una rama competitiva__Era una rama retorcida
+rama,Era una rama disecada,2,female,Era una rama retorcida,2,female,adjective,adjective,True,True,6,Era una rama disecada__Era una rama retorcida
+raya,Dibujó una raya recta,1,female,Dibujó una raya precisa,1,female,adjective,adjective,True,True,6,Dibujó una raya precisa__Dibujó una raya recta
+raya,Dibujó una raya recta,1,female,Dibujó una raya marina,2,female,adjective,adjective,False,True,6,Dibujó una raya marina__Dibujó una raya recta
+raya,Dibujó una raya recta,1,female,Dibujó una raya endémica,2,female,adjective,adjective,False,True,6,Dibujó una raya endémica__Dibujó una raya recta
+raya,Dibujó una raya precisa,1,female,Dibujó una raya marina,2,female,adjective,adjective,False,True,6,Dibujó una raya marina__Dibujó una raya precisa
+raya,Dibujó una raya precisa,1,female,Dibujó una raya endémica,2,female,adjective,adjective,False,True,6,Dibujó una raya endémica__Dibujó una raya precisa
+raya,Dibujó una raya marina,2,female,Dibujó una raya endémica,2,female,adjective,adjective,True,True,6,Dibujó una raya endémica__Dibujó una raya marina
+red,Era una red cibernética,1,female,Era una red privada,1,female,adjective,adjective,True,True,6,Era una red cibernética__Era una red privada
+red,Era una red cibernética,1,female,Era una red pesquera,2,female,adjective,adjective,False,True,6,Era una red cibernética__Era una red pesquera
+red,Era una red cibernética,1,female,Era una red de cuerda,2,female,adjective,adjective,False,True,6,Era una red cibernética__Era una red de cuerda
+red,Era una red privada,1,female,Era una red pesquera,2,female,adjective,adjective,False,True,6,Era una red pesquera__Era una red privada
+red,Era una red privada,1,female,Era una red de cuerda,2,female,adjective,adjective,False,True,6,Era una red de cuerda__Era una red privada
+red,Era una red pesquera,2,female,Era una red de cuerda,2,female,adjective,adjective,True,True,6,Era una red de cuerda__Era una red pesquera
+redada,Fue una redada pesquera,1,female,Fue una redada en el río,1,female,adjective,adjective,True,True,6,Fue una redada en el río__Fue una redada pesquera
+redada,Fue una redada pesquera,1,female,Fue una redada policiaca,2,female,adjective,adjective,False,True,6,Fue una redada pesquera__Fue una redada policiaca
+redada,Fue una redada pesquera,1,female,Fue una redada en el barrio,2,female,adjective,adjective,False,True,6,Fue una redada en el barrio__Fue una redada pesquera
+redada,Fue una redada en el río,1,female,Fue una redada policiaca,2,female,adjective,adjective,False,True,6,Fue una redada en el río__Fue una redada policiaca
+redada,Fue una redada en el río,1,female,Fue una redada en el barrio,2,female,adjective,adjective,False,True,6,Fue una redada en el barrio__Fue una redada en el río
+redada,Fue una redada policiaca,2,female,Fue una redada en el barrio,2,female,adjective,adjective,True,True,6,Fue una redada en el barrio__Fue una redada policiaca
+resistencia,Se trataba de una resistencia eléctrica,1,female,Se trataba de una resistencia de circuito,1,female,adjective,adjective,True,True,6,Se trataba de una resistencia de circuito__Se trataba de una resistencia eléctrica
+resistencia,Se trataba de una resistencia eléctrica,1,female,Se trataba de una resistencia política,2,female,adjective,adjective,False,True,6,Se trataba de una resistencia eléctrica__Se trataba de una resistencia política
+resistencia,Se trataba de una resistencia eléctrica,1,female,Se trataba de una resistencia militar,2,female,adjective,adjective,False,True,6,Se trataba de una resistencia eléctrica__Se trataba de una resistencia militar
+resistencia,Se trataba de una resistencia de circuito,1,female,Se trataba de una resistencia política,2,female,adjective,adjective,False,True,6,Se trataba de una resistencia de circuito__Se trataba de una resistencia política
+resistencia,Se trataba de una resistencia de circuito,1,female,Se trataba de una resistencia militar,2,female,adjective,adjective,False,True,6,Se trataba de una resistencia de circuito__Se trataba de una resistencia militar
+resistencia,Se trataba de una resistencia política,2,female,Se trataba de una resistencia militar,2,female,adjective,adjective,True,True,6,Se trataba de una resistencia militar__Se trataba de una resistencia política
+revista,Era una revista de belleza,1,female,Era una revista deportiva,1,female,adjective,adjective,True,True,6,Era una revista de belleza__Era una revista deportiva
+revista,Era una revista de belleza,1,female,Era una revista brillosa,2,female,adjective,adjective,False,True,6,Era una revista brillosa__Era una revista de belleza
+revista,Era una revista de belleza,1,female,Era una revista estrujada,2,female,adjective,adjective,False,True,6,Era una revista de belleza__Era una revista estrujada
+revista,Era una revista deportiva,1,female,Era una revista brillosa,2,female,adjective,adjective,False,True,6,Era una revista brillosa__Era una revista deportiva
+revista,Era una revista deportiva,1,female,Era una revista estrujada,2,female,adjective,adjective,False,True,6,Era una revista deportiva__Era una revista estrujada
+revista,Era una revista brillosa,2,female,Era una revista estrujada,2,female,adjective,adjective,True,True,6,Era una revista brillosa__Era una revista estrujada
+rosa,Era una rosa fragante,1,female,Era una rosa frágil,1,female,adjective,adjective,True,True,6,Era una rosa fragante__Era una rosa frágil
+rosa,Era una rosa fragante,1,female,Era un rosa claro,2,male,adjective,adjective,False,False,6,Era un rosa claro__Era una rosa fragante
+rosa,Era una rosa fragante,1,female,Era un rosa tenue,2,male,adjective,adjective,False,False,6,Era un rosa tenue__Era una rosa fragante
+rosa,Era una rosa frágil,1,female,Era un rosa claro,2,male,adjective,adjective,False,False,6,Era un rosa claro__Era una rosa frágil
+rosa,Era una rosa frágil,1,female,Era un rosa tenue,2,male,adjective,adjective,False,False,6,Era un rosa tenue__Era una rosa frágil
+rosa,Era un rosa claro,2,male,Era un rosa tenue,2,male,adjective,adjective,True,True,6,Era un rosa claro__Era un rosa tenue
+sangre,Él tiene sangre coagulada,1,female,Él tiene sangre diluida,1,female,adjective,adjective,True,True,6,Él tiene sangre coagulada__Él tiene sangre diluida
+sangre,Él tiene sangre coagulada,1,female,Él tiene sangre noble,2,female,adjective,adjective,False,True,6,Él tiene sangre coagulada__Él tiene sangre noble
+sangre,Él tiene sangre coagulada,1,female,Él tiene sangre real,2,female,adjective,adjective,False,True,6,Él tiene sangre coagulada__Él tiene sangre real
+sangre,Él tiene sangre diluida,1,female,Él tiene sangre noble,2,female,adjective,adjective,False,True,6,Él tiene sangre diluida__Él tiene sangre noble
+sangre,Él tiene sangre diluida,1,female,Él tiene sangre real,2,female,adjective,adjective,False,True,6,Él tiene sangre diluida__Él tiene sangre real
+sangre,Él tiene sangre noble,2,female,Él tiene sangre real,2,female,adjective,adjective,True,True,6,Él tiene sangre noble__Él tiene sangre real
+semilla,Era una semilla educativa,1,female,Era una semilla cultural,1,female,adjective,adjective,True,True,6,Era una semilla cultural__Era una semilla educativa
+semilla,Era una semilla educativa,1,female,Era una semilla germinada,2,female,adjective,adjective,False,True,6,Era una semilla educativa__Era una semilla germinada
+semilla,Era una semilla educativa,1,female,Era una semilla sembrada,2,female,adjective,adjective,False,True,6,Era una semilla educativa__Era una semilla sembrada
+semilla,Era una semilla cultural,1,female,Era una semilla germinada,2,female,adjective,adjective,False,True,6,Era una semilla cultural__Era una semilla germinada
+semilla,Era una semilla cultural,1,female,Era una semilla sembrada,2,female,adjective,adjective,False,True,6,Era una semilla cultural__Era una semilla sembrada
+semilla,Era una semilla germinada,2,female,Era una semilla sembrada,2,female,adjective,adjective,True,True,6,Era una semilla germinada__Era una semilla sembrada
+seno,Estaba en el seno familiar,1,male,Estaba en el seno social,1,male,adjective,adjective,True,True,6,Estaba en el seno familiar__Estaba en el seno social
+seno,Estaba en el seno familiar,1,male,Estaba en el seno izquiero,2,male,adjective,adjective,False,True,6,Estaba en el seno familiar__Estaba en el seno izquiero
+seno,Estaba en el seno familiar,1,male,Estaba en el seno operado,2,male,adjective,adjective,False,True,6,Estaba en el seno familiar__Estaba en el seno operado
+seno,Estaba en el seno social,1,male,Estaba en el seno izquiero,2,male,adjective,adjective,False,True,6,Estaba en el seno izquiero__Estaba en el seno social
+seno,Estaba en el seno social,1,male,Estaba en el seno operado,2,male,adjective,adjective,False,True,6,Estaba en el seno operado__Estaba en el seno social
+seno,Estaba en el seno izquiero,2,male,Estaba en el seno operado,2,male,adjective,adjective,True,True,6,Estaba en el seno izquiero__Estaba en el seno operado
+serie,Se trataba de una serie televisiva,1,female,Se trataba de una serie animada,1,female,adjective,adjective,True,True,6,Se trataba de una serie animada__Se trataba de una serie televisiva
+serie,Se trataba de una serie televisiva,1,female,Se trataba de una serie matemática,2,female,adjective,adjective,False,True,6,Se trataba de una serie matemática__Se trataba de una serie televisiva
+serie,Se trataba de una serie televisiva,1,female,Se trataba de una serie numérica,2,female,adjective,adjective,False,True,6,Se trataba de una serie numérica__Se trataba de una serie televisiva
+serie,Se trataba de una serie animada,1,female,Se trataba de una serie matemática,2,female,adjective,adjective,False,True,6,Se trataba de una serie animada__Se trataba de una serie matemática
+serie,Se trataba de una serie animada,1,female,Se trataba de una serie numérica,2,female,adjective,adjective,False,True,6,Se trataba de una serie animada__Se trataba de una serie numérica
+serie,Se trataba de una serie matemática,2,female,Se trataba de una serie numérica,2,female,adjective,adjective,True,True,6,Se trataba de una serie matemática__Se trataba de una serie numérica
+sierra,Era una sierra eléctrica,1,female,Era una sierra automática,1,female,adjective,adjective,True,True,6,Era una sierra automática__Era una sierra eléctrica
+sierra,Era una sierra eléctrica,1,female,Era una sierra forestada,2,female,adjective,adjective,False,True,6,Era una sierra eléctrica__Era una sierra forestada
+sierra,Era una sierra eléctrica,1,female,Era una sierra nevada,2,female,adjective,adjective,False,True,6,Era una sierra eléctrica__Era una sierra nevada
+sierra,Era una sierra automática,1,female,Era una sierra forestada,2,female,adjective,adjective,False,True,6,Era una sierra automática__Era una sierra forestada
+sierra,Era una sierra automática,1,female,Era una sierra nevada,2,female,adjective,adjective,False,True,6,Era una sierra automática__Era una sierra nevada
+sierra,Era una sierra forestada,2,female,Era una sierra nevada,2,female,adjective,adjective,True,True,6,Era una sierra forestada__Era una sierra nevada
+sirena,Era una sirena mitológica,1,female,Era una sirena coqueta,1,female,adjective,adjective,True,True,6,Era una sirena coqueta__Era una sirena mitológica
+sirena,Era una sirena mitológica,1,female,Era una sirena policíaca,2,female,adjective,adjective,False,True,6,Era una sirena mitológica__Era una sirena policíaca
+sirena,Era una sirena mitológica,1,female,Era una sirena ruidosa,2,female,adjective,adjective,False,True,6,Era una sirena mitológica__Era una sirena ruidosa
+sirena,Era una sirena coqueta,1,female,Era una sirena policíaca,2,female,adjective,adjective,False,True,6,Era una sirena coqueta__Era una sirena policíaca
+sirena,Era una sirena coqueta,1,female,Era una sirena ruidosa,2,female,adjective,adjective,False,True,6,Era una sirena coqueta__Era una sirena ruidosa
+sirena,Era una sirena policíaca,2,female,Era una sirena ruidosa,2,female,adjective,adjective,True,True,6,Era una sirena policíaca__Era una sirena ruidosa
+sostén,Era un sostén emocional,1,male,Era un sostén incondicional,1,male,adjective,adjective,True,True,6,Era un sostén emocional__Era un sostén incondicional
+sostén,Era un sostén emocional,1,male,Era un sostén sedoso,2,male,adjective,adjective,False,True,6,Era un sostén emocional__Era un sostén sedoso
+sostén,Era un sostén emocional,1,male,Era un sostén incómodo,2,male,adjective,adjective,False,True,6,Era un sostén emocional__Era un sostén incómodo
+sostén,Era un sostén incondicional,1,male,Era un sostén sedoso,2,male,adjective,adjective,False,True,6,Era un sostén incondicional__Era un sostén sedoso
+sostén,Era un sostén incondicional,1,male,Era un sostén incómodo,2,male,adjective,adjective,False,True,6,Era un sostén incondicional__Era un sostén incómodo
+sostén,Era un sostén sedoso,2,male,Era un sostén incómodo,2,male,adjective,adjective,True,True,6,Era un sostén incómodo__Era un sostén sedoso
+sueño,Él alcanzó su sueño,1,male,Él abandonó su sueño,1,male,verb,verb,True,True,15,Él abandonó su sueño__Él alcanzó su sueño
+sueño,Él alcanzó su sueño,1,male,Él moría de sueño,2,male,verb,verb,False,True,15,Él alcanzó su sueño__Él moría de sueño
+sueño,Él alcanzó su sueño,1,male,Él tenía sueño,2,male,verb,verb,False,True,15,Él alcanzó su sueño__Él tenía sueño
+sueño,Él alcanzó su sueño,1,male,Él recordó su sueño,3,male,verb,verb,False,True,15,Él alcanzó su sueño__Él recordó su sueño
+sueño,Él alcanzó su sueño,1,male,Él relató su sueño,3,male,verb,verb,False,True,15,Él alcanzó su sueño__Él relató su sueño
+sueño,Él abandonó su sueño,1,male,Él moría de sueño,2,male,verb,verb,False,True,15,Él abandonó su sueño__Él moría de sueño
+sueño,Él abandonó su sueño,1,male,Él tenía sueño,2,male,verb,verb,False,True,15,Él abandonó su sueño__Él tenía sueño
+sueño,Él abandonó su sueño,1,male,Él recordó su sueño,3,male,verb,verb,False,True,15,Él abandonó su sueño__Él recordó su sueño
+sueño,Él abandonó su sueño,1,male,Él relató su sueño,3,male,verb,verb,False,True,15,Él abandonó su sueño__Él relató su sueño
+sueño,Él moría de sueño,2,male,Él tenía sueño,2,male,verb,verb,True,True,15,Él moría de sueño__Él tenía sueño
+sueño,Él moría de sueño,2,male,Él recordó su sueño,3,male,verb,verb,False,True,15,Él moría de sueño__Él recordó su sueño
+sueño,Él moría de sueño,2,male,Él relató su sueño,3,male,verb,verb,False,True,15,Él moría de sueño__Él relató su sueño
+sueño,Él tenía sueño,2,male,Él recordó su sueño,3,male,verb,verb,False,True,15,Él recordó su sueño__Él tenía sueño
+sueño,Él tenía sueño,2,male,Él relató su sueño,3,male,verb,verb,False,True,15,Él relató su sueño__Él tenía sueño
+sueño,Él recordó su sueño,3,male,Él relató su sueño,3,male,verb,verb,True,True,15,Él recordó su sueño__Él relató su sueño
+tabla,Le gustó la tabla de madera,1,female,Le gustó la tabla astillada,1,female,adjective,adjective,True,True,6,Le gustó la tabla astillada__Le gustó la tabla de madera
+tabla,Le gustó la tabla de madera,1,female,Le gustó la tabla de ajedrez,2,female,adjective,adjective,False,True,6,Le gustó la tabla de ajedrez__Le gustó la tabla de madera
+tabla,Le gustó la tabla de madera,1,female,Le gustó la tabla de juego,2,female,adjective,adjective,False,True,6,Le gustó la tabla de juego__Le gustó la tabla de madera
+tabla,Le gustó la tabla astillada,1,female,Le gustó la tabla de ajedrez,2,female,adjective,adjective,False,True,6,Le gustó la tabla astillada__Le gustó la tabla de ajedrez
+tabla,Le gustó la tabla astillada,1,female,Le gustó la tabla de juego,2,female,adjective,adjective,False,True,6,Le gustó la tabla astillada__Le gustó la tabla de juego
+tabla,Le gustó la tabla de ajedrez,2,female,Le gustó la tabla de juego,2,female,adjective,adjective,True,True,6,Le gustó la tabla de ajedrez__Le gustó la tabla de juego
+taco,Le gustó el taco mexicano,1,male,Le gustó el taco delicioso,1,male,adjective,adjective,True,True,6,Le gustó el taco delicioso__Le gustó el taco mexicano
+taco,Le gustó el taco mexicano,1,male,Le gustó el taco del zapato,2,male,adjective,adjective,False,True,6,Le gustó el taco del zapato__Le gustó el taco mexicano
+taco,Le gustó el taco mexicano,1,male,Le gustó el taco puntiagudo,2,male,adjective,adjective,False,True,6,Le gustó el taco mexicano__Le gustó el taco puntiagudo
+taco,Le gustó el taco delicioso,1,male,Le gustó el taco del zapato,2,male,adjective,adjective,False,True,6,Le gustó el taco del zapato__Le gustó el taco delicioso
+taco,Le gustó el taco delicioso,1,male,Le gustó el taco puntiagudo,2,male,adjective,adjective,False,True,6,Le gustó el taco delicioso__Le gustó el taco puntiagudo
+taco,Le gustó el taco del zapato,2,male,Le gustó el taco puntiagudo,2,male,adjective,adjective,True,True,6,Le gustó el taco del zapato__Le gustó el taco puntiagudo
+tecla,Tocó la tecla del ordenador,1,female,Tocó la tecla espaciadora,1,female,adjective,adjective,True,True,6,Tocó la tecla del ordenador__Tocó la tecla espaciadora
+tecla,Tocó la tecla del ordenador,1,female,Tocó la tecla desafinada,2,female,adjective,adjective,False,True,6,Tocó la tecla del ordenador__Tocó la tecla desafinada
+tecla,Tocó la tecla del ordenador,1,female,Tocó la tecla afinada,2,female,adjective,adjective,False,True,6,Tocó la tecla afinada__Tocó la tecla del ordenador
+tecla,Tocó la tecla espaciadora,1,female,Tocó la tecla desafinada,2,female,adjective,adjective,False,True,6,Tocó la tecla desafinada__Tocó la tecla espaciadora
+tecla,Tocó la tecla espaciadora,1,female,Tocó la tecla afinada,2,female,adjective,adjective,False,True,6,Tocó la tecla afinada__Tocó la tecla espaciadora
+tecla,Tocó la tecla desafinada,2,female,Tocó la tecla afinada,2,female,adjective,adjective,True,True,6,Tocó la tecla afinada__Tocó la tecla desafinada
+título,Le gustó el título profesional,1,male,Le gustó el título halagador,1,male,adjective,adjective,True,True,15,Le gustó el título halagador__Le gustó el título profesional
+título,Le gustó el título profesional,1,male,Le gustó el título del poema,2,male,adjective,adjective,False,True,15,Le gustó el título del poema__Le gustó el título profesional
+título,Le gustó el título profesional,1,male,Le gustó el título del libro,2,male,adjective,adjective,False,True,15,Le gustó el título del libro__Le gustó el título profesional
+título,Le gustó el título profesional,1,male,Le gustó el título legal,3,male,adjective,adjective,False,True,15,Le gustó el título legal__Le gustó el título profesional
+título,Le gustó el título profesional,1,male,Le gustó el título propietario,3,male,adjective,adjective,False,True,15,Le gustó el título profesional__Le gustó el título propietario
+título,Le gustó el título halagador,1,male,Le gustó el título del poema,2,male,adjective,adjective,False,True,15,Le gustó el título del poema__Le gustó el título halagador
+título,Le gustó el título halagador,1,male,Le gustó el título del libro,2,male,adjective,adjective,False,True,15,Le gustó el título del libro__Le gustó el título halagador
+título,Le gustó el título halagador,1,male,Le gustó el título legal,3,male,adjective,adjective,False,True,15,Le gustó el título halagador__Le gustó el título legal
+título,Le gustó el título halagador,1,male,Le gustó el título propietario,3,male,adjective,adjective,False,True,15,Le gustó el título halagador__Le gustó el título propietario
+título,Le gustó el título del poema,2,male,Le gustó el título del libro,2,male,adjective,adjective,True,True,15,Le gustó el título del libro__Le gustó el título del poema
+título,Le gustó el título del poema,2,male,Le gustó el título legal,3,male,adjective,adjective,False,True,15,Le gustó el título del poema__Le gustó el título legal
+título,Le gustó el título del poema,2,male,Le gustó el título propietario,3,male,adjective,adjective,False,True,15,Le gustó el título del poema__Le gustó el título propietario
+título,Le gustó el título del libro,2,male,Le gustó el título legal,3,male,adjective,adjective,False,True,15,Le gustó el título del libro__Le gustó el título legal
+título,Le gustó el título del libro,2,male,Le gustó el título propietario,3,male,adjective,adjective,False,True,15,Le gustó el título del libro__Le gustó el título propietario
+título,Le gustó el título legal,3,male,Le gustó el título propietario,3,male,adjective,adjective,True,True,15,Le gustó el título legal__Le gustó el título propietario
+vaso,Se trataba de un vaso antiguo,1,male,Se trataba de un vaso cristalino,1,male,adjective,adjective,True,True,6,Se trataba de un vaso antiguo__Se trataba de un vaso cristalino
+vaso,Se trataba de un vaso antiguo,1,male,Se trataba de un vaso sanguíneo,2,male,adjective,adjective,False,True,6,Se trataba de un vaso antiguo__Se trataba de un vaso sanguíneo
+vaso,Se trataba de un vaso antiguo,1,male,Se trataba de un vaso obstruido,2,male,adjective,adjective,False,True,6,Se trataba de un vaso antiguo__Se trataba de un vaso obstruido
+vaso,Se trataba de un vaso cristalino,1,male,Se trataba de un vaso sanguíneo,2,male,adjective,adjective,False,True,6,Se trataba de un vaso cristalino__Se trataba de un vaso sanguíneo
+vaso,Se trataba de un vaso cristalino,1,male,Se trataba de un vaso obstruido,2,male,adjective,adjective,False,True,6,Se trataba de un vaso cristalino__Se trataba de un vaso obstruido
+vaso,Se trataba de un vaso sanguíneo,2,male,Se trataba de un vaso obstruido,2,male,adjective,adjective,True,True,6,Se trataba de un vaso obstruido__Se trataba de un vaso sanguíneo
+vela,Ella vio la vela del barco,1,female,Ella vio la vela de lona,1,female,adjective,adjective,True,True,6,Ella vio la vela de lona__Ella vio la vela del barco
+vela,Ella vio la vela del barco,1,female,Ella vio la vela de cera,2,female,adjective,adjective,False,True,6,Ella vio la vela de cera__Ella vio la vela del barco
+vela,Ella vio la vela del barco,1,female,Ella vio la vela derretida,2,female,adjective,adjective,False,True,6,Ella vio la vela del barco__Ella vio la vela derretida
+vela,Ella vio la vela de lona,1,female,Ella vio la vela de cera,2,female,adjective,adjective,False,True,6,Ella vio la vela de cera__Ella vio la vela de lona
+vela,Ella vio la vela de lona,1,female,Ella vio la vela derretida,2,female,adjective,adjective,False,True,6,Ella vio la vela de lona__Ella vio la vela derretida
+vela,Ella vio la vela de cera,2,female,Ella vio la vela derretida,2,female,adjective,adjective,True,True,6,Ella vio la vela de cera__Ella vio la vela derretida
+volumen,Aumentó el volumen de la corriente,1,male,Aumentó el volumen del agua,1,male,adjective,adjective,True,True,6,Aumentó el volumen de la corriente__Aumentó el volumen del agua
+volumen,Aumentó el volumen de la corriente,1,male,Aumentó el volumen de la voz,2,male,adjective,adjective,False,True,6,Aumentó el volumen de la corriente__Aumentó el volumen de la voz
+volumen,Aumentó el volumen de la corriente,1,male,Aumentó el volumen de la bocina,2,male,adjective,adjective,False,True,6,Aumentó el volumen de la bocina__Aumentó el volumen de la corriente
+volumen,Aumentó el volumen del agua,1,male,Aumentó el volumen de la voz,2,male,adjective,adjective,False,True,6,Aumentó el volumen de la voz__Aumentó el volumen del agua
+volumen,Aumentó el volumen del agua,1,male,Aumentó el volumen de la bocina,2,male,adjective,adjective,False,True,6,Aumentó el volumen de la bocina__Aumentó el volumen del agua
+volumen,Aumentó el volumen de la voz,2,male,Aumentó el volumen de la bocina,2,male,adjective,adjective,True,True,6,Aumentó el volumen de la bocina__Aumentó el volumen de la voz
+órgano,Tenía un órgano eclesiástico,1,male,Tenía un órgano ceremonial,1,male,adjective,adjective,True,True,6,Tenía un órgano ceremonial__Tenía un órgano eclesiástico
+órgano,Tenía un órgano eclesiástico,1,male,Tenía un órgano herido,2,male,adjective,adjective,False,True,6,Tenía un órgano eclesiástico__Tenía un órgano herido
+órgano,Tenía un órgano eclesiástico,1,male,Tenía un órgano operado,2,male,adjective,adjective,False,True,6,Tenía un órgano eclesiástico__Tenía un órgano operado
+órgano,Tenía un órgano ceremonial,1,male,Tenía un órgano herido,2,male,adjective,adjective,False,True,6,Tenía un órgano ceremonial__Tenía un órgano herido
+órgano,Tenía un órgano ceremonial,1,male,Tenía un órgano operado,2,male,adjective,adjective,False,True,6,Tenía un órgano ceremonial__Tenía un órgano operado
+órgano,Tenía un órgano herido,2,male,Tenía un órgano operado,2,male,adjective,adjective,True,True,6,Tenía un órgano herido__Tenía un órgano operado
