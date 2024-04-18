@@ -305,7 +305,7 @@ df_item_means = df_merged_with_demo %>%
             median_relatedness = median(Response),
             count = n())
 
-write.csv(df_merged_with_all_data,
+write.csv(df_item_means,
           "../../data/processed/human/sawc_avg_relatedness.csv")
 
 ```
