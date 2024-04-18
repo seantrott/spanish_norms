@@ -650,3 +650,227 @@ df_experimental_with_mb %>%
         legend.position="bottom")
   
 ```
+
+
+# Replicating with XLM Roberta
+
+## Load and process XLM Roberta data
+
+```{r}
+### XLM distances
+df_xlm_distances = read_csv("../../data/processed/models/xlm_sawc_distances.csv")
+nrow(df_xlm_distances)
+
+### basic items to get Tag
+df_sawc_items = read_csv("../../data/raw/items/sawc_sentence_pairs.csv")
+
+### merge together
+df_merged = df_xlm_distances %>%
+  left_join(df_sawc_items)
+```
+
+## Merge with SAW-C Norms
+
+```{r}
+df_list_mean = df_final %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n())
+nrow(df_list_mean)
+
+df_merged_xlm = df_merged %>%
+  inner_join(df_list_mean)
+nrow(df_merged_xlm)
+```
+
+## RQ2: Correlation by layer
+
+```{r rq2_corr_by_layer_xlm}
+df_by_layer = df_merged_xlm %>%
+  group_by(Layer) %>%
+  summarise(r = cor(mean_relatedness, Distance, method = "pearson"),
+            r2 = r ** 2,
+            rho = cor(mean_relatedness, Distance, method = "spearman"),
+            count = n())
+
+summary(df_by_layer$rho)
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (XLM-RoBERTa)",
+       y = "Pearson's r") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = rho)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (XLM-RoBERTa)",
+       y = "Spearman's rho") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (XLM-RoBERTa)",
+       y = "R2") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+min(df_by_layer$rho)
+```
+
+
+## RQ5: Expected layer
+
+```{r rq5_layer_xlm}
+df_by_layer <- df_by_layer %>%
+  mutate(r2_delta = c(NA, diff(r2))) %>%
+  mutate(weighted_layer = Layer * r2_delta)
+
+expected_layer = sum(df_by_layer$weighted_layer, na.rm = TRUE) / sum(df_by_layer$r2_delta, na.rm = TRUE)
+expected_layer
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue",
+            alpha = .8) +
+  theme_minimal() +
+  geom_vline(xintercept = expected_layer, size = 1.5, 
+             linetype = "dashed", alpha = .7) +
+  geom_vline(xintercept = 6, size = 1.5, 
+             linetype = "dotted", alpha = .7) +
+  scale_x_continuous(breaks = c(0:13)) +
+  labs(x = "Layer (XLM-RoBERTa)",
+       y = "R2") +
+  theme(text = element_text(size = 15),
+        legend.position="none") 
+```
+
+## RQ6: Layer vs. same/different
+
+The actual code implementation is executed in Python, but a visualization is produced here.
+
+```{r rq6_same_different_xlm}
+# Calculate mean and SE of Distance
+df_summary <- df_xlm_distances %>%
+  group_by(Layer, Same_sense) %>%
+  summarise(
+    mean_Distance = mean(Distance),
+    sd_Distance = sd(Distance),
+    count = n(),
+    se_Distance = sd_Distance / sqrt(count),
+    .groups = 'drop'  # Drop the automatic grouping by dplyr
+  )
+
+df_summary %>%
+  ggplot(aes(x = Layer, 
+             y = mean_Distance, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_Distance - 2 * se_Distance, 
+                  ymax = mean_Distance + 2 * se_Distance), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "Layer (XLM-RoBERTa)",
+       y = "Mean Distance",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+  
+```
+
+## RQ3: Cosine distance vs. Same/Different
+
+Now, we select the *best-performing layer* from BETO.
+
+```{r rq3_xlm}
+df_xlm_6 = df_merged %>%
+  filter(Layer == 6) %>%
+  select(-Same_sense)
+nrow(df_xlm_6)
+
+df_experimental_with_xlm = df_final %>%
+  left_join(df_xlm_6)
+nrow(df_experimental_with_xlm)
+  
+
+mod_full = lmer(data = df_experimental_with_xlm,
+                Response ~ Same_sense + Distance +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_reduced = lmer(data = df_experimental_with_xlm,
+                Response ~ Distance + # Same_sense +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_just_same = lmer(data = df_experimental_with_xlm,
+                Response ~ Same_sense + # Distance
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+summary(mod_full)
+anova(mod_full, mod_reduced)
+anova(mod_full, mod_just_same)
+
+
+
+### Visualize
+df_experimental_with_xlm %>%
+  mutate(distance_binned = ntile(Distance, 20)) %>%
+  group_by(Same_sense, distance_binned) %>%
+  summarize(
+    mean_relatedness = mean(Response),
+    sd_relatedness = sd(Response),
+    count = n(),
+    se_relatedness = sd_relatedness / sqrt(count),
+  ) %>%
+  ggplot(aes(x = distance_binned, 
+             y = mean_relatedness, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_relatedness - se_relatedness, 
+                  ymax = mean_relatedness + se_relatedness), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "XLM-RoBERTa Cosine Distance (Binned)",
+       y = "Relatedness",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+
+  
+```
