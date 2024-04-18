@@ -37,7 +37,7 @@ my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palett
 # Load data
 
 ```{r}
-### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/saw-c/src/analysis/")
+### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
 ### Read in all data
 df_final = read_csv("../../data/processed/human/sawc_relatedness_full_critical_data.csv")
 nrow(df_final)
@@ -216,7 +216,7 @@ Now, we select the *best-performing layer* from BETO.
 
 ```{r}
 df_beto_l5 = df_merged %>%
-  filter(Layer == 5) %>%
+  filter(Layer == 7) %>%
   select(-Same_sense)
 nrow(df_beto_l5)
 
@@ -383,5 +383,49 @@ df_summary %>%
   theme(text = element_text(size = 15),
         legend.position="bottom")
   
+```
+
+
+# Final visualizations
+
+```{r visualizations}
+df_item_means = df_final %>%
+  group_by(List, Word, Same_sense, Sentence_1, Sentence_2,
+           Sense_id_s1, Sense_id_s2, Gender_s1, Gender_s2) %>%
+  summarise(mean_relatedness = mean(Response),
+            sd_relatedness = sd(Response),
+            median_relatedness = median(Response),
+            count = n())
+
+
+df_item_means %>%         
+  ggplot(aes(x = mean_relatedness)) +
+  geom_histogram(alpha = .6, bins = 10) +
+  theme_minimal() +
+  labs(x = "Mean Relatedness",
+       y = "Count") +
+  facet_wrap(~Same_sense) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+df_item_means %>%
+  ggplot(aes(x = mean_relatedness,
+             y = Same_sense,
+             fill = Same_sense)) +
+  geom_density_ridges2(aes(height = ..density..), 
+                       color=gray(0.25), 
+                       alpha = 1, 
+                       scale=.85, 
+                       # size=1, 
+                       size = 0,
+                       stat="density") +
+  labs(x = "Mean Relatedness",
+       y = "",
+       fill = "") +
+  theme_minimal()+
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="none") 
+
 ```
 
