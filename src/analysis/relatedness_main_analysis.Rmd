@@ -870,7 +870,856 @@ df_experimental_with_xlm %>%
   scale_color_viridis(option = "mako", discrete=TRUE) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
+```
+
+# Replicating with DistilBETO
+
+## Load and process DistilBETO data
+
+```{r}
+### XLM distances
+df_db_distances = read_csv("../../data/processed/models/distilbeto_sawc_distances.csv")
+nrow(df_db_distances)
+
+### basic items to get Tag
+df_sawc_items = read_csv("../../data/raw/items/sawc_sentence_pairs.csv")
+
+### merge together
+df_merged = df_db_distances %>%
+  left_join(df_sawc_items)
+```
+
+## Merge with SAW-C Norms
+
+```{r}
+df_list_mean = df_final %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n())
+nrow(df_list_mean)
+
+df_db_distances = df_merged %>%
+  inner_join(df_list_mean)
+nrow(df_db_distances)
+```
+
+## RQ2: Correlation by layer
+
+```{r rq2_corr_by_layer_db}
+df_by_layer = df_db_distances %>%
+  group_by(Layer) %>%
+  summarise(r = cor(mean_relatedness, Distance, method = "pearson"),
+            r2 = r ** 2,
+            rho = cor(mean_relatedness, Distance, method = "spearman"),
+            count = n())
+
+summary(df_by_layer$rho)
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (DistilBETO)",
+       y = "Pearson's r") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
 
 
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = rho)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (DistilBETO)",
+       y = "Spearman's rho") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (DistilBETO)",
+       y = "R2") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+min(df_by_layer$rho)
+```
+
+
+## RQ5: Expected layer
+
+```{r rq5_layer_db}
+df_by_layer <- df_by_layer %>%
+  mutate(r2_delta = c(NA, diff(r2))) %>%
+  mutate(weighted_layer = Layer * r2_delta)
+
+expected_layer = sum(df_by_layer$weighted_layer, na.rm = TRUE) / sum(df_by_layer$r2_delta, na.rm = TRUE)
+expected_layer
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue",
+            alpha = .8) +
+  theme_minimal() +
+  geom_vline(xintercept = expected_layer, size = 1.5, 
+             linetype = "dashed", alpha = .7) +
+  geom_vline(xintercept = 6, size = 1.5, 
+             linetype = "dotted", alpha = .7) +
+  scale_x_continuous(breaks = c(0:13)) +
+  labs(x = "Layer (DistilBETO)",
+       y = "R2") +
+  theme(text = element_text(size = 15),
+        legend.position="none") 
+```
+
+## RQ6: Layer vs. same/different
+
+The actual code implementation is executed in Python, but a visualization is produced here.
+
+```{r rq6_same_different_db}
+# Calculate mean and SE of Distance
+df_summary <- df_db_distances %>%
+  group_by(Layer, Same_sense) %>%
+  summarise(
+    mean_Distance = mean(Distance),
+    sd_Distance = sd(Distance),
+    count = n(),
+    se_Distance = sd_Distance / sqrt(count),
+    .groups = 'drop'  # Drop the automatic grouping by dplyr
+  )
+
+df_summary %>%
+  ggplot(aes(x = Layer, 
+             y = mean_Distance, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_Distance - 2 * se_Distance, 
+                  ymax = mean_Distance + 2 * se_Distance), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "Layer (DistilBETO)",
+       y = "Mean Distance",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
   
 ```
+
+## RQ3: Cosine distance vs. Same/Different
+
+Now, we select the *best-performing layer* from BETO.
+
+```{r rq3_db}
+df_db_6 = df_merged %>%
+  filter(Layer == 6) %>%
+  select(-Same_sense)
+nrow(df_db_6)
+
+df_experimental_with_db = df_final %>%
+  left_join(df_db_6)
+nrow(df_experimental_with_db)
+  
+
+mod_full = lmer(data = df_experimental_with_db,
+                Response ~ Same_sense + Distance +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_reduced = lmer(data = df_experimental_with_db,
+                Response ~ Distance + # Same_sense +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_just_same = lmer(data = df_experimental_with_db,
+                Response ~ Same_sense + # Distance
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+summary(mod_full)
+anova(mod_full, mod_reduced)
+anova(mod_full, mod_just_same)
+
+
+
+### Visualize
+df_experimental_with_db %>%
+  mutate(distance_binned = ntile(Distance, 20)) %>%
+  group_by(Same_sense, distance_binned) %>%
+  summarize(
+    mean_relatedness = mean(Response),
+    sd_relatedness = sd(Response),
+    count = n(),
+    se_relatedness = sd_relatedness / sqrt(count),
+  ) %>%
+  ggplot(aes(x = distance_binned, 
+             y = mean_relatedness, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_relatedness - se_relatedness, 
+                  ymax = mean_relatedness + se_relatedness), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "DistilBETO Cosine Distance (Binned)",
+       y = "Relatedness",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+```
+
+# Replicating with ALBERT-tiny
+
+## Load and process ALBERT-tiny data
+
+```{r}
+### XLM distances
+df_at_distances = read_csv("../../data/processed/models/albert-tiny_sawc_distances.csv")
+nrow(df_at_distances)
+
+### basic items to get Tag
+df_sawc_items = read_csv("../../data/raw/items/sawc_sentence_pairs.csv")
+
+### merge together
+df_merged = df_at_distances %>%
+  left_join(df_sawc_items)
+```
+
+## Merge with SAW-C Norms
+
+```{r}
+df_list_mean = df_final %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n())
+nrow(df_list_mean)
+
+df_at_distances = df_merged %>%
+  inner_join(df_list_mean)
+nrow(df_at_distances)
+```
+
+## RQ2: Correlation by layer
+
+```{r rq2_corr_by_layer_at}
+df_by_layer = df_at_distances %>%
+  group_by(Layer) %>%
+  summarise(r = cor(mean_relatedness, Distance, method = "pearson"),
+            r2 = r ** 2,
+            rho = cor(mean_relatedness, Distance, method = "spearman"),
+            count = n())
+
+summary(df_by_layer$rho)
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (ALBERT-tiny)",
+       y = "Pearson's r") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = rho)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (ALBERT-tiny)",
+       y = "Spearman's rho") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (ALBERT-tiny)",
+       y = "R2") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+min(df_by_layer$rho)
+```
+
+
+## RQ5: Expected layer
+
+```{r rq5_layer_at}
+df_by_layer <- df_by_layer %>%
+  mutate(r2_delta = c(NA, diff(r2))) %>%
+  mutate(weighted_layer = Layer * r2_delta)
+
+expected_layer = sum(df_by_layer$weighted_layer, na.rm = TRUE) / sum(df_by_layer$r2_delta, na.rm = TRUE)
+expected_layer
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue",
+            alpha = .8) +
+  theme_minimal() +
+  geom_vline(xintercept = expected_layer, size = 1.5, 
+             linetype = "dashed", alpha = .7) +
+  geom_vline(xintercept = 2, size = 1.5, 
+             linetype = "dotted", alpha = .7) +
+  scale_x_continuous(breaks = c(0:13)) +
+  labs(x = "Layer (ALBERT-tiny)",
+       y = "R2") +
+  theme(text = element_text(size = 15),
+        legend.position="none") 
+```
+
+## RQ6: Layer vs. same/different
+
+The actual code implementation is executed in Python, but a visualization is produced here.
+
+```{r rq6_same_different_at}
+# Calculate mean and SE of Distance
+df_summary <- df_at_distances %>%
+  group_by(Layer, Same_sense) %>%
+  summarise(
+    mean_Distance = mean(Distance),
+    sd_Distance = sd(Distance),
+    count = n(),
+    se_Distance = sd_Distance / sqrt(count),
+    .groups = 'drop'  # Drop the automatic grouping by dplyr
+  )
+
+df_summary %>%
+  ggplot(aes(x = Layer, 
+             y = mean_Distance, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_Distance - 2 * se_Distance, 
+                  ymax = mean_Distance + 2 * se_Distance), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "Layer (ALBERT-tiny)",
+       y = "Mean Distance",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+  
+```
+
+## RQ3: Cosine distance vs. Same/Different
+
+Now, we select the *best-performing layer* from BETO.
+
+```{r rq3_at}
+df_at_6 = df_merged %>%
+  filter(Layer == 2) %>%
+  select(-Same_sense)
+nrow(df_at_6)
+
+df_experimental_with_at = df_final %>%
+  left_join(df_at_6)
+nrow(df_experimental_with_at)
+  
+
+mod_full = lmer(data = df_experimental_with_at,
+                Response ~ Same_sense + Distance +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_reduced = lmer(data = df_experimental_with_at,
+                Response ~ Distance + # Same_sense +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_just_same = lmer(data = df_experimental_with_at,
+                Response ~ Same_sense + # Distance
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+summary(mod_full)
+anova(mod_full, mod_reduced)
+anova(mod_full, mod_just_same)
+
+
+
+### Visualize
+df_experimental_with_at %>%
+  mutate(distance_binned = ntile(Distance, 20)) %>%
+  group_by(Same_sense, distance_binned) %>%
+  summarize(
+    mean_relatedness = mean(Response),
+    sd_relatedness = sd(Response),
+    count = n(),
+    se_relatedness = sd_relatedness / sqrt(count),
+  ) %>%
+  ggplot(aes(x = distance_binned, 
+             y = mean_relatedness, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_relatedness - se_relatedness, 
+                  ymax = mean_relatedness + se_relatedness), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "ALBERT-tiny Cosine Distance (Binned)",
+       y = "Relatedness",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+```
+
+# Replicating with ALBERT-base
+
+## Load and process ALBERT-base data
+
+```{r}
+### XLM distances
+df_ab_distances = read_csv("../../data/processed/models/albert-base_sawc_distances.csv")
+nrow(df_ab_distances)
+
+### basic items to get Tag
+df_sawc_items = read_csv("../../data/raw/items/sawc_sentence_pairs.csv")
+
+### merge together
+df_merged = df_ab_distances %>%
+  left_join(df_sawc_items)
+```
+
+## Merge with SAW-C Norms
+
+```{r}
+df_list_mean = df_final %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n())
+nrow(df_list_mean)
+
+df_ab_distances = df_merged %>%
+  inner_join(df_list_mean)
+nrow(df_ab_distances)
+```
+
+## RQ2: Correlation by layer
+
+```{r rq2_corr_by_layer_ab}
+df_by_layer = df_ab_distances %>%
+  group_by(Layer) %>%
+  summarise(r = cor(mean_relatedness, Distance, method = "pearson"),
+            r2 = r ** 2,
+            rho = cor(mean_relatedness, Distance, method = "spearman"),
+            count = n())
+
+summary(df_by_layer$rho)
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (ALBERT-base)",
+       y = "Pearson's r") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = rho)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (ALBERT-base)",
+       y = "Spearman's rho") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue") +
+  theme_minimal() +
+  labs(x = "Layer (ALBERT-base)",
+       y = "R2") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme(text = element_text(size = 15),
+        legend.position="none")
+
+min(df_by_layer$rho)
+```
+
+
+## RQ5: Expected layer
+
+```{r rq5_layer_ab}
+df_by_layer <- df_by_layer %>%
+  mutate(r2_delta = c(NA, diff(r2))) %>%
+  mutate(weighted_layer = Layer * r2_delta)
+
+expected_layer = sum(df_by_layer$weighted_layer, na.rm = TRUE) / sum(df_by_layer$r2_delta, na.rm = TRUE)
+expected_layer
+
+df_by_layer %>%
+  ggplot(aes(x = Layer,
+             y = r2)) +
+  geom_line(size = 2,
+            color = "cornflower blue",
+            alpha = .8) +
+  theme_minimal() +
+  geom_vline(xintercept = expected_layer, size = 1.5, 
+             linetype = "dashed", alpha = .7) +
+  geom_vline(xintercept = 6, size = 1.5, 
+             linetype = "dotted", alpha = .7) +
+  scale_x_continuous(breaks = c(0:13)) +
+  labs(x = "Layer (ALBERT-tiny)",
+       y = "R2") +
+  theme(text = element_text(size = 15),
+        legend.position="none") 
+```
+
+## RQ6: Layer vs. same/different
+
+The actual code implementation is executed in Python, but a visualization is produced here.
+
+```{r rq6_same_different_ab}
+# Calculate mean and SE of Distance
+df_summary <- df_ab_distances %>%
+  group_by(Layer, Same_sense) %>%
+  summarise(
+    mean_Distance = mean(Distance),
+    sd_Distance = sd(Distance),
+    count = n(),
+    se_Distance = sd_Distance / sqrt(count),
+    .groups = 'drop'  # Drop the automatic grouping by dplyr
+  )
+
+df_summary %>%
+  ggplot(aes(x = Layer, 
+             y = mean_Distance, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_Distance - 2 * se_Distance, 
+                  ymax = mean_Distance + 2 * se_Distance), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "Layer (ALBERT-base)",
+       y = "Mean Distance",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+  
+```
+
+## RQ3: Cosine distance vs. Same/Different
+
+Now, we select the *best-performing layer* from BETO.
+
+```{r rq3_ab}
+df_ab_6 = df_merged %>%
+  filter(Layer == 2) %>%
+  select(-Same_sense)
+nrow(df_ab_6)
+
+df_experimental_with_ab = df_final %>%
+  left_join(df_ab_6)
+nrow(df_experimental_with_ab)
+  
+
+mod_full = lmer(data = df_experimental_with_ab,
+                Response ~ Same_sense + Distance +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_reduced = lmer(data = df_experimental_with_ab,
+                Response ~ Distance + # Same_sense +
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+mod_just_same = lmer(data = df_experimental_with_ab,
+                Response ~ Same_sense + # Distance
+                  (1 + Same_sense + Distance | Participant) + 
+                  (1 | List) + (1 | Word),
+                REML = FALSE)
+
+summary(mod_full)
+anova(mod_full, mod_reduced)
+anova(mod_full, mod_just_same)
+
+
+
+### Visualize
+df_experimental_with_ab %>%
+  mutate(distance_binned = ntile(Distance, 20)) %>%
+  group_by(Same_sense, distance_binned) %>%
+  summarize(
+    mean_relatedness = mean(Response),
+    sd_relatedness = sd(Response),
+    count = n(),
+    se_relatedness = sd_relatedness / sqrt(count),
+  ) %>%
+  ggplot(aes(x = distance_binned, 
+             y = mean_relatedness, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_relatedness - se_relatedness, 
+                  ymax = mean_relatedness + se_relatedness), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "ALBERT-base Cosine Distance (Binned)",
+       y = "Relatedness",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+df_experimental_with_ab %>%
+  group_by(Word, Tag, Same_sense) %>%
+  summarise(m_relatedness = mean(Response),
+            m_distance = mean(Distance)) %>%
+  ggplot(aes(x = m_distance, y = m_relatedness,
+             color = Same_sense)) +
+  geom_point(alpha = .5) +
+  geom_smooth(method = "lm") +
+  theme_minimal() +
+  labs(x = "ALBERT-base Cosine Distance",
+       y = "Mean Relatedness",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+```
+
+
+# Comparing all models together
+
+```{r}
+df_beto = read_csv("../../data/processed/models/beto_sawc_distances.csv") %>%
+  mutate(Model = "BETO",
+         Multilingual = "Monolingual")
+df_xlm = read_csv("../../data/processed/models/xlm_sawc_distances.csv") %>%
+  mutate(Model = "XLM-RoBERTa",
+         Multilingual = "Multilingual")
+df_mb = read_csv("../../data/processed/models/multilingual_sawc_distances.csv") %>%
+  mutate(Model = "Multilingual BERT",
+         Multilingual = "Multilingual")
+df_db = read_csv("../../data/processed/models/distilbeto_sawc_distances.csv") %>%
+  mutate(Model = "DistilBETO",
+         Multilingual = "Monolingual")
+df_ab = read_csv("../../data/processed/models/albert-base_sawc_distances.csv") %>%
+  mutate(Model = "ALBERT-base",
+         Multilingual = "Monolingual")
+df_at = read_csv("../../data/processed/models/albert-tiny_sawc_distances.csv") %>%
+  mutate(Model = "ALBERT-tiny",
+         Multilingual = "Monolingual")
+df_axl = read_csv("../../data/processed/models/albert-xlarge_sawc_distances.csv") %>%
+  mutate(Model = "ALBERT-xlarge",
+         Multilingual = "Monolingual")
+df_al = read_csv("../../data/processed/models/albert-large_sawc_distances.csv") %>%
+  mutate(Model = "ALBERT-large",
+         Multilingual = "Monolingual")
+
+df_axxl = read_csv("../../data/processed/models/albert-xxlarge_sawc_distances.csv") %>%
+  mutate(Model = "ALBERT-xxlarge",
+         Multilingual = "Monolingual")
+
+df_all = df_beto %>%
+  bind_rows(df_xlm) %>%
+  bind_rows(df_db) %>%
+  bind_rows(df_ab) %>%
+  bind_rows(df_at) %>%
+  bind_rows(df_mb) %>%
+  bind_rows(df_axl) %>%
+  bind_rows(df_al) %>%
+  bind_rows(df_axxl)
+
+nrow(df_all)
+
+
+### basic items to get Tag
+df_sawc_items = read_csv("../../data/raw/items/sawc_sentence_pairs.csv")
+
+### merge together
+df_merged = df_all %>%
+  left_join(df_sawc_items)
+
+df_list_mean = df_final %>%
+  group_by(List, Word, Tag) %>%
+  summarise(mean_relatedness = mean(Response), .groups = "drop",
+            count = n())
+nrow(df_list_mean)
+
+df_merged = df_merged %>%
+  inner_join(df_list_mean)
+nrow(df_merged)
+```
+
+
+## R2 by layer, by model
+
+```{r}
+df_by_layer = df_merged %>%
+  group_by(Model, Multilingual, Layer) %>%
+  summarise(r = cor(mean_relatedness, Distance, method = "pearson"),
+            r2 = r ** 2,
+            rho = cor(mean_relatedness, Distance, method = "spearman"),
+            count = n())
+
+max(df_by_layer$r2)
+df_by_layer %>%
+  filter(r2 == max(df_by_layer$r2))
+
+df_by_layer %>%
+  filter(Model != "ALBERT-tiny") %>%
+  filter(Model != "ALBERT-xlarge") %>%
+  filter(Model != "DistilBETO") %>%
+  ggplot(aes(x = Layer,
+             y = r2,
+             color = Model)) +
+  geom_line(size = 2) +
+  theme_minimal() +
+  labs(x = "Layer",
+       y = "R2") +
+  scale_x_continuous(breaks = c(0:13)) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+df_by_layer %>%
+  filter(Model %in% c("ALBERT-xlarge", "ALBERT-large")) %>%
+  ggplot(aes(x = Layer,
+             y = r2,
+             color = Model)) +
+  geom_line(size = 2) +
+  theme_minimal() +
+  labs(x = "Layer",
+       y = "R2") +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+df_by_layer %>%
+  ggplot(aes(x = Multilingual,
+             y = r2)) +
+  geom_boxplot() +
+  geom_jitter(alpha = .4, width = .1) +
+  theme_minimal() +
+  labs(x = "",
+       y = "R2") +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+```
+
+## Comparison by model parameters
+
+The BETO/ALBERT/DistilBETO family of models provide a nice within-family comparison of the effect of number of **parameters**, since they are trained on the same datasets.
+
+
+```{r}
+df_params = data.frame(
+  Model = c("BETO", "DistilBETO", "ALBERT-tiny",
+            "ALBERT-base", "ALBERT-large", 
+            "ALBERT-xlarge", "ALBERT-xxlarge",
+            "Multilingual BERT", "XLM-RoBERTa"),
+  Parameters = c(110000000, 66000000, 5000000,
+                 12000000, 18000000, 60000000, 235000000,
+                 110000000, 270000000)
+  # Words = c(3000000000, 3000000000, 3000000000,
+  #           3000000000, 3000000000, 3000000000,
+  #          )
+)
+
+
+df_perf_with_params = df_by_layer %>%
+  inner_join(df_params)
+
+my_colors <- all_colors[c(3, 7)] 
+
+df_perf_with_params %>%
+  group_by(Model, Parameters, Multilingual) %>%
+  summarise(max_r2 = max(r2)) %>%
+  ggplot(aes(x = Parameters,
+             y = max_r2,
+             color = Multilingual,
+             shape = Multilingual)) +
+  geom_point(size = 6,
+             alpha = .7) +
+  geom_hline(yintercept = .5967562, ### Human accuracy 
+              linetype = "dotted", color = "red",
+             size = 1.2, alpha = .5) +
+  geom_text_repel(aes(label=Model), size=3) +
+  scale_x_log10() +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(x = "Parameters",
+       y = "Maximum R2",
+       color = "",
+       shape = "") +
+  theme_minimal() +
+  # guides(color="none") +
+  # scale_color_viridis(option = "mako", discrete=TRUE) +
+  scale_color_manual(values = my_colors)  +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+```
+
