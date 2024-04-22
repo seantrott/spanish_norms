@@ -1582,6 +1582,15 @@ df_axxl = read_csv("../../data/processed/models/albert-xxlarge_sawc_distances.cs
   mutate(Model = "ALBERT-xxlarge",
          Multilingual = "Monolingual")
 
+df_rb = read_csv("../../data/processed/models/roberta-base_sawc_distances.csv") %>%
+  mutate(Model = "RoBERTa-base",
+         Multilingual = "Monolingual")
+
+df_rl = read_csv("../../data/processed/models/roberta-large_sawc_distances.csv") %>%
+  mutate(Model = "RoBERTa-large",
+         Multilingual = "Monolingual")
+
+
 df_all = df_beto %>%
   bind_rows(df_xlm) %>%
   bind_rows(df_db) %>%
@@ -1590,7 +1599,9 @@ df_all = df_beto %>%
   bind_rows(df_mb) %>%
   bind_rows(df_axl) %>%
   bind_rows(df_al) %>%
-  bind_rows(df_axxl)
+  bind_rows(df_axxl) %>%
+  bind_rows(df_rb) %>%
+  bind_rows(df_rl)
 
 nrow(df_all)
 
@@ -1632,6 +1643,8 @@ df_by_layer %>%
   filter(Model != "ALBERT-tiny") %>%
   filter(Model != "ALBERT-xlarge") %>%
   filter(Model != "DistilBETO") %>%
+  filter(Model != "ALBERT-large") %>%
+  filter(Model != "RoBERTa-large") %>%
   ggplot(aes(x = Layer,
              y = r2,
              color = Model)) +
@@ -1645,7 +1658,9 @@ df_by_layer %>%
         legend.position="bottom")
 
 df_by_layer %>%
-  filter(Model %in% c("ALBERT-xlarge", "ALBERT-large")) %>%
+  filter(Model %in% c("ALBERT-xlarge", 
+                      "ALBERT-large",
+                      "RoBERTa-large")) %>%
   ggplot(aes(x = Layer,
              y = r2,
              color = Model)) +
@@ -1675,15 +1690,16 @@ df_by_layer %>%
 
 The BETO/ALBERT/DistilBETO family of models provide a nice within-family comparison of the effect of number of **parameters**, since they are trained on the same datasets.
 
-
 ```{r}
 df_params = data.frame(
   Model = c("BETO", "DistilBETO", "ALBERT-tiny",
             "ALBERT-base", "ALBERT-large", 
             "ALBERT-xlarge", "ALBERT-xxlarge",
+            "RoBERTa-base", "RoBERTa-large",
             "Multilingual BERT", "XLM-RoBERTa"),
   Parameters = c(110000000, 66000000, 5000000,
                  12000000, 18000000, 60000000, 235000000,
+                 125000000, 355000000,
                  110000000, 270000000)
   # Words = c(3000000000, 3000000000, 3000000000,
   #           3000000000, 3000000000, 3000000000,
@@ -1696,9 +1712,11 @@ df_perf_with_params = df_by_layer %>%
 
 my_colors <- all_colors[c(3, 7)] 
 
-df_perf_with_params %>%
+df_max_r2 = df_perf_with_params %>%
   group_by(Model, Parameters, Multilingual) %>%
-  summarise(max_r2 = max(r2)) %>%
+  summarise(max_r2 = max(r2))
+
+df_max_r2 %>%
   ggplot(aes(x = Parameters,
              y = max_r2,
              color = Multilingual,
@@ -1721,5 +1739,35 @@ df_perf_with_params %>%
   scale_color_manual(values = my_colors)  +
   theme(text = element_text(size = 15),
         legend.position="bottom")
+
+```
+
+## `Same` vs. `Different` Sense residuals
+
+```{r}
+# Fit models and calculate residuals for each LLM
+models <- by(df_merged, df_merged$Model, function(subdata) {
+  model <- lm(mean_relatedness ~ Distance, data = subdata)
+  subdata$residuals <- residuals(model)
+  return(subdata)
+})
+
+# Combine the results back into a single dataframe
+results <- do.call(rbind, models)
+
+# View results
+print(results)
+
+results %>%
+  ggplot(aes(x = residuals,
+             fill = Same_sense)) +
+  geom_density(alpha = .6, size = 2) +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  theme_minimal() +
+  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom") +
+  labs(x = "Residuals (Relatedness ~ Distance)") +
+  facet_wrap(~Model)
 ```
 
