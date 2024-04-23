@@ -633,7 +633,7 @@ df_max_r2 %>%
 ## `Same` vs. `Different` Sense residuals
 
 
-```{r}
+```{r same_diff_residuals}
 # Fit models and calculate residuals for each LLM
 models <- by(df_merged, df_merged$Model, function(subdata) {
   model <- lm(mean_relatedness ~ Distance * Layer, data = subdata)
