@@ -32,6 +32,7 @@ library(viridis)
 
 all_colors <- viridis::viridis(10, option = "mako")
 my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palette
+my_colors <- all_colors[c(3, 7)] 
 ```
 
 # Load data
@@ -101,7 +102,7 @@ anova(mod_full, mod_reduced)
 
 ```{r}
 ### BETO distances
-df_beto_distances = read_csv("../../data/processed/models/beto_sawc_distances.csv")
+df_beto_distances = read_csv("../../data/processed/models/sawc-distances_model-bert-base-spanish-wwm-cased.csv")
 nrow(df_beto_distances)
 
 ### basic items to get Tag
@@ -110,6 +111,7 @@ df_sawc_items = read_csv("../../data/raw/items/sawc_sentence_pairs.csv")
 ### merge together
 df_merged = df_beto_distances %>%
   left_join(df_sawc_items)
+nrow(df_merged)
 ```
 
 ## Merge with SAW-C Norms
@@ -324,7 +326,7 @@ for (ppt in ppts) {
 ### Visualization
 df_r %>%
   ggplot(aes(x = estimate)) +
-  geom_histogram(alpha = .7) +
+  geom_histogram(alpha = .6) +
   scale_x_continuous(limits = c(0, 1)) +
   theme_minimal() +
   geom_vline(xintercept = BETO_COR, size = 1.5, 
@@ -378,8 +380,10 @@ df_summary %>%
        fill = "Same Sense") +
   scale_x_continuous(breaks = c(0:13)) +
   theme_minimal() +
-  scale_fill_viridis(option = "mako", discrete=TRUE) +
-  scale_color_viridis(option = "mako", discrete=TRUE) +
+  # scale_fill_viridis(option = "mako", discrete=TRUE) +
+  # scale_color_viridis(option = "mako", discrete=TRUE) +
+  scale_fill_manual(values = my_colors)  +
+  scale_color_manual(values = my_colors)  +
   theme(text = element_text(size = 15),
         legend.position="bottom")
   
@@ -414,7 +418,7 @@ df_item_means %>%
              fill = Same_sense)) +
   geom_density_ridges2(aes(height = ..density..), 
                        color=gray(0.25), 
-                       alpha = 1, 
+                       alpha = .7, 
                        scale=.85, 
                        # size=1, 
                        size = 0,
@@ -423,7 +427,7 @@ df_item_means %>%
        y = "",
        fill = "") +
   theme_minimal()+
-  scale_fill_viridis(option = "mako", discrete=TRUE) +
+  scale_fill_manual(values = my_colors)  +
   theme(text = element_text(size = 15),
         legend.position="none") 
 
@@ -435,44 +439,50 @@ df_item_means %>%
 # Comparing all models together
 
 ```{r}
-df_beto = read_csv("../../data/processed/models/beto_sawc_distances.csv") %>%
+df_beto = read_csv("../../data/processed/models/sawc-distances_model-bert-base-spanish-wwm-cased.csv") %>%
   mutate(Model = "BETO-cased",
          Multilingual = "Monolingual")
-df_xlm = read_csv("../../data/processed/models/xlm_sawc_distances.csv") %>%
+df_xlm = read_csv("../../data/processed/models/sawc-distances_model-xlm-roberta-base.csv") %>%
   mutate(Model = "XLM-RoBERTa",
          Multilingual = "Multilingual")
-df_mb = read_csv("../../data/processed/models/multilingual_sawc_distances.csv") %>%
+
+df_mb = read_csv("../../data/processed/models/sawc-distances_model-bert-base-multilingual-cased.csv") %>%
   mutate(Model = "Multilingual BERT",
          Multilingual = "Multilingual")
-df_db = read_csv("../../data/processed/models/distilbeto_sawc_distances.csv") %>%
+
+df_db = read_csv("../../data/processed/models/sawc-distances_model-distilbert-base-spanish-uncased.csv") %>%
   mutate(Model = "DistilBETO",
          Multilingual = "Monolingual")
-df_ab = read_csv("../../data/processed/models/albert-base_sawc_distances.csv") %>%
+
+df_ab = read_csv("../../data/processed/models/sawc-distances_model-albert-base-spanish.csv") %>%
   mutate(Model = "ALBERT-base",
          Multilingual = "Monolingual")
-df_at = read_csv("../../data/processed/models/albert-tiny_sawc_distances.csv") %>%
+
+df_at = read_csv("../../data/processed/models/sawc-distances_model-albert-tiny-spanish.csv") %>%
   mutate(Model = "ALBERT-tiny",
          Multilingual = "Monolingual")
-df_axl = read_csv("../../data/processed/models/albert-xlarge_sawc_distances.csv") %>%
+
+df_axl = read_csv("../../data/processed/models/sawc-distances_model-albert-xlarge-spanish.csv") %>%
   mutate(Model = "ALBERT-xlarge",
          Multilingual = "Monolingual")
-df_al = read_csv("../../data/processed/models/albert-large_sawc_distances.csv") %>%
+
+df_al = read_csv("../../data/processed/models/sawc-distances_model-albert-large-spanish.csv") %>%
   mutate(Model = "ALBERT-large",
          Multilingual = "Monolingual")
 
-df_axxl = read_csv("../../data/processed/models/albert-xxlarge_sawc_distances.csv") %>%
+df_axxl = read_csv("../../data/processed/models/sawc-distances_model-albert-xxlarge-spanish.csv") %>%
   mutate(Model = "ALBERT-xxlarge",
          Multilingual = "Monolingual")
 
-df_rb = read_csv("../../data/processed/models/roberta-base_sawc_distances.csv") %>%
+df_rb = read_csv("../../data/processed/models/sawc-distances_model-roberta-base-bne.csv") %>%
   mutate(Model = "RoBERTa-base",
          Multilingual = "Monolingual")
 
-df_rl = read_csv("../../data/processed/models/roberta-large_sawc_distances.csv") %>%
+df_rl = read_csv("../../data/processed/models/sawc-distances_model-roberta-large-bne.csv") %>%
   mutate(Model = "RoBERTa-large",
          Multilingual = "Monolingual")
 
-df_beto_uncased = read_csv("../../data/processed/models/beto-uncased_sawc_distances.csv") %>%
+df_beto_uncased = read_csv("../../data/processed/models/sawc-distances_model-bert-base-spanish-wwm-uncased.csv") %>%
   mutate(Model = "BETO-uncased",
          Multilingual = "Monolingual")
 
@@ -515,7 +525,7 @@ nrow(df_merged)
 
 ```{r r2_by_layer}
 df_by_layer = df_merged %>%
-  group_by(Model, Multilingual, Layer) %>%
+  group_by(Model, Multilingual, Layer, n_params) %>%
   summarise(r = cor(mean_relatedness, Distance, method = "pearson"),
             r2 = r ** 2,
             rho = cor(mean_relatedness, Distance, method = "spearman"),
@@ -537,10 +547,11 @@ df_by_layer %>%
   geom_line(size = 2) +
   theme_minimal() +
   labs(x = "Layer",
-       y = "R2") +
+       y = "R2",
+       color = "") +
   scale_x_continuous(breaks = c(0:13)) +
   scale_color_viridis(option = "mako", discrete=TRUE) +
-  theme(text = element_text(size = 15),
+  theme(text = element_text(size = 12),
         legend.position="bottom")
 
 df_by_layer %>%
@@ -553,7 +564,8 @@ df_by_layer %>%
   geom_line(size = 2) +
   theme_minimal() +
   labs(x = "Layer",
-       y = "R2") +
+       y = "R2",
+       color = "") +
   scale_color_viridis(option = "mako", discrete=TRUE) +
   theme(text = element_text(size = 15),
         legend.position="bottom")
@@ -566,28 +578,6 @@ df_by_layer %>%
 The BETO/ALBERT/DistilBETO family of models provide a nice within-family comparison of the effect of number of **parameters**, since they are trained on the same datasets.
 
 ```{r r2_by_params}
-df_params = data.frame(
-  Model = c("BETO-cased", "BETO-uncased",
-            "DistilBETO", "ALBERT-tiny",
-            "ALBERT-base", "ALBERT-large", 
-            "ALBERT-xlarge", "ALBERT-xxlarge",
-            "RoBERTa-base", "RoBERTa-large",
-            "Multilingual BERT", "XLM-RoBERTa"),
-  Parameters = c(110000000, 110000000,
-                 66000000, 5000000,
-                 12000000, 18000000, 60000000, 235000000,
-                 125000000, 355000000,
-                 110000000, 270000000)
-  # Words = c(3000000000, 3000000000, 3000000000,
-  #           3000000000, 3000000000, 3000000000,
-  #          )
-)
-
-
-df_perf_with_params = df_by_layer %>%
-  inner_join(df_params)
-
-my_colors <- all_colors[c(3, 7)] 
 
 df_max_r2 = df_perf_with_params %>%
   group_by(Model, Parameters, Multilingual) %>%
@@ -600,7 +590,7 @@ df_max_r2 %>%
              shape = Multilingual)) +
   geom_point(size = 6,
              alpha = .7) +
-  geom_hline(yintercept = .5967562, ### Human accuracy 
+  geom_hline(yintercept = mean(df_r$estimate)**2, ### Human accuracy 
               linetype = "dotted", color = "red",
              size = 1.2, alpha = .5) +
   geom_text_repel(aes(label=Model), size=3) +
@@ -646,7 +636,7 @@ results = results %>%
 results %>%
   ggplot(aes(x = residuals,
              fill = Same_sense)) +
-  geom_density(alpha = .6, size = 0) +
+  geom_density(alpha = .7, size = 0) +
   geom_vline(xintercept = 0, size = .6, linetype = "dashed") +
   theme_minimal() +
   # scale_fill_viridis(option = "mako", discrete=TRUE) +
