@@ -275,8 +275,8 @@ df_experimental_with_beto %>%
        color = "Same Sense",
        fill = "Same Sense") +
   theme_minimal() +
-  scale_fill_viridis(option = "mako", discrete=TRUE) +
-  scale_color_viridis(option = "mako", discrete=TRUE) +
+  scale_fill_manual(values = my_colors)  +
+  scale_color_manual(values = my_colors)  +
   theme(text = element_text(size = 15),
         legend.position="bottom")
   
@@ -543,6 +543,27 @@ df_by_layer %>%
   filter(Model != "RoBERTa-large") %>%
   ggplot(aes(x = Layer,
              y = r2,
+             color = Model,
+             linetype = Model)) +
+  geom_line(size = 2) +
+  theme_minimal() +
+  labs(x = "Layer",
+       y = "R2",
+       color = "",
+       linetype = "") +
+  scale_x_continuous(breaks = c(0:13)) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 12),
+        legend.position="bottom")
+
+df_by_layer %>%
+  filter(Model != "ALBERT-tiny") %>%
+  filter(Model != "ALBERT-xlarge") %>%
+  filter(Model != "DistilBETO") %>%
+  filter(Model != "ALBERT-large") %>%
+  filter(Model != "RoBERTa-large") %>%
+  ggplot(aes(x = Layer,
+             y = r2,
              color = Model)) +
   geom_line(size = 2) +
   theme_minimal() +
@@ -579,12 +600,12 @@ The BETO/ALBERT/DistilBETO family of models provide a nice within-family compari
 
 ```{r r2_by_params}
 
-df_max_r2 = df_perf_with_params %>%
-  group_by(Model, Parameters, Multilingual) %>%
+df_max_r2 = df_by_layer %>%
+  group_by(Model, n_params, Multilingual) %>%
   summarise(max_r2 = max(r2))
 
 df_max_r2 %>%
-  ggplot(aes(x = Parameters,
+  ggplot(aes(x = n_params,
              y = max_r2,
              color = Multilingual,
              shape = Multilingual)) +
