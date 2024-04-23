@@ -670,3 +670,55 @@ results %>%
 
 ```
 
+## Comparison to Chilean BERT
+
+```{r}
+### Load Chilean BERT
+df_chilean_bert = read_csv("../../data/processed/models/sawc-distances_model-patana-chilean-spanish-bert.csv") %>%
+  mutate(Model = "Chilean-BERT", Multilingual = "Monolingual")
+
+### Merge with model
+df_all = df_all %>%
+  bind_rows(df_chilean_bert)
+nrow(df_all)
+
+### Load relatedness by demographic
+df_demographic_averages = read_csv("../../data/processed/human/sawc_relatedness_by_demographic.csv") %>%
+  select(-Same_sense)
+
+### Merge together
+df_llm_plus_demo = df_demographic_averages %>%
+  inner_join(df_all) %>%
+  select(Sentence_1, Sentence_2, Word,
+         mean_relatedness_Chile, mean_relatedness_México, mean_relatedness_España,
+         Model, Distance, Layer) %>%
+  filter(Layer == 4) ### Just test
+
+### Best layer per model
+df_llm_plus_demo
+
+### Pivot wide
+s = df_llm_plus_demo %>%
+  pivot_wider(names_from = Model,
+              values_from = Distance)
+
+### Extract relevant columns
+relevant_columns = s %>%
+  mutate(Chile = mean_relatedness_Chile,
+         México = mean_relatedness_México,
+         España = mean_relatedness_España) %>%
+  select(Chile, México, España, 
+         `BETO-cased`, `XLM-RoBERTa`,
+         DistilBETO, `ALBERT-base`, `ALBERT-tiny`,
+         `Multilingual BERT`, `ALBERT-xlarge`, `ALBERT-large`,
+         `ALBERT-xxlarge`, `RoBERTa-base`, `RoBERTa-large`, `BETO-uncased`,
+         `Chilean-BERT`
+         )
+
+### abslute  value
+relevant_cors = cor(relevant_columns,  use = "complete.obs")
+relevant_cors
+
+```
+
+

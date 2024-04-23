@@ -39,7 +39,7 @@ my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palett
 # Load data
 
 ```{r}
-### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/saw-c/src/analysis/")
+### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
 
 ### Read in all data
 df_all_results = read_csv("../../data/processed/human/sawc_relatedness_full_all_data.csv")
@@ -290,6 +290,7 @@ df_merged_with_all_data = df_critical %>%
   select(Participant, Response, Word, Tag, Same_sense, List) %>%
   left_join(df_items)
 
+### Save raw data
 write.csv(df_merged_with_all_data, "../../data/processed/human/sawc_relatedness_full_critical_data.csv")
 
 ### Save averages
@@ -305,8 +306,19 @@ df_item_means = df_merged_with_demo %>%
             median_relatedness = median(Response),
             count = n())
 
+### Save item means
 write.csv(df_item_means,
           "../../data/processed/human/sawc_avg_relatedness.csv")
+
+
+### Save demographic data
+df_ratings_by_demo = df_wide %>%
+  inner_join(df_items) %>%
+  inner_join(df_item_means)
+nrow(df_ratings_by_demo)
+
+write.csv(df_ratings_by_demo,
+          "../../data/processed/human/sawc_relatedness_by_demographic.csv")
 
 ```
 
