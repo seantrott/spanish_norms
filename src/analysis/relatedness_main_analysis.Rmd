@@ -670,7 +670,9 @@ results %>%
 
 ```
 
-## Comparison to Chilean BERT
+## Comparison by demographic
+
+**TODO**: In progress; creating correlation matrix that factors in demographic data and compares this also to Chilean BERT.
 
 ```{r}
 ### Load Chilean BERT
@@ -715,9 +717,34 @@ relevant_columns = s %>%
          `Chilean-BERT`
          )
 
-### abslute  value
-relevant_cors = cor(relevant_columns,  use = "complete.obs")
+### absolute  value
+relevant_cors = abs(cor(relevant_columns,  use = "complete.obs"))
 relevant_cors
+
+corrplot(relevant_cors,
+         method = "shade",
+         # type = "upper",
+         tl.col = "black")
+
+heatmap.2(relevant_cors,
+          breaks=breaks,
+          col=my_palette,
+          main="Correlations",
+          trace="none",
+          dendrogram="row",
+          Rowv=TRUE, 
+          Colv=FALSE,
+          scale="none",
+          key=TRUE,
+          keysize=1.2,
+          symm=TRUE, # symmetric heatmap
+          density.info="none",
+          margins=c(6,6),
+          cexRow=0.9, # Adjust font size of row labels if needed
+          cexCol=0.9, # Adjust font size of column labels if needed
+          # cellnote=round(relevant_cors, 2), # Add correlation values to cells
+          notecol="black", # Color for cell values
+          notecex=0.8) # Font size for cell values
 
 ```
 
