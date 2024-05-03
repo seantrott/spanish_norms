@@ -29,6 +29,8 @@ library(lmerTest)
 library(ggrepel)
 library(tools)
 library(viridis)
+library(corrplot)
+library(gplots)
 
 all_colors <- viridis::viridis(10, option = "mako")
 my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palette
@@ -77,6 +79,11 @@ df_final %>%
   facet_wrap(~Same_sense) +
   theme(text = element_text(size = 15),
         legend.position="none")
+
+df_final %>%
+  group_by(Same_sense) %>%
+  summarise(m_rel = mean(Response),
+            sd_rel = sd(Response))
 
 
 mod_full = lmer(data = df_final,
@@ -139,6 +146,8 @@ df_by_layer = df_merged_beto %>%
             count = n())
 
 summary(df_by_layer$rho)
+summary(df_by_layer$r2)
+summary(df_by_layer$r)
 
 df_by_layer %>%
   ggplot(aes(x = Layer,
@@ -184,32 +193,46 @@ min(df_by_layer$rho)
 ## RQ5: Expected layer
 
 ```{r rq5_layer}
-df_by_layer <- df_by_layer %>%
+
+df_wide <- df_merged_beto %>%
+  pivot_wider(
+    names_from = Layer,       # This specifies where to get the names of the new columns
+    values_from = Distance    # This specifies what values to fill the new columns with
+  ) %>%
+rename_with(.cols = matches("^[0-9]+$"),  
+              .fn = ~ paste0("Layer", as.integer(.) + 1))  
+
+
+base_formula <- "mean_relatedness ~ "
+
+# Create a vector to hold all layer names that you want to include in the models
+layer_names <- colnames(df_wide)[grepl("Layer", colnames(df_wide))]
+
+# Generate the model formulas incrementally
+formulas <- sapply(seq_along(layer_names), function(i) {
+  paste(base_formula, paste(layer_names[1:i], collapse = " + "))
+})
+
+# Initialize a vector to store R-squared values
+r_squared <- numeric(length(formulas))
+
+# Loop over the formulas
+for (i in seq_along(formulas)) {
+  model <- lm(formulas[i], data = df_wide)
+  r_squared[i] <- summary(model)$r.squared
+}
+
+
+df_results_expected = data.frame(r_squared, layer_names) %>%
+  mutate(r2 = r_squared) %>%
   mutate(r2_delta = c(NA, diff(r2))) %>%
+  mutate(Layer = as.numeric(gsub("Layer", "", layer_names)) - 1) %>%
   mutate(weighted_layer = Layer * r2_delta)
 
-expected_layer = sum(df_by_layer$weighted_layer, na.rm = TRUE) / sum(df_by_layer$r2_delta, na.rm = TRUE)
+expected_layer = sum(df_results_expected$weighted_layer, na.rm = TRUE) / sum(df_results_expected$r2_delta, na.rm = TRUE)
 expected_layer
 
-df_by_layer %>%
-  ggplot(aes(x = Layer,
-             y = r2)) +
-  geom_line(size = 2,
-            color = "cornflower blue",
-            alpha = .8) +
-  theme_minimal() +
-  geom_vline(xintercept = expected_layer, size = 1.5, 
-             linetype = "dashed", alpha = .7) +
-  geom_vline(xintercept = 7, size = 1.5, 
-             linetype = "dotted", alpha = .7) +
-  scale_x_continuous(breaks = c(0:13)) +
-  labs(x = "Layer (BETO)",
-       y = "R2") +
-  theme(text = element_text(size = 15),
-        legend.position="none") 
 ```
-
-
 
 
 # RQ3: Cosine distance vs. Same/Different
@@ -289,7 +312,7 @@ df_experimental_with_beto %>%
 ```{r rq4_comparison}
 ### First, get group means
 df_list_mean = df_experimental_with_beto %>%
-  group_by(List, Word, Tag) %>%
+  group_by(List, Word, Tag, Same_sense) %>%
   summarise(mean_relatedness = mean(Response), .groups = "drop",
             count = n(),
             distance = mean(Distance))
@@ -347,10 +370,26 @@ prop_larger
 
 ```
 
+## Calculate R2
+
+```{r}
+### Full model
+summary(lm(data = df_list_mean,
+           mean_relatedness ~ Same_sense + distance))
+
+### Just same sense
+summary(lm(data = df_list_mean,
+           mean_relatedness ~ Same_sense))
+
+### Just cosine distance
+summary(lm(data = df_list_mean,
+           mean_relatedness ~ distance))
+```
+
+
 
 # RQ6: Layer vs. same/different
 
-The actual code implementation is executed in Python, but a visualization is produced here.
 
 ```{r rq6_same_different}
 # Calculate mean and SE of Distance
@@ -386,7 +425,71 @@ df_summary %>%
   scale_color_manual(values = my_colors)  +
   theme(text = element_text(size = 15),
         legend.position="bottom")
+
+
+
   
+```
+
+
+We also build a logistic regression model for each layer.
+
+```{r}
+df_wide <- df_beto_distances %>%
+  pivot_wider(
+    names_from = Layer,       # This specifies where to get the names of the new columns
+    values_from = Distance    # This specifies what values to fill the new columns with
+  ) %>%
+rename_with(.cols = matches("^[0-9]+$"),  
+              .fn = ~ paste0("Layer", as.integer(.) + 1))  
+
+
+base_formula <- "Same_sense ~ "
+
+# Create a vector to hold all layer names that you want to include in the models
+layer_names <- colnames(df_wide)[grepl("Layer", colnames(df_wide))]
+
+# Generate the model formulas incrementally: individual
+formulas_individual <- sapply(seq_along(layer_names), function(i) {
+  paste(base_formula, paste(layer_names[i], collapse = " + "))
+})
+
+# Generate the model formulas incrementally: altogether
+formulas_combined <- sapply(seq_along(layer_names), function(i) {
+  paste(base_formula, paste(layer_names[1:i], collapse = " + "))
+})
+
+
+aic_individual <- numeric(length(formulas_individual))
+aic_together <- numeric(length(formulas_combined))
+
+
+# Loop over the formulas
+for (i in seq_along(formulas_combined)) {
+  model <- glm(formulas_combined[i], data = df_wide, family = binomial())
+  aic_together[i] <- summary(model)$aic
+}
+
+# Loop over the formulas
+for (i in seq_along(formulas_individual)) {
+  model <- glm(formulas_individual[i], data = df_wide, family = binomial())
+  aic_individual[i] <- summary(model)$aic
+}
+
+# 
+df_results_expected = data.frame(aic_individual, aic_together, layer_names) %>%
+  mutate(aic_delta = -c(NA, diff(aic_together))) %>%
+  mutate(Layer = as.numeric(gsub("Layer", "", layer_names)) - 1) %>%
+  mutate(weighted_layer = Layer * aic_delta)
+
+expected_layer = sum(df_results_expected$weighted_layer, na.rm = TRUE) / sum(df_results_expected$aic_delta, na.rm = TRUE)
+expected_layer
+
+
+df_results_expected %>%
+  filter(aic_individual == min(df_results_expected$aic_individual))
+
+
 ```
 
 
@@ -594,6 +697,85 @@ df_by_layer %>%
 
 ```
 
+We can also break this down by looking at the *proportion of layers* through the model.
+
+```{r r2_by_prop_layer}
+df_families = data.frame(
+  Model = unique(df_by_layer$Model),
+  Family = c("ALBERT", "ALBERT", "ALBERT", "ALBERT",
+             "ALBERT", "BERT", "BERT", "BERT", "BERT",
+             "RoBERTa", "RoBERTa", "RoBERTa")
+)
+
+df_by_layer = df_by_layer %>%
+  group_by(Model) %>%
+  mutate(max_layer = max(Layer),
+         prop_layer = Layer / max_layer)  %>%
+  inner_join(df_families)
+
+
+df_by_layer %>%
+  ggplot(aes(x = prop_layer,
+             y = r2)) +
+  geom_line(size = .5, aes(color = Model, group = Model),
+            alpha = .3) + 
+  stat_summary(
+    fun = mean,                    # calculate mean
+    geom = "line",                 # use line geometry
+    size = 2,                    # set line size
+    na.rm = TRUE                   # remove NA values
+  ) +
+  theme_minimal() +
+  labs(x = "Proportion of Total Layers",
+       y = "R2",
+       color = "") +  # Renaming legend title appropriately
+  scale_color_viridis(option = "mako", discrete = TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position = "none") 
+
+df_by_layer %>%
+  ggplot(aes(x = prop_layer,
+             y = r2,
+             color = Family)) + 
+  geom_smooth(size = 2) +
+  scale_color_viridis(option = "mako", discrete = TRUE) +
+  theme_minimal() +
+  labs(x = "Proportion of Total Layers",
+       y = "R2",
+       color = "Family") +
+  theme(text = element_text(size = 15),
+        legend.position = "bottom") 
+  
+df_by_layer %>%
+  mutate(binned_prop_layer = ntile(prop_layer, 10)) %>%
+  mutate(prop_binned = binned_prop_layer / 10) %>%
+  ggplot(aes(x = prop_binned,
+             y = r2)) +
+  stat_summary(
+    aes(group = Family,
+        color = Family),  
+    fun = mean,    
+    geom = "line",        
+    size = 2              
+  ) +
+  stat_summary(
+    aes(group = Family, 
+        fill = Family), 
+    fun.data = mean_se,    
+    geom = "ribbon",  
+    alpha = 0.2,   
+    color = NA     
+  ) +
+  theme_minimal() +
+  labs(x = "Layer Depth Ratio",
+       y = "R2",
+       color = "Family") +
+  scale_color_viridis(option = "mako", discrete = TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position = "bottom") 
+```
+
+
 ## Comparison by model parameters
 
 The BETO/ALBERT/DistilBETO family of models provide a nice within-family comparison of the effect of number of **parameters**, since they are trained on the same datasets.
@@ -674,7 +856,7 @@ results %>%
 
 **TODO**: In progress; creating correlation matrix that factors in demographic data and compares this also to Chilean BERT.
 
-```{r}
+```{r chilean_bert}
 ### Load Chilean BERT
 df_chilean_bert = read_csv("../../data/processed/models/sawc-distances_model-patana-chilean-spanish-bert.csv") %>%
   mutate(Model = "Chilean-BERT", Multilingual = "Monolingual")
@@ -726,6 +908,9 @@ corrplot(relevant_cors,
          # type = "upper",
          tl.col = "black")
 
+breaks <- seq(-1, 1, length.out=101) 
+my_palette <- colorRampPalette(c("lightblue", "white", "lightcoral"))(100)
+
 heatmap.2(relevant_cors,
           breaks=breaks,
           col=my_palette,
@@ -748,4 +933,55 @@ heatmap.2(relevant_cors,
 
 ```
 
+
+# Appendix
+
+## Analysis of GPT-4 Ratings
+
+```{r appendix_gpt}
+df_sawc = read_csv("../../data/processed/human/sawc_avg_relatedness.csv")
+df_gpt4 = read_csv("../../data/processed/models/sawc-ratings-gpt4-turbo.csv")
+
+df_merged_gpt4 = df_gpt4 %>%
+  inner_join(df_sawc)
+nrow(df_merged_gpt4)
+
+cor.test(df_merged_gpt4$GPT_rating, df_merged_gpt4$mean_relatedness,
+         method = "spearman")
+cor.test(df_merged_gpt4$GPT_rating, df_merged_gpt4$mean_relatedness,
+         method = "pearson")
+
+
+
+mod_full = lm(data = df_merged_gpt4, 
+              mean_relatedness ~ Same_sense + GPT_rating)
+summary(mod_full)
+
+mod_gpt = lm(data = df_merged_gpt4, 
+              mean_relatedness ~ GPT_rating)
+summary(mod_gpt)
+
+mod_sense = lm(data = df_merged_gpt4, 
+              mean_relatedness ~ Same_sense)
+summary(mod_sense)
+
+
+df_merged_gpt4$residuals = residuals(mod_gpt)
+
+
+df_merged_gpt4 %>%
+  ggplot(aes(x = residuals,
+             fill = Same_sense)) +
+  geom_density(alpha = .7, size = 0) +
+  geom_vline(xintercept = 0, size = .6, linetype = "dashed") +
+  theme_minimal() +
+  # scale_fill_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom") +
+  scale_fill_manual(values = my_colors)  +
+  labs(x = "Residuals (GPT-4 Turbo Ratings)",
+       fill = "") 
+
+
+```
 
