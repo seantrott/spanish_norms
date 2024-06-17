@@ -403,6 +403,14 @@ df_summary <- df_beto_distances %>%
     .groups = 'drop'  # Drop the automatic grouping by dplyr
   )
 
+# Modify Same_sense
+df_summary = df_summary %>%
+  mutate(Same_sense = case_when(
+    Same_sense == TRUE ~ "Same Sense",
+    Same_sense == FALSE ~ "Different Sense"
+  ))
+  
+
 df_summary %>%
   ggplot(aes(x = Layer, 
              y = mean_Distance, 
@@ -415,6 +423,32 @@ df_summary %>%
               color = NA) +
   labs(x = "Layer (BETO)",
        y = "Mean Distance",
+       color = "",
+       fill = "") +
+  scale_x_continuous(breaks = c(0:13)) +
+  theme_minimal() +
+  # scale_fill_viridis(option = "mako", discrete=TRUE) +
+  # scale_color_viridis(option = "mako", discrete=TRUE) +
+  scale_fill_manual(values = my_colors)  +
+  scale_color_manual(values = my_colors)  +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+### Centered by layer
+df_summary %>%
+  group_by(Layer) %>%
+  mutate(Distance_scaled = mean_Distance - mean(mean_Distance)) %>%
+  ggplot(aes(x = Layer, 
+             y = Distance_scaled, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = Distance_scaled - 2 * se_Distance, 
+                  ymax = Distance_scaled + 2 * se_Distance), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "Layer (BETO)",
+       y = "Mean Distance (Centered)",
        color = "Same Sense",
        fill = "Same Sense") +
   scale_x_continuous(breaks = c(0:13)) +
@@ -425,8 +459,6 @@ df_summary %>%
   scale_color_manual(values = my_colors)  +
   theme(text = element_text(size = 15),
         legend.position="bottom")
-
-
 
   
 ```
@@ -621,6 +653,89 @@ nrow(df_list_mean)
 df_merged = df_merged %>%
   inner_join(df_list_mean)
 nrow(df_merged)
+```
+
+
+## Distance by layer, by model
+
+```{r distance_by_layer}
+df_distance_by_layer = df_merged %>%
+  group_by(Model, Multilingual, Same_sense, Layer, n_params) %>%
+  summarise(mean_distance = mean(Distance),
+            .groups = 'drop'  # Drop the automatic grouping by dplyr
+  )
+
+nrow(df_distance_by_layer)
+
+df_distance_by_layer_wide = df_distance_by_layer %>%
+  pivot_wider(names_from = "Same_sense",
+              values_from = "mean_distance",
+              names_prefix = "Distance_") %>%
+  mutate(Diff = Distance_FALSE - Distance_TRUE)
+
+
+df_families = data.frame(
+  Model = unique(df_distance_by_layer_wide$Model),
+  Family = c("ALBERT", "ALBERT", "ALBERT", "ALBERT",
+             "ALBERT", "BERT", "BERT", "BERT", "BERT",
+             "RoBERTa", "RoBERTa", "RoBERTa")
+)
+
+df_distance_by_layer_wide = df_distance_by_layer_wide %>%
+  group_by(Model) %>%
+  mutate(max_layer = max(Layer),
+         prop_layer = Layer / max_layer)  %>%
+  inner_join(df_families)
+
+
+df_distance_by_layer_wide %>%
+  ggplot(aes(x = prop_layer,
+             y = Diff)) +
+  geom_line(size = .5, aes(color = Model, group = Model),
+            alpha = .3) + 
+  stat_summary(
+    fun = mean,                    # calculate mean
+    geom = "line",                 # use line geometry
+    size = 2,                    # set line size
+    na.rm = TRUE                   # remove NA values
+  ) +
+  theme_minimal() +
+  labs(x = "Proportion of Total Layers",
+       y = "Mean Difference (Different - Same Sense)",
+       color = "") +  # Renaming legend title appropriately
+  scale_color_viridis(option = "mako", discrete = TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position = "none") 
+
+  
+df_distance_by_layer_wide %>%
+  mutate(binned_prop_layer = ntile(prop_layer, 10)) %>%
+  mutate(prop_binned = binned_prop_layer / 10) %>%
+  ggplot(aes(x = prop_binned,
+             y = Diff)) +
+  stat_summary(
+    aes(group = Family,
+        color = Family),  
+    fun = mean,    
+    geom = "line",        
+    size = 2              
+  ) +
+  stat_summary(
+    aes(group = Family, 
+        fill = Family), 
+    fun.data = mean_se,    
+    geom = "ribbon",  
+    alpha = 0.2,   
+    color = NA     
+  ) +
+  theme_minimal() +
+  labs(x = "Layer Depth Ratio",
+       y = "Mean Cosine Distance Difference (Different - Same Sense)",
+       color = "Family") +
+  scale_color_viridis(option = "mako", discrete = TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position = "bottom") 
+
 ```
 
 
@@ -854,7 +969,6 @@ results %>%
 
 ## Comparison by demographic
 
-**TODO**: In progress; creating correlation matrix that factors in demographic data and compares this also to Chilean BERT.
 
 ```{r chilean_bert}
 ### Load Chilean BERT
