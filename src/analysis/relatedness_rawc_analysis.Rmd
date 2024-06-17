@@ -1,0 +1,364 @@
+---
+title: "RAW-C: Supplemental Analysis"
+author: "Sean Trott"
+date: "May 5, 2024"
+output:
+  # pdf_document: 
+  #    fig_caption: yes
+  #    keep_md: yes
+  #    keep_tex: yes
+  html_document:
+     keep_md: yes
+     toc: yes
+     toc_float: yes
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(dpi = 300, fig.format = "pdf", warning = FALSE, message = FALSE)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(lmtest)
+library(forcats)
+library(broom)
+library(lme4)
+library(ggridges)
+library(lmerTest)
+library(ggrepel)
+library(tools)
+library(viridis)
+library(corrplot)
+library(gplots)
+
+all_colors <- viridis::viridis(10, option = "mako")
+my_colors <- all_colors[c(3, 5, 7)]  # Selecting specific colors from the palette
+my_colors <- all_colors[c(3, 7)] 
+```
+
+# Load data
+
+```{r}
+### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
+### Read in all data
+df_rawc = read_csv("../../data/extra/rawc_stimuli.csv")
+```
+
+
+
+# Comparing all models together
+
+```{r}
+df_bert = read_csv("../../data/processed/models_english/rawc-distances_model-bert-base-uncased.csv") %>%
+  mutate(Model = "BERT-base-uncased",
+         Multilingual = "Monolingual")
+
+df_bert_cased = read_csv("../../data/processed/models_english/rawc-distances_model-bert-base-cased.csv") %>%
+  mutate(Model = "BERT-base-cased",
+         Multilingual = "Monolingual")
+
+
+df_xlm = read_csv("../../data/processed/models_english/rawc-distances_model-xlm-roberta-base.csv") %>%
+  mutate(Model = "XLM-RoBERTa",
+         Multilingual = "Multilingual")
+
+
+df_ab1 = read_csv("../../data/processed/models_english/rawc-distances_model-albert-base-v1.csv") %>%
+  mutate(Model = "ALBERT-base-v1",
+         Multilingual = "Monolingual")
+
+df_ab2 = read_csv("../../data/processed/models_english/rawc-distances_model-albert-base-v2.csv") %>%
+  mutate(Model = "ALBERT-base-v2",
+         Multilingual = "Monolingual")
+
+df_al = read_csv("../../data/processed/models_english/rawc-distances_model-albert-large-v2.csv") %>%
+  mutate(Model = "ALBERT-large-v2",
+         Multilingual = "Monolingual")
+
+df_axl = read_csv("../../data/processed/models_english/rawc-distances_model-albert-xlarge-v2.csv") %>%
+  mutate(Model = "ALBERT-xlarge-v2",
+         Multilingual = "Monolingual")
+
+df_axxl = read_csv("../../data/processed/models_english/rawc-distances_model-albert-xxlarge-v2.csv")  %>%
+  mutate(Model = "ALBERT-xxlarge-v2",
+         Multilingual = "Monolingual")
+
+df_rb = read_csv("../../data/processed/models_english/rawc-distances_model-roberta-base.csv") %>%
+  mutate(Model = "RoBERTa-base",
+         Multilingual = "Monolingual")
+
+df_rl = read_csv("../../data/processed/models_english/rawc-distances_model-roberta-large.csv") %>%
+  mutate(Model = "RoBERTa-large",
+         Multilingual = "Monolingual")
+
+df_db = read_csv("../../data/processed/models_english/rawc-distances_model-distilbert-base-uncased.csv") %>%
+  mutate(Model = "DistilBERT",
+         Multilingual = "Monolingual")
+
+
+df_mb = read_csv("../../data/processed/models_english/rawc-distances_model-bert-base-multilingual-cased.csv") %>%
+  mutate(Model = "Multilingual BERT",
+         Multilingual = "Multilingual")
+
+
+
+df_all = df_bert %>%
+  bind_rows(df_bert_cased) %>%
+  bind_rows(df_xlm) %>%
+  bind_rows(df_ab1) %>%
+  bind_rows(df_ab2) %>%
+  bind_rows(df_al) %>%
+  bind_rows(df_axl) %>%
+  bind_rows(df_axxl) %>%
+  bind_rows(df_rb) %>%
+  bind_rows(df_rl) %>%
+  bind_rows(df_db) %>%
+  bind_rows(df_mb)
+
+nrow(df_all)
+
+
+### merge together
+df_merged = df_all %>%
+  inner_join(df_rawc, by = c("sentence1", "sentence2", "word", "string"))
+
+```
+
+
+## Same/Different by layer, by model
+
+```{r}
+# Calculate mean and SE of Distance
+df_summary <- df_merged %>%
+  group_by(Layer, Same_sense, Model) %>%
+  summarise(
+    mean_Distance = mean(Distance),
+    sd_Distance = sd(Distance),
+    count = n(),
+    se_Distance = sd_Distance / sqrt(count),
+    .groups = 'drop'  # Drop the automatic grouping by dplyr
+  )
+
+df_summary %>%
+  ggplot(aes(x = Layer, 
+             y = mean_Distance, 
+             color = Same_sense, 
+             fill = Same_sense)) +
+  geom_line(size = 1.5) +
+  geom_ribbon(aes(ymin = mean_Distance - 2 * se_Distance, 
+                  ymax = mean_Distance + 2 * se_Distance), 
+              alpha = 0.8,
+              color = NA) +
+  labs(x = "Layer",
+       y = "Mean Distance",
+       color = "Same Sense",
+       fill = "Same Sense") +
+  # scale_x_continuous(breaks = c(0:13)) +
+  theme_minimal() +
+  # scale_fill_viridis(option = "mako", discrete=TRUE) +
+  # scale_color_viridis(option = "mako", discrete=TRUE) +
+  scale_fill_manual(values = my_colors)  +
+  scale_color_manual(values = my_colors)  +
+  theme(text = element_text(size = 15),
+        legend.position="bottom") +
+  facet_wrap(~Model)
+
+```
+
+
+## R2 by layer, by model
+
+```{r r2_by_layer}
+df_by_layer = df_merged %>%
+  group_by(Model, Multilingual, Layer, n_params) %>%
+  summarise(r = cor(mean_relatedness, Distance, method = "pearson"),
+            r2 = r ** 2,
+            rho = cor(mean_relatedness, Distance, method = "spearman"),
+            count = n())
+
+max(df_by_layer$r2)
+df_by_layer %>%
+  filter(r2 == max(df_by_layer$r2))
+
+df_by_layer %>%
+  filter(Model != "ALBERT-tiny") %>%
+  filter(Model != "ALBERT-xlarge-v2") %>%
+  filter(Model != "DistilBETO") %>%
+  filter(Model != "ALBERT-large-v2") %>%
+  filter(Model != "RoBERTa-large") %>%
+  ggplot(aes(x = Layer,
+             y = r2,
+             color = Model,
+             linetype = Model)) +
+  geom_line(size = 2) +
+  theme_minimal() +
+  labs(x = "Layer",
+       y = "R2",
+       color = "",
+       linetype = "") +
+  scale_x_continuous(breaks = c(0:13)) +
+  scale_color_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 12),
+        legend.position="bottom")
+
+```
+
+We can also break this down by looking at the *proportion of layers* through the model.
+
+```{r r2_by_prop_layer}
+df_families = data.frame(
+  Model = unique(df_by_layer$Model),
+  Family = c("ALBERT", "ALBERT", "ALBERT", "ALBERT","ALBERT",
+             "BERT", "BERT","BERT", "BERT",
+             "RoBERTa", "RoBERTa", "RoBERTa"))
+
+df_by_layer = df_by_layer %>%
+  group_by(Model) %>%
+  mutate(max_layer = max(Layer),
+         prop_layer = Layer / max_layer)  %>%
+  inner_join(df_families, by = "Model")
+
+
+df_by_layer %>%
+  mutate(binned_prop_layer = ntile(prop_layer, 10)) %>%
+  mutate(prop_binned = binned_prop_layer / 10) %>%
+  ggplot(aes(x = prop_binned,
+             y = r2)) +
+  geom_line(size = .5, aes(color = Model, group = Model),
+            alpha = .3) + 
+  stat_summary(
+    fun = mean,                    # calculate mean
+    geom = "line",                 # use line geometry
+    size = 2,                    # set line size
+    na.rm = TRUE                   # remove NA values
+  ) +
+  theme_minimal() +
+  labs(x = "Layer Depth Ratio",
+       y = "R2",
+       color = "") +  # Renaming legend title appropriately
+  scale_color_viridis(option = "mako", discrete = TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position = "none") 
+
+  
+df_by_layer %>%
+  mutate(binned_prop_layer = ntile(prop_layer, 10)) %>%
+  mutate(prop_binned = binned_prop_layer / 10) %>%
+  ggplot(aes(x = prop_binned,
+             y = r2)) +
+  stat_summary(
+    aes(group = Family,
+        color = Family),  
+    fun = mean,    
+    geom = "line",        
+    size = 2              
+  ) +
+  stat_summary(
+    aes(group = Family, 
+        fill = Family), 
+    fun.data = mean_se,    
+    geom = "ribbon",  
+    alpha = 0.2,   
+    color = NA     
+  ) +
+  theme_minimal() +
+  labs(x = "Layer Depth Ratio",
+       y = "R2",
+       color = "Family") +
+  scale_color_viridis(option = "mako", discrete = TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position = "bottom") 
+```
+
+
+## Comparison by model parameters
+
+The BETO/ALBERT/DistilBETO family of models provide a nice within-family comparison of the effect of number of **parameters**, since they are trained on the same datasets.
+
+```{r r2_by_params}
+
+df_max_r2 = df_by_layer %>%
+  group_by(Model, n_params, Multilingual) %>%
+  summarise(max_r2 = max(r2))
+
+df_max_r2 %>%
+  ggplot(aes(x = n_params,
+             y = max_r2,
+             color = Multilingual,
+             shape = Multilingual)) +
+  geom_point(size = 6,
+             alpha = .7) +
+  geom_hline(yintercept = .64,
+              linetype = "dotted", color = "red",
+             size = 1.2, alpha = .5) +
+  geom_text_repel(aes(label=Model), size=3) +
+  scale_x_log10() +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(x = "Parameters",
+       y = "Maximum R2",
+       color = "",
+       title = "Scaling on English RAW-C Dataset",
+       shape = "") +
+  theme_minimal() +
+  # guides(color="none") +
+  # scale_color_viridis(option = "mako", discrete=TRUE) +
+  scale_color_manual(values = my_colors)  +
+  theme(text = element_text(size = 15),
+        legend.position="bottom")
+
+
+summary(lm(data = df_max_r2,
+           max_r2 ~ log10(n_params) + Multilingual))
+
+```
+
+## `Same` vs. `Different` Sense residuals
+
+
+```{r same_diff_residuals}
+# Fit models and calculate residuals for each LLM
+models <- by(df_merged, df_merged$Model, function(subdata) {
+  model <- lm(mean_relatedness ~ Distance * Layer, data = subdata)
+  subdata$residuals <- residuals(model)
+  return(subdata)
+})
+
+# Combine the results back into a single dataframe
+results <- do.call(rbind, models)
+
+# Modify Same_sense
+results = results %>%
+  mutate(Same_sense = case_when(
+    Same_sense == TRUE ~ "Same Sense",
+    Same_sense == FALSE ~ "Different Sense"
+  ))
+  
+
+
+
+results %>%
+  ggplot(aes(x = residuals,
+             fill = Same_sense,
+             y = ambiguity_type)) +
+  # geom_density(alpha = .7, size = 0) +
+  geom_density_ridges2(aes(height = ..density..), 
+                       color=gray(0.25), 
+                       alpha = .7, 
+                       scale=.85, 
+                       # size=1, 
+                       size = 0,
+                       stat="density") +
+  geom_vline(xintercept = 0, size = .6, linetype = "dashed") +
+  theme_minimal() +
+  # scale_fill_viridis(option = "mako", discrete=TRUE) +
+  theme(text = element_text(size = 15),
+        legend.position="bottom") +
+  scale_fill_manual(values = my_colors)  +
+  labs(x = "Residuals (Relatedness ~ Distance * Layer)",
+       fill = "",
+       y = "Ambiguity Type") +
+  facet_wrap(~Model)
+
+```
+
