@@ -41,9 +41,9 @@ my_colors <- all_colors[c(3, 7)]
 # Load data
 
 ```{r}
-### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
+setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
 # setwd("/Users/pamelariviere/Desktop/projects/project_sawc/spanish_norms/src/analysis/")
-setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
+# setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
 ### Read in all data
 df_final = read_csv("../../data/processed/human/sawc_relatedness_full_critical_data.csv")
 nrow(df_final)
@@ -923,6 +923,10 @@ df_max_r2 %>%
   scale_color_manual(values = my_colors)  +
   theme(text = element_text(size = 15),
         legend.position="bottom")
+
+
+summary(lm(data = df_max_r2,
+           max_r2 ~ log10(n_params) + Multilingual))
 
 ```
 

@@ -23,9 +23,9 @@ output:
 
 
 ```r
-### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
+setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
 # setwd("/Users/pamelariviere/Desktop/projects/project_sawc/spanish_norms/src/analysis/")
-setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
+# setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
 ### Read in all data
 df_final = read_csv("../../data/processed/human/sawc_relatedness_full_critical_data.csv")
 nrow(df_final)
@@ -130,18 +130,18 @@ summary(mod_full)
 ## 
 ## Random effects:
 ##  Groups      Name                 Variance Std.Dev. Corr 
-##  Participant (Intercept)          0.13241  0.3639        
-##              Same_senseSame Sense 0.13066  0.3615   -0.59
-##  Word        (Intercept)          0.32040  0.5660        
-##  List        (Intercept)          0.02791  0.1670        
-##              Same_senseSame Sense 0.07986  0.2826   -0.55
+##  Participant (Intercept)          0.13240  0.3639        
+##              Same_senseSame Sense 0.13065  0.3614   -0.59
+##  Word        (Intercept)          0.32042  0.5661        
+##  List        (Intercept)          0.02791  0.1671        
+##              Same_senseSame Sense 0.07990  0.2827   -0.55
 ##  Residual                         1.35993  1.1662        
 ## Number of obs: 10639, groups:  Participant, 131; Word, 102; List, 10
 ## 
 ## Fixed effects:
 ##                      Estimate Std. Error       df t value Pr(>|t|)    
-## (Intercept)           2.11454    0.08477 29.45708   24.94  < 2e-16 ***
-## Same_senseSame Sense  2.24722    0.09836  9.68103   22.85 9.55e-10 ***
+## (Intercept)           2.11454    0.08478 29.45271   24.94  < 2e-16 ***
+## Same_senseSame Sense  2.24722    0.09838  9.67540   22.84 9.65e-10 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -250,8 +250,8 @@ summary(df_by_layer$rho)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## -0.6116 -0.5990 -0.5893 -0.4973 -0.4587  0.0215
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -0.61156 -0.59893 -0.58927 -0.49727 -0.45873  0.02152
 ```
 
 ```r
@@ -325,7 +325,7 @@ min(df_by_layer$rho)
 ```
 
 ```
-## [1] -0.6116149
+## [1] -0.6115575
 ```
 
 ## RQ5: Expected layer
@@ -439,19 +439,19 @@ summary(mod_full)
 ## 
 ## Random effects:
 ##  Groups      Name                 Variance Std.Dev. Corr       
-##  Participant (Intercept)          0.25032  0.5003              
-##              Same_senseSame Sense 0.19682  0.4436   -0.56      
-##              Distance             0.78449  0.8857   -0.78  0.03
-##  Word        (Intercept)          0.27245  0.5220              
+##  Participant (Intercept)          0.25030  0.5003              
+##              Same_senseSame Sense 0.19681  0.4436   -0.56      
+##              Distance             0.78406  0.8855   -0.78  0.03
+##  Word        (Intercept)          0.27246  0.5220              
 ##  List        (Intercept)          0.02121  0.1456              
-##  Residual                         1.29818  1.1394              
+##  Residual                         1.29819  1.1394              
 ## Number of obs: 10639, groups:  Participant, 131; Word, 102; List, 10
 ## 
 ## Fixed effects:
 ##                       Estimate Std. Error        df t value Pr(>|t|)    
-## (Intercept)            2.97258    0.09216  69.43145   32.25   <2e-16 ***
-## Same_senseSame Sense   1.83851    0.04972 146.71408   36.98   <2e-16 ***
-## Distance              -4.38979    0.21736 321.73087  -20.20   <2e-16 ***
+## (Intercept)            2.97258    0.09216  69.43469   32.25   <2e-16 ***
+## Same_senseSame Sense   1.83850    0.04972 146.72258   36.98   <2e-16 ***
+## Distance              -4.38980    0.21735 321.73994  -20.20   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -593,7 +593,7 @@ summary(df_r$estimate)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.3946  0.7488  0.7962  0.7725  0.8308  0.8830
+##  0.3946  0.7480  0.7962  0.7725  0.8308  0.8834
 ```
 
 ```r
@@ -1308,6 +1308,33 @@ df_max_r2 %>%
 ```
 
 ![](relatedness_main_analysis_stimpunct_files/figure-html/r2_by_params-1.png)<!-- -->
+
+```r
+summary(lm(data = df_max_r2,
+           max_r2 ~ log10(n_params) + Multilingual))
+```
+
+```
+## 
+## Call:
+## lm(formula = max_r2 ~ log10(n_params) + Multilingual, data = df_max_r2)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.13036 -0.03405 -0.01244  0.04742  0.10604 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)              -0.59331    0.33355  -1.779   0.1090  
+## log10(n_params)           0.10498    0.04281   2.452   0.0366 *
+## MultilingualMultilingual -0.09780    0.06302  -1.552   0.1551  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.07488 on 9 degrees of freedom
+## Multiple R-squared:  0.4167,	Adjusted R-squared:  0.2871 
+## F-statistic: 3.215 on 2 and 9 DF,  p-value: 0.0884
+```
 
 ## `Same` vs. `Different` Sense residuals
 
