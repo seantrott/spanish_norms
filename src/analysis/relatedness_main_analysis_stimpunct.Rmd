@@ -41,9 +41,9 @@ my_colors <- all_colors[c(3, 7)]
 # Load data
 
 ```{r}
-setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
+# setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
 # setwd("/Users/pamelariviere/Desktop/projects/project_sawc/spanish_norms/src/analysis/")
-# setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
+setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
 ### Read in all data
 df_final = read_csv("../../data/processed/human/sawc_relatedness_full_critical_data.csv")
 nrow(df_final)
@@ -255,7 +255,7 @@ Now, we select the *best-performing layer* from BETO.
 
 ```{r rq3}
 df_beto_l5 = df_merged %>%
-  filter(Layer == 7) %>%
+  filter(Layer == 12) %>% #hard-coded
   select(-Same_sense)
 nrow(df_beto_l5)
 

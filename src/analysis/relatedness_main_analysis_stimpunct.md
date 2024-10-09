@@ -23,9 +23,9 @@ output:
 
 
 ```r
-setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
+# setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
 # setwd("/Users/pamelariviere/Desktop/projects/project_sawc/spanish_norms/src/analysis/")
-# setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
+setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
 ### Read in all data
 df_final = read_csv("../../data/processed/human/sawc_relatedness_full_critical_data.csv")
 nrow(df_final)
@@ -130,18 +130,18 @@ summary(mod_full)
 ## 
 ## Random effects:
 ##  Groups      Name                 Variance Std.Dev. Corr 
-##  Participant (Intercept)          0.13240  0.3639        
-##              Same_senseSame Sense 0.13065  0.3614   -0.59
-##  Word        (Intercept)          0.32042  0.5661        
-##  List        (Intercept)          0.02791  0.1671        
-##              Same_senseSame Sense 0.07990  0.2827   -0.55
+##  Participant (Intercept)          0.13241  0.3639        
+##              Same_senseSame Sense 0.13066  0.3615   -0.59
+##  Word        (Intercept)          0.32040  0.5660        
+##  List        (Intercept)          0.02791  0.1670        
+##              Same_senseSame Sense 0.07986  0.2826   -0.55
 ##  Residual                         1.35993  1.1662        
 ## Number of obs: 10639, groups:  Participant, 131; Word, 102; List, 10
 ## 
 ## Fixed effects:
 ##                      Estimate Std. Error       df t value Pr(>|t|)    
-## (Intercept)           2.11454    0.08478 29.45271   24.94  < 2e-16 ***
-## Same_senseSame Sense  2.24722    0.09838  9.67540   22.84 9.65e-10 ***
+## (Intercept)           2.11454    0.08477 29.45708   24.94  < 2e-16 ***
+## Same_senseSame Sense  2.24722    0.09836  9.68103   22.85 9.55e-10 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -250,8 +250,8 @@ summary(df_by_layer$rho)
 ```
 
 ```
-##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## -0.61156 -0.59893 -0.58927 -0.49727 -0.45873  0.02152
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -0.6116 -0.5990 -0.5893 -0.4973 -0.4587  0.0215
 ```
 
 ```r
@@ -325,7 +325,7 @@ min(df_by_layer$rho)
 ```
 
 ```
-## [1] -0.6115575
+## [1] -0.6116149
 ```
 
 ## RQ5: Expected layer
@@ -382,7 +382,7 @@ Now, we select the *best-performing layer* from BETO.
 
 ```r
 df_beto_l5 = df_merged %>%
-  filter(Layer == 7) %>%
+  filter(Layer == 12) %>% #hard-coded
   select(-Same_sense)
 nrow(df_beto_l5)
 ```
@@ -431,34 +431,34 @@ summary(mod_full)
 ##    Data: df_experimental_with_beto
 ## 
 ##      AIC      BIC   logLik deviance df.resid 
-##  33743.7  33831.0 -16859.9  33719.7    10627 
+##  33737.9  33825.1 -16856.9  33713.9    10627 
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -4.0322 -0.6348 -0.1078  0.6185  3.6093 
+## -4.0657 -0.6328 -0.1224  0.6186  3.5604 
 ## 
 ## Random effects:
 ##  Groups      Name                 Variance Std.Dev. Corr       
-##  Participant (Intercept)          0.25030  0.5003              
-##              Same_senseSame Sense 0.19681  0.4436   -0.56      
-##              Distance             0.78406  0.8855   -0.78  0.03
-##  Word        (Intercept)          0.27246  0.5220              
-##  List        (Intercept)          0.02121  0.1456              
-##  Residual                         1.29819  1.1394              
+##  Participant (Intercept)          0.24424  0.4942              
+##              Same_senseSame Sense 0.19732  0.4442   -0.56      
+##              Distance             1.36516  1.1684   -0.83  0.01
+##  Word        (Intercept)          0.27521  0.5246              
+##  List        (Intercept)          0.02009  0.1417              
+##  Residual                         1.29855  1.1395              
 ## Number of obs: 10639, groups:  Participant, 131; Word, 102; List, 10
 ## 
 ## Fixed effects:
 ##                       Estimate Std. Error        df t value Pr(>|t|)    
-## (Intercept)            2.97258    0.09216  69.43469   32.25   <2e-16 ***
-## Same_senseSame Sense   1.83850    0.04972 146.72258   36.98   <2e-16 ***
-## Distance              -4.38980    0.21735 321.73994  -20.20   <2e-16 ***
+## (Intercept)            2.97822    0.09141  72.09401   32.58   <2e-16 ***
+## Same_senseSame Sense   1.83720    0.04972 147.34553   36.95   <2e-16 ***
+## Distance              -6.88799    0.33244 919.09985  -20.72   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Correlation of Fixed Effects:
 ##             (Intr) Sm_sSS
-## Sm_snsSmSns -0.410       
-## Distance    -0.533  0.358
+## Sm_snsSmSns -0.411       
+## Distance    -0.532  0.358
 ```
 
 ```r
@@ -471,8 +471,8 @@ anova(mod_full, mod_reduced)
 ## mod_reduced: Response ~ Distance + (1 + Same_sense + Distance | Participant) + (1 | List) + (1 | Word)
 ## mod_full: Response ~ Same_sense + Distance + (1 + Same_sense + Distance | Participant) + (1 | List) + (1 | Word)
 ##             npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)    
-## mod_reduced   11 34067 34147 -17023    34045                         
-## mod_full      12 33744 33831 -16860    33720 325.52  1  < 2.2e-16 ***
+## mod_reduced   11 34061 34141 -17020    34039                         
+## mod_full      12 33738 33825 -16857    33714 325.21  1  < 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -487,8 +487,8 @@ anova(mod_full, mod_just_same)
 ## mod_just_same: Response ~ Same_sense + (1 + Same_sense + Distance | Participant) + (1 | List) + (1 | Word)
 ## mod_full: Response ~ Same_sense + Distance + (1 + Same_sense + Distance | Participant) + (1 | List) + (1 | Word)
 ##               npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)    
-## mod_just_same   11 33964 34044 -16971    33942                         
-## mod_full        12 33744 33831 -16860    33720 222.11  1  < 2.2e-16 ***
+## mod_just_same   11 33973 34053 -16975    33951                         
+## mod_full        12 33738 33825 -16857    33714 236.73  1  < 2.2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -593,7 +593,7 @@ summary(df_r$estimate)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.3946  0.7480  0.7962  0.7725  0.8308  0.8834
+##  0.3946  0.7488  0.7962  0.7725  0.8308  0.8830
 ```
 
 ```r
@@ -626,20 +626,20 @@ summary(lm(data = df_list_mean,
 ## lm(formula = mean_relatedness ~ Same_sense + distance, data = df_list_mean)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.3689 -0.5274 -0.0524  0.4403  2.5100 
+##      Min       1Q   Median       3Q      Max 
+## -2.48907 -0.52346 -0.05123  0.43586  2.72589 
 ## 
 ## Coefficients:
 ##                      Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)           2.94142    0.07765   37.88   <2e-16 ***
-## Same_senseSame Sense  1.83679    0.06724   27.32   <2e-16 ***
-## distance             -4.11245    0.35189  -11.69   <2e-16 ***
+## (Intercept)           2.95210    0.07822   37.74   <2e-16 ***
+## Same_senseSame Sense  1.82957    0.06746   27.12   <2e-16 ***
+## distance             -6.51870    0.55561  -11.73   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.7602 on 809 degrees of freedom
-## Multiple R-squared:  0.6628,	Adjusted R-squared:  0.6619 
-## F-statistic:   795 on 2 and 809 DF,  p-value: < 2.2e-16
+## Residual standard error: 0.7598 on 809 degrees of freedom
+## Multiple R-squared:  0.6632,	Adjusted R-squared:  0.6623 
+## F-statistic: 796.4 on 2 and 809 DF,  p-value: < 2.2e-16
 ```
 
 ```r
@@ -682,18 +682,18 @@ summary(lm(data = df_list_mean,
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -2.99262 -0.78540  0.01506  0.86980  2.60768 
+## -2.88199 -0.78885 -0.00052  0.83880  2.82873 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  4.31185    0.08213   52.50   <2e-16 ***
-## distance    -8.87766    0.42344  -20.96   <2e-16 ***
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   4.33051    0.08212   52.73   <2e-16 ***
+## distance    -14.07413    0.66384  -21.20   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 1.053 on 810 degrees of freedom
-## Multiple R-squared:  0.3518,	Adjusted R-squared:  0.351 
-## F-statistic: 439.5 on 1 and 810 DF,  p-value: < 2.2e-16
+## Residual standard error: 1.049 on 810 degrees of freedom
+## Multiple R-squared:  0.3569,	Adjusted R-squared:  0.3561 
+## F-statistic: 449.5 on 1 and 810 DF,  p-value: < 2.2e-16
 ```
 
 # RQ6: Layer vs. same/different
