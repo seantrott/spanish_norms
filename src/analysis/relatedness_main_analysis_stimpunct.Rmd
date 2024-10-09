@@ -42,7 +42,8 @@ my_colors <- all_colors[c(3, 7)]
 
 ```{r}
 ### setwd("/Users/seantrott/Dropbox/UCSD/Research/Ambiguity/SSD/spanish_norms/src/analysis/")
-setwd("/Users/pamelariviere/Desktop/projects/project_sawc/spanish_norms/src/analysis/")
+# setwd("/Users/pamelariviere/Desktop/projects/project_sawc/spanish_norms/src/analysis/")
+setwd("/Users/pamelariviere/Desktop/backburner_projects/projects_sean/sawc/spanish_norms/src/analysis/")
 ### Read in all data
 df_final = read_csv("../../data/processed/human/sawc_relatedness_full_critical_data.csv")
 nrow(df_final)
