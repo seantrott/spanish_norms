@@ -328,6 +328,40 @@ min(df_by_layer$rho)
 ## [1] -0.6116149
 ```
 
+```r
+min(df_by_layer$r)
+```
+
+```
+## [1] -0.597393
+```
+
+```r
+max(df_by_layer$r2)
+```
+
+```
+## [1] 0.3568784
+```
+
+```r
+### Get the layer with max r2
+max_pred_layer = df_by_layer$Layer[which.max(df_by_layer$r2)]
+max_pred_layer
+```
+
+```
+## [1] 12
+```
+
+```r
+df_by_layer$r2[df_by_layer$Layer==7]
+```
+
+```
+## [1] 0.3517647
+```
+
 ## RQ5: Expected layer
 
 
@@ -382,7 +416,7 @@ Now, we select the *best-performing layer* from BETO.
 
 ```r
 df_beto_l5 = df_merged %>%
-  filter(Layer == 12) %>% #hard-coded
+  filter(Layer == max_pred_layer) %>% 
   select(-Same_sense)
 nrow(df_beto_l5)
 ```
